@@ -1,0 +1,121 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { BriefingBody } from "@/components/BriefingBody";
+import { Section, PageHeader } from "@/components/primitives";
+import { formatDateLong } from "@/lib/format";
+import { getRegistry, getTokens } from "@/lib/queries";
+import { CONTACT_EMAIL, PRICE_CHECK_DATES, VAT_PERCENT } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "How we rank",
+  description: "How Grootboek scores and ranks business software, how prices are read and dated, how the review figures were produced, and how to ask for a correction.",
+  alternates: { canonical: "/method" },
+};
+
+export default async function MethodPage() {
+  const [reg, tokens] = await Promise.all([getRegistry(), getTokens()]);
+  const byDate = PRICE_CHECK_DATES.map((d) => ({ date: d, items: reg.ranked.filter((s) => s.price_checked_at === d) }));
+  const checked = reg.ranked.filter((s) => s.price_checked_at).length;
+
+  return (
+    <>
+      <PageHeader title="How we rank and check prices" stamp="The method">
+        The scoring method in full, with the real numbers behind it. Nothing on this page describes a process that is not running.
+      </PageHeader>
+
+      <Section title="The score" first>
+        <div className="max-w-[68ch] space-y-4 text-[15px] leading-6">
+          <p>
+            Products are ranked by a Bayesian weighted average, not by raw rating. A rating of 4.3 from 96 reviews is a weaker claim than 4.2 from 412, so each rating is pulled toward the register average in proportion to how little evidence stands behind it.
+          </p>
+        </div>
+        <div className="mt-6 max-w-[760px]">
+          <BriefingBody blocks={[{ type: "live", name: "priors" }]} reg={reg} tokens={tokens} />
+        </div>
+        <div className="max-w-[68ch] space-y-4 text-[15px] leading-6">
+          <p>
+            The score uses rating and review count only. No affiliate link, sponsorship or vendor relationship is an input, and the ranking is computed before any commercial relationship is looked at. Ties are broken by review count, then by name.
+          </p>
+        </div>
+      </Section>
+
+      <Section title="How prices are checked">
+        <div className="max-w-[68ch] space-y-4 text-[15px] leading-6">
+          <p>
+            A price on the register is the vendor&apos;s own published list price for South Africa. We open the vendor&apos;s page, read the figure, and record the amount, the currency, the basis (per month, per employee, per user, including or excluding VAT) and the date we read it.
+          </p>
+          {byDate.map(({ date, items }) => (
+            <p key={date}>
+              <span className="font-semibold">{formatDateLong(date)}.</span>{" "}
+              {items.length > 0 ? `${items.length} products read: ${items.map((s) => s.name).join(", ")}.` : "No products carry this date in the current data."}
+            </p>
+          ))}
+          <p>
+            {checked} of {reg.ranked.length} products carry a check date. The rest show Unchecked, in grey, because we have not yet read a price for them on a date we can state. Lime means checked on a date. Grey means not.
+          </p>
+          <p>
+            No recurring check is scheduled or running. When one is, this page will say so. Until then, a date on a price is the last time a person read it, and the admin dashboard flags any price older than 90 days.
+          </p>
+        </div>
+      </Section>
+
+      <Section title="Rand, VAT and currency">
+        <div className="max-w-[68ch] space-y-4 text-[15px] leading-6">
+          <p>
+            Every price prints with its basis. Sage quotes cloud products including VAT and Pastel products excluding it, and at {VAT_PERCENT} percent that is real money, so the basis is never dropped. A price with no stated VAT basis is recorded as /mo and not assumed.
+          </p>
+          <p>
+            Quoted means the vendor publishes no price. Free means the starting price is zero. They are different facts and render differently. A billing currency other than rand is shown in red, because it is a recurring unhedged exposure.
+          </p>
+          <p>
+            Every price on the register is shown in rand. A price that a vendor bills in dollars, pounds or euros is converted at the European Central Bank reference rate, fetched from Frankfurter and refreshed twice a day, and it is marked with a leading ≈ because the vendor will invoice at its own rate. The vendor&apos;s own figure, the rate and its date are printed beside every converted price, so nothing is hidden. If the rate feed is unavailable the site falls back to the last rates saved with it and says so.
+          </p>
+        </div>
+      </Section>
+
+      <Section title="Written reviews and comparisons">
+        <div className="max-w-[68ch] space-y-4 text-[15px] leading-6">
+          <p>
+            Each product has a long form review, and each curated pair has a detailed comparison. They were written from the vendors&apos; own pages on 5 October 2026, and every review lists the pages it was read from. Prices in a review are as the vendor showed them that day. Where that differs from the price recorded in the register, the review says so and gives both.
+          </p>
+          <p>
+            Some vendors block automated readers, load their prices by script or publish no price at all. When that happens the review says exactly which figures could not be read and what they rest on instead, and it never fills the gap with a guess. A few products have no vendor website on record, and their entries say so plainly.
+          </p>
+          <p>
+            Everything on this site is written for South African buyers, and every product page carries a note on what that means for you. Sold in South Africa marks products that have a South African site, rand pricing, a local phone line or South African origin, which covers every Sage product, because Sage South Africa builds, sells and supports them locally, and also Xero, QuickBooks and Zoho Books. For the others, the note says what to check in rand: the billing currency, the support hours and who invoices you.
+          </p>
+        </div>
+      </Section>
+
+      <Section title="SARS filing and bank feeds">
+        <div className="max-w-[68ch] space-y-4 text-[15px] leading-6">
+          <p>
+            Files means the product transfers VAT201, EMP201, EMP501, IRP5 or IT3(a) data into SARS eFiling or e@syFile. Manual means it was checked and you retype. Unchecked means we have not looked, and the register claims nothing. Bank feeds are recorded by bank: Capitec, FNB, Absa, Standard Bank, Nedbank, TymeBank, Investec and Discovery Bank.
+          </p>
+          <p>
+            The filters on the register are built from the values present in the data, so a filter never offers an option that returns nothing for a reason we cannot explain.
+          </p>
+        </div>
+      </Section>
+
+      <Section title="How the review figures were produced">
+        <div className="max-w-[68ch] space-y-4 text-[15px] leading-6">
+          <p>
+            The ratings and review counts come from a corpus of {tokens.reviews} entries. The corpus was produced by a seeded generating script. It is not a set of reviews written by verified buyers. That is why the register says reviews analysed and never reviews verified, and why we publish the aggregate figures and not the individual entries.
+          </p>
+          <p>
+            Reviews submitted through this site are different. They are read by an editor before they appear, they are published as written, and they are kept separate from the corpus. As they arrive they will replace the corpus as the evidence behind a rating.
+          </p>
+        </div>
+      </Section>
+
+      <Section title="Corrections">
+        <div className="max-w-[68ch] space-y-4 text-[15px] leading-6">
+          <p>
+            If a price, a rating or a record is wrong, <Link href="/enquiries?subject=correction" className="prose-link">write to us</Link> or email <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a> with the page and a source. A confirmed error is corrected on the page and the check date is updated. Corrections are never sold, and a vendor cannot pay to change a rating or a verdict.
+          </p>
+        </div>
+      </Section>
+    </>
+  );
+}

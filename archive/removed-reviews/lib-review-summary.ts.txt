@@ -1,0 +1,45 @@
+import type { RankedSoftware, Sector } from "./types";
+
+/**
+ * What the review figures say, worked out from the rating and the review count
+ * on each product and nothing else. No individual review is read or invented.
+ */
+
+export interface SectorReviews {
+  sector: Sector;
+  /** Most reviewed first. */
+  items: RankedSoftware[];
+  reviews: number;
+  /** Mean rating across the sector, weighted by review count. */
+  mean: number;
+}
+
+/** The mean of the ratings, weighted by how many reviews sit behind each. */
+export function weightedMean(items: Pick<RankedSoftware, "rating" | "review_count">[]): number {
+  let weighted = 0;
+  let total = 0;
+  for (const s of items) {
+    weighted += s.rating * s.review_count;
+    total += s.review_count;
+  }
+  return total ? weighted / total : 0;
+}
+
+export function reviewsBySector(ranked: RankedSoftware[], sectors: Sector[]): SectorReviews[] {
+  return sectors.map((sector) => {
+    const items = ranked.filter((s) => s.sector === sector.slug).sort((a, b) => b.review_count - a.review_count || b.rating - a.rating);
+    return { sector, items, reviews: items.reduce((n, s) => n + s.review_count, 0), mean: weightedMean(items) };
+  });
+}
+
+/** The products with the most reviews behind them, across the whole register. */
+export function mostReviewed(ranked: RankedSoftware[], limit: number): RankedSoftware[] {
+  return [...ranked].sort((a, b) => b.review_count - a.review_count || b.rating - a.rating).slice(0, limit);
+}
+
+/** One decimal, with the sign always printed: +0.2, -0.1 as "0.1 below". Words, not a minus sign. */
+export function gapText(gap: number, against: string): string {
+  const rounded = Math.round(gap * 10) / 10;
+  if (rounded === 0) return `In line with ${against}`;
+  return `${Math.abs(rounded).toFixed(1)} ${rounded > 0 ? "above" : "below"} ${against}`;
+}

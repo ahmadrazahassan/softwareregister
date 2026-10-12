@@ -1,0 +1,350 @@
+import type { Briefing } from "../types";
+
+/**
+ * Briefings.
+ *
+ * Two rules govern every line here.
+ *
+ * 1. Register figures are never typed in. Prose uses {{tokens}} that are filled
+ *    from the live dataset at render time, and `live` blocks render tables
+ *    straight from the data. If a price or a count changes, the briefing
+ *    changes with it.
+ * 2. Statutory facts are limited to ones that are stable and widely published:
+ *    the VAT rate, EMP201, EMP501, IRP5, UIF at one percent each side, SDL at
+ *    one percent, BCEA minimum leave. Nothing here claims what a named product
+ *    does with SARS, because that has not been checked yet.
+ *
+ * Copy contains no hyphens and no dashes. Rewrite the sentence instead.
+ */
+
+const AUTHOR = "Grootboek editorial";
+const DATE = "2026-10-05";
+
+export const BRIEFINGS: Briefing[] = [
+  {
+    slug: "what-software-costs-in-rand",
+    title: "What business software costs in rand",
+    standfirst:
+      "{{priced}} products publish a price we could read, {{free}} start free, and {{quoted}} will only quote. Here is the whole table.",
+    topic: "Pricing",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 4,
+    product_slugs: ["sage-accounting", "xero", "quickbooks-online", "payspace"],
+    published: true,
+    body: [
+      {
+        type: "p",
+        text: "The register holds {{products}} products across {{sectors}} sectors. Before you build a shortlist, know how they split. {{priced}} publish a list price that we read on the vendor's own page and recorded with its date. {{free}} start at zero. {{quoted}} publish nothing and ask you to request a quote.",
+      },
+      { type: "h2", text: "The priced products" },
+      { type: "live", name: "priced" },
+      { type: "h2", text: "Read the basis before the number" },
+      {
+        type: "p",
+        text: "A price is only comparable when you know what it covers. Sage quotes cloud products including VAT and Pastel products excluding it. At {{vat_pct}} percent VAT that gap is real money, so the register prints the basis next to every number: /mo incl VAT, /mo excl VAT, /employee /mo or /user /mo.",
+      },
+      { type: "h2", text: "Free is not Quoted" },
+      {
+        type: "p",
+        text: "A zero price is a price. A missing price is not. The register prints Free for the first and Quoted for the second, and never leaves either blank. A product that quotes may well cost less than one that lists, but you cannot know until you ask.",
+      },
+      {
+        type: "p",
+        text: "Read [how prices are checked](/method) before you rely on any number here.",
+      },
+    ],
+  },
+  {
+    slug: "rand-exposure-billed-in-rand-or-not",
+    title: "Billed in rand, or not",
+    standfirst:
+      "{{foreign}} of the {{products}} products on this register bill in a foreign currency. That is exchange rate risk on a monthly cost.",
+    topic: "Pricing",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 4,
+    product_slugs: ["pipedrive", "freshbooks", "peoplehr", "xero"],
+    published: true,
+    body: [
+      {
+        type: "p",
+        text: "{{foreign}} products bill in US dollars, pounds or euros. {{zar}} bill in rand. For the other {{unrecorded_currency}} the price is quoted, so the billing currency is not published and the register records none.",
+      },
+      { type: "live", name: "currency" },
+      { type: "h2", text: "What exposure means in rand" },
+      {
+        type: "p",
+        text: "A price in dollars is a price in rand that moves. Take a tool priced at USD 14 per user per month. Every R1 the dollar rises against the rand adds R14 per user per month. A team of ten pays R140 more each month for that one rand.",
+      },
+      {
+        type: "p",
+        text: "No global review site shows this, because to them it is not a cost at all. For a South African buyer it is a recurring, unhedged foreign exchange position, and the rand has moved enough over five years to turn a cheap tool into an expensive one.",
+      },
+      { type: "h2", text: "What to do about it" },
+      {
+        type: "ul",
+        items: [
+          "Ask whether the vendor will invoice in rand, and at what exchange rate.",
+          "Ask how often that rate is reset.",
+          "Compare products on a twelve month rand total, not on the headline price.",
+          "Filter the [register by billing currency](/register?currency=ZAR) to see only rand billed products.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "including-and-excluding-vat",
+    title: "Including and excluding VAT in a software price",
+    standfirst:
+      "Sage quotes cloud products including VAT and Pastel products excluding it. Put both on the same footing and the order changes.",
+    topic: "Pricing",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 3,
+    product_slugs: ["sage-accounting", "sage-50cloud-pastel", "sage-payroll", "xero"],
+    published: true,
+    body: [
+      {
+        type: "p",
+        text: "South African VAT is {{vat_pct}} percent. A price including VAT is the net price multiplied by {{vat_factor}}. A price excluding VAT needs {{vat_pct}} percent added before it is comparable with one that already includes it.",
+      },
+      { type: "live", name: "vat" },
+      {
+        type: "p",
+        text: "Which column matters to you depends on whether you are registered for VAT. A registered vendor claims the VAT back as an input, so the excluding figure is the real cost. A business that is not registered pays the including figure and cannot recover it.",
+      },
+      {
+        type: "p",
+        text: "QuickBooks Online and Smartsheet publish a rand price without stating a VAT basis. The register records them as /mo and does not guess.",
+      },
+    ],
+  },
+  {
+    slug: "how-to-ask-for-a-quote",
+    title: "How to ask for a quote",
+    standfirst:
+      "{{quoted}} products on the register publish no price. These are the questions that turn a quote into something you can compare.",
+    topic: "Pricing",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 3,
+    product_slugs: [],
+    published: true,
+    body: [
+      {
+        type: "p",
+        text: "A quote only product is not hiding anything sinister. ERP and enterprise payroll are priced by company size and scope. But a quote that arrives as a single number is not a comparison. Ask for these in writing.",
+      },
+      { type: "live", name: "quoted" },
+      { type: "h2", text: "Ask every vendor" },
+      {
+        type: "ul",
+        items: [
+          "The price per month and per year, with the VAT basis stated.",
+          "The currency you will be invoiced in.",
+          "What is charged once only: implementation, data migration, training.",
+          "Which SARS returns the product files directly into eFiling and e@syFile.",
+          "Which banks it feeds from, and whether Capitec and TymeBank are included.",
+          "What happens to your data, and in what format you can take it out, if you leave.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "free-tiers-on-the-register",
+    title: "The free tiers on the register",
+    standfirst:
+      "{{free}} products start at zero. A free tier is a way in. Here is what to check before you build on one.",
+    topic: "Pricing",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 3,
+    product_slugs: [],
+    published: true,
+    body: [
+      { type: "live", name: "free" },
+      {
+        type: "p",
+        text: "The register records the zero. It does not yet record the limits that come with it, such as the number of users, invoices or contacts. Those limits are where a free plan stops being free.",
+      },
+      { type: "h2", text: "Before you build on a free tier" },
+      {
+        type: "ul",
+        items: [
+          "Find the limit that would force an upgrade, and price the plan above it.",
+          "Check the billing currency of that next plan. Several free tiers lead to dollar billed plans.",
+          "Check whether your data can be exported if the vendor changes the free plan.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "vat-and-the-vat201-return",
+    title: "VAT and the VAT201 return",
+    standfirst:
+      "The VAT201 is the return a registered vendor submits to SARS. Accounting software can prepare it, and some can transfer it into eFiling. Those are different things.",
+    topic: "Compliance",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 4,
+    product_slugs: [],
+    published: true,
+    body: [
+      {
+        type: "p",
+        text: "Value added tax is charged at {{vat_pct}} percent. A business must register once its taxable turnover passes R1 million in any twelve month period, and may register voluntarily below that.",
+      },
+      { type: "h2", text: "What the VAT201 is" },
+      {
+        type: "p",
+        text: "A registered vendor submits a VAT201 to SARS for each tax period. Most small vendors file every two months. Larger vendors file monthly. It is submitted through SARS eFiling and is due shortly after the period ends, so check the current SARS calendar rather than a briefing for the exact date.",
+      },
+      {
+        type: "p",
+        text: "Software can help in two ways. It can produce the VAT201 figures from your ledger. Some products can also transfer those figures into eFiling so nobody retypes them. The second saves the time and avoids the keying error, and it is the one the register is built to record.",
+      },
+      { type: "h2", text: "What the register records" },
+      {
+        type: "p",
+        text: "For each accounting product the register is meant to say whether VAT201 transfers into eFiling. That field has not been checked for any product yet, so the register shows Unchecked and makes no claim. When it is filled, the compliance matrix on the [accounting sector page](/sector/accounting) will show it.",
+      },
+      { type: "h2", text: "Questions to ask before you buy" },
+      {
+        type: "ul",
+        items: [
+          "Does the VAT201 it produces match the SARS form line by line?",
+          "Can it submit to eFiling, or only export a file?",
+          "Does it handle both the invoice basis and the payments basis?",
+          "Does it keep an audit trail SARS will accept in a VAT review?",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "payroll-returns-emp201-emp501-irp5",
+    title: "Payroll returns: EMP201, EMP501 and IRP5",
+    standfirst:
+      "South African payroll produces a chain of statutory documents. A mistake in one link costs penalties in the next.",
+    topic: "Compliance",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 5,
+    product_slugs: [],
+    published: true,
+    body: [
+      {
+        type: "p",
+        text: "Running payroll in South Africa is not just paying salaries. Every month the employer declares and pays tax and contributions to SARS, and every year the employer reconciles those declarations and issues certificates to employees.",
+      },
+      {
+        type: "table",
+        head: ["Document", "What it is", "When"],
+        rows: [
+          ["EMP201", "Monthly employer declaration of PAYE, UIF and SDL", "Monthly, due by the 7th of the following month"],
+          ["EMP501", "Reconciliation of what was declared against what was paid and certified", "Twice a year: an interim and an annual reconciliation"],
+          ["IRP5", "Employee tax certificate showing PAYE deducted", "Issued after the tax year ends"],
+          ["IT3(a)", "Certificate for employees from whom no PAYE was deducted", "Issued after the tax year ends"],
+        ],
+      },
+      { type: "h2", text: "The deductions inside it" },
+      {
+        type: "ul",
+        items: [
+          "PAYE: income tax withheld from salary.",
+          "UIF: 1 percent from the employee and 1 percent from the employer.",
+          "SDL: 1 percent of payroll, for employers whose annual payroll is above R500 000.",
+          "ETI: an incentive that reduces PAYE for qualifying young employees.",
+        ],
+      },
+      { type: "h2", text: "e@syFile" },
+      {
+        type: "p",
+        text: "e@syFile is the SARS desktop application that payroll output is commonly loaded into for EMP501 reconciliations and certificate submissions. A product that transfers into e@syFile or eFiling saves you retyping. One that does not forces a manual capture, which is where the errors happen.",
+      },
+      {
+        type: "p",
+        text: "The register records which payroll products transfer into SARS. That field has not been checked yet, so every payroll product currently shows Unchecked. See the [payroll sector page](/sector/payroll).",
+      },
+    ],
+  },
+  {
+    slug: "bcea-leave-what-hr-software-must-accrue",
+    title: "BCEA leave: what HR software must accrue",
+    standfirst:
+      "The Basic Conditions of Employment Act sets minimum leave. HR software that accrues it wrongly will quietly misstate what you owe.",
+    topic: "Compliance",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 3,
+    product_slugs: [],
+    published: true,
+    body: [
+      {
+        type: "table",
+        head: ["Leave", "Minimum under the BCEA"],
+        rows: [
+          ["Annual", "21 consecutive days in each twelve month leave cycle"],
+          ["Sick", "30 days over a three year cycle"],
+          ["Family responsibility", "3 days a year for qualifying employees"],
+          ["Maternity", "4 consecutive months, unpaid by the employer unless the contract says otherwise"],
+          ["Parental", "10 consecutive days"],
+        ],
+      },
+      {
+        type: "p",
+        text: "Contracts and collective agreements can give more. The Act sets the floor. What matters for software is whether it accrues each leave type by the rule that applies to your employee, and keeps a record you can produce in a CCMA dispute.",
+      },
+      {
+        type: "p",
+        text: "The register treats BCEA leave accrual as the headline compliance item for the [HR sector](/sector/hr). It has not been checked for any HR product yet, so each shows Unchecked.",
+      },
+    ],
+  },
+  {
+    slug: "bank-feeds-by-bank",
+    title: "Bank feeds, bank by bank",
+    standfirst:
+      "A product that feeds from Chase and Barclays is useless to a business banking with Capitec. The register asks about eight South African banks.",
+    topic: "Compliance",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 3,
+    product_slugs: [],
+    published: true,
+    body: [
+      {
+        type: "p",
+        text: "A bank feed pulls your transactions into the software each day so you reconcile instead of typing. Global products usually build feeds for American and British banks first. Coverage of South African banks varies, and it varies by account type as well as by bank.",
+      },
+      { type: "live", name: "banks" },
+      {
+        type: "p",
+        text: "The register asks about these eight. No product has been checked yet, so no bank is claimed for any product. Treat a vendor's own list as a starting point and ask for the feed by name for your account type.",
+      },
+    ],
+  },
+  {
+    slug: "why-412-reviews-at-4-2-outranks-96-at-4-3",
+    title: "Why 412 reviews at 4.2 outranks 96 reviews at 4.3",
+    standfirst:
+      "The ranking is a Bayesian weighted average. It is computed before any commercial relationship is looked at.",
+    topic: "Method",
+    author: AUTHOR,
+    published_at: DATE,
+    read_minutes: 4,
+    product_slugs: ["sage-accounting", "sage-intacct"],
+    published: true,
+    body: [
+      {
+        type: "p",
+        text: "A rating on its own hides how much evidence stands behind it. A 4.3 from 96 reviews is a weaker claim than a 4.2 from 412. The register ranks by a weighted score that pulls thinly reviewed products toward the register average.",
+      },
+      { type: "live", name: "priors" },
+      {
+        type: "p",
+        text: "No sponsorship, affiliate link or vendor relationship is an input. A vendor cannot buy position. The full method, including how the review figures were produced and what they are not, is on the [method page](/method).",
+      },
+    ],
+  },
+];

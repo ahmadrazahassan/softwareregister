@@ -1,0 +1,345 @@
+import type { EditorialReviewBase } from "../../types";
+
+const DATE = "2026-10-05";
+
+/** HR reviews, written from each vendor's own pages on the date above. */
+export const HR_REVIEWS: EditorialReviewBase[] = [
+  {
+    slug: "sage-hr",
+    headline: "Modular HR in rand: pay for core HR and leave, then add only the modules you use.",
+    summary:
+      "Sage HR is the cloud HR product Sage sells to South African businesses. Core HR and leave management are included as standard, and you add Performance, Shift Scheduling, Timesheets, Expenses and Recruitment as separate modules. A calculator on the pricing page works out the final price from the modules and headcount you choose, and a 30 day trial needs no credit card. The register records R28 per employee per month.",
+    bestFor: [
+      "Small and growing businesses that want to start with leave and employee records",
+      "Teams that want to add modules, such as shifts or recruitment, only when they need them",
+      "Businesses that already use Sage Payroll or Sage Accounting",
+    ],
+    thinkTwice: [
+      "You want a single published price, because the final figure comes from a calculator",
+      "You need payroll inside the same product, where Sage Payroll Advanced is aimed instead",
+      "You have more than a few hundred employees and need advanced HR, where Sage 300 People is the larger option",
+    ],
+    facts: [
+      { label: "In South Africa", value: "Sold and supported in South Africa by Sage South Africa" },
+      { label: "Price recorded", value: "R28 per employee per month on the register" },
+      { label: "Free trial", value: "30 days, no credit card, ends automatically" },
+      { label: "Included as standard", value: "Core HR and leave management" },
+      { label: "Optional modules", value: "Performance, Shift Scheduling, Timesheets, Expenses, Recruitment" },
+      { label: "Pricing tool", value: "Choose modules and headcount to see the final price" },
+      { label: "Mobile", value: "Expenses can be submitted from the mobile app" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Sage describes Sage HR as a way to manage and engage your workforce wherever they are, and its South African page frames the pricing around modules. Core Sage HR and leave management digitalise absence management and HR essentials. Everything else is optional.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "The pricing page does not show a table of prices. It shows a three step tool: choose the modules you want, enter your details and headcount from bands that run from 1 to 4 employees up to 500 plus, and the tool shows the final price. The register records R28 per employee per month, which reflects the starting rate it was able to read. Because the figure depends on modules and band, treat it as a starting point and take the calculator's figure.",
+          "The trial is generous: 30 days, no credit card, the trial ends automatically so there is nothing to cancel, and you can experiment with demo data or your own employee information.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: ["Each module is described in a single line on the page, which is enough to see where the product stops and where you would need something bigger."],
+        bullets: [
+          "Core HR and leave management, included as standard",
+          "Performance: goals, one to one meetings and 360 feedback",
+          "Shift Scheduling: flexible shift planning",
+          "Timesheets: a quick way for employees to track overtime",
+          "Expenses: submit and manage company expenses from the mobile app",
+          "Recruitment: job ads, an applicant pipeline and interview scheduling",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Sage HR is sold and supported by Sage South Africa, with its own South African pricing page. Leave rules are the heart of South African HR, and Sage's payroll pages describe leave managed under the Basic Conditions of Employment Act. The HR pricing page itself does not detail how leave is configured, so ask Sage South Africa to show you how family responsibility and maternity leave are set up in a trial.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "Payroll is not part of Sage HR, so you will connect it to Sage Payroll or another payroll product. The price depends on a calculator rather than a table, which makes quick comparison harder.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against BambooHR, Sage HR is priced in rand and sold locally, while BambooHR bills in dollars and restricts payroll to the United States. Read the full comparison.",
+        ],
+      },
+    ],
+    verdict:
+      "A sensible, locally supported HR product for a business that wants to start small. Use the trial with your real employee data, run the calculator for your headcount and modules, and ask how South African leave types are configured.",
+    sources: [{ label: "Sage HR pricing, South Africa", url: "https://www.sage.com/en-za/sage-business-cloud/hr/pricing/" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "peoplehr",
+    headline: "A UK built HR product with clear per employee tiers, priced in pounds.",
+    summary:
+      "PeopleHR is an HR product whose pricing page is written for the United Kingdom. HR plans run from £3 per employee per month on Starter to £9.50 on Elite+, and a 14 day free trial needs no credit card. Its payroll plans are built on HMRC compliance, the British tax authority, and the page does not mention South Africa or the rand.",
+    bestFor: [
+      "Businesses with UK operations or UK employees",
+      "South African firms that want HR records, absence and onboarding only, and handle payroll separately",
+    ],
+    thinkTwice: [
+      "You need South African payroll, because the payroll plans are built for the UK",
+      "You need rand pricing and local leave rules",
+      "You want local phone support in your time zone",
+    ],
+    facts: [
+      { label: "Billing", value: "British pounds, per employee per month" },
+      { label: "HR plans", value: "Starter £3, Core £5.50, Pro £8, Elite+ £9.50" },
+      { label: "Full suite", value: "Core+ £7, Pro+ £9.50, Ultimate+ £11" },
+      { label: "Free trial", value: "14 days, no credit card" },
+      { label: "Payroll", value: "UK payroll from £3, managed payroll from £5" },
+      { label: "South Africa", value: "Not mentioned on the pricing page" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "PeopleHR sells HR software in tiers and an optional UK payroll. The cheapest HR tier covers HR essentials, digitised employee records, document management, absence tracking, a mobile app, an AI HR assistant, a dashboard and a learning library. Each tier above it adds more: onboarding, expenses and e signatures on Core, performance management and timesheets on Pro, and automated workflows and advanced analytics on Elite+.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in pounds",
+        paragraphs: [
+          "The page quotes prices per employee per month, starting from £3, which the register records as GBP 3. At the reference rate used on this site, £3 is about R66 a month per employee, and that rand figure will move daily. Add ons are priced separately, for example timesheets, employee benefits and premium analytics at £1.50 per employee per month each.",
+          "Payroll is a separate set of plans: Payroll SaaS Core from £3 and Payroll Managed Core from £5, described in terms of HMRC compliance, pension enrolment and a 24 by 7 support line. These are UK features, so they do not help with PAYE, UIF or SDL.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "The pricing page does not mention South Africa, the rand or local leave law. HR records and absence tracking can work anywhere, but payroll, tax and statutory leave rules need a South African product alongside. The register cannot say that it handles BCEA leave.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The currency, the UK payroll and the absence of South African detail are the limits. For most South African employers, a rand priced product such as Sage HR is the more natural fit.",
+        ],
+      },
+    ],
+    verdict:
+      "Reasonable for a company with UK staff, and a stretch for a purely South African one. If you consider it for HR only, ask how leave policies are set up for South African law and be ready for a dollar like exposure to the pound.",
+    sources: [{ label: "PeopleHR pricing", url: "https://www.peoplehr.com/en-gb/pricing" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "bamboohr",
+    headline: "A polished American HR platform that publishes dollar prices and restricts payroll to the US.",
+    summary:
+      "BambooHR is a well regarded HR platform with three tiers: Core at $10, Pro at $17 and Elite at $25 per employee per month for companies of 25 or more employees, with flat monthly rates of $250, $425 and $650 for smaller companies. Its payroll and benefits add ons are for US employees only, and South Africa is not mentioned on the page. The register lists BambooHR as quote only, so the vendor's published prices are newer than that record.",
+    bestFor: [
+      "Companies with a US presence that want a polished HR platform",
+      "Teams that value performance reviews, onboarding and employee surveys in a friendly interface",
+    ],
+    thinkTwice: [
+      "You need payroll for South African employees, because payroll is for US employees only",
+      "You are a small team, because the flat monthly rates are $250 or more",
+      "Your budget is in rand, because the dollar price moves with the exchange rate",
+    ],
+    facts: [
+      { label: "Core, Pro, Elite", value: "$10, $17 and $25 per employee per month, for 25 or more employees" },
+      { label: "Small company rates", value: "$250, $425 and $650 a month" },
+      { label: "Add ons", value: "Payroll, Benefits Administration, Time and Attendance, Global Employment" },
+      { label: "Payroll and benefits", value: "US employees only" },
+      { label: "Bundle", value: "15 percent off when Payroll and Benefits Administration are combined" },
+      { label: "Founded", value: "2008" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "BambooHR is an HR information system built around employee records, hiring and onboarding, time off, benefits tracking and employee satisfaction surveys. The Pro tier adds performance management with 360 degree reviews and one to ones, employee community features and recognition. Elite adds compensation management with benchmarking, custom dashboards and a library of more than 300 compliance training courses.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "The pricing page publishes a price for each tier. At $10 a month, Core is about R167 per employee per month at the 2 October 2026 reference rate, Pro at $17 is about R284 and Elite at $25 is about R418, and those rand figures change daily. A company with fewer than 25 employees pays a flat monthly rate instead, which is $250 for Core, about R4 180.",
+          "The register records BambooHR as quote only with a dollar billing currency, so its record is out of date against the page on this point, and the review states the published numbers as the vendor showed them.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "The page says payroll and benefits are for US employees only and does not mention South Africa. A South African business would therefore use BambooHR for HR records and performance, and keep payroll in a local product. Nothing on the page describes South African leave law or statutory reporting.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The dollar pricing, the US only payroll and the absence of local compliance are the three limits for a South African employer.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against Sage HR, BambooHR is more established globally and priced in dollars, while Sage HR is modular, rand priced and sold locally. See the full comparison.",
+        ],
+      },
+    ],
+    verdict:
+      "A strong HR platform when the work is HR records, onboarding and performance, and the staff are not mostly in South Africa. For a South African employer, check the rand cost at today's rate and plan separate payroll.",
+    sources: [{ label: "BambooHR pricing", url: "https://www.bamboohr.com/pricing/" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "personio",
+    headline: "A European HR suite, priced in euros and written for HR teams across Europe.",
+    summary:
+      "Personio is a German HR software company that positions itself for HR teams across Europe. Its pricing page shows Core from €7.60 per month per employee, a Core Pro tier, and add on apps for recruiting, performance, compensation and surveys, plus payroll connections. It asks you to book a demo, it says it is used by more than 16,000 companies, and it does not mention South Africa. The register lists it as quote only, so the page's published starting price is newer than that record.",
+    bestFor: [
+      "Companies with employees in Europe that want one HR suite",
+      "Teams that want recruiting, performance and payroll data connected",
+    ],
+    thinkTwice: [
+      "Your employees are mostly in South Africa, because the product and its payroll connections are European",
+      "You want rand pricing, because it bills in euros",
+      "You want a quick start, because the page steers you to a demo",
+    ],
+    facts: [
+      { label: "Starting price", value: "From €7.60 per month per employee, Core tier" },
+      { label: "Tiers", value: "Core and Core Pro" },
+      { label: "Add on apps", value: "Recruiting, Performance and Development, Compensation, Surveys" },
+      { label: "Payroll", value: "Personio Payroll and connections such as Xero and Sage 50" },
+      { label: "Customers", value: "More than 16,000 companies, by Personio's own count" },
+      { label: "How to buy", value: "Book a demo" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Personio presents itself as tailored HR solutions designed to grow with your business, and the page is localised for European languages. Core covers employee profiles, documents and e signatures with limits, and analytics and reporting. Core Pro adds position management, unlimited documents and e signatures, and unlimited legal entity management.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in euros",
+        paragraphs: [
+          "The page states a starting price of €7.60 per month per employee. At the reference rate on this site, that is about R143 a month per employee, a figure that moves daily. The register records Personio as quote only with a euro billing currency, so the page is more specific than the register on the starting price.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: ["Beyond the core product, Personio sells apps for each part of the employee lifecycle."],
+        bullets: [
+          "Recruiting, onboarding and time tracking",
+          "Absence management and people analytics",
+          "Workflow automation and documents with e signatures",
+          "Performance and development, compensation management and surveys",
+          "Payroll, with Personio Payroll and preliminary payroll connections to Xero and Sage 50",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Nothing on the page addresses South Africa, local leave law or SARS. The payroll connections named are European in character. A South African business should treat Personio as an option for European staff, not as a local HR system.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: ["Euro billing, a demo led sale and the lack of South African specifics are the limits for a local buyer."],
+      },
+    ],
+    verdict:
+      "A capable suite for European HR teams. For South African employers, it only makes sense when much of the workforce is in Europe, and you should convert the euro price at today's rate before comparing.",
+    sources: [{ label: "Personio pricing", url: "https://www.personio.com/pricing/" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "labournet",
+    headline: "A South African labour law consultancy first, with payroll and HR software behind the advice.",
+    summary:
+      "LabourNet describes itself as the largest labour law consulting firm in South Africa, established in 1996 and serving more than 6,500 businesses. Alongside labour law advice it sells payroll, health and safety, information compliance, transformation services and learning. Its People Management software handles SARS and UIF integration, EMP201 and EMP501 documents, leave and employee self service. It publishes no price and says there are no upfront costs or joining fees.",
+    bestFor: [
+      "Employers that want labour law advice and payroll from one South African provider",
+      "Businesses that value dedicated consultants and guaranteed turnaround times",
+      "Firms that need employment equity, BBBEE or POPIA support",
+    ],
+    thinkTwice: [
+      "You want to buy software online without talking to anyone",
+      "You want a published price to compare against products such as SimplePay",
+      "You only need a software licence, because the model is service heavy",
+    ],
+    facts: [
+      { label: "Established", value: "1996, by LabourNet's own statement" },
+      { label: "Customers", value: "More than 6,500 businesses, by LabourNet's own count" },
+      { label: "Solutions", value: "Labour law, payroll, health and safety, information compliance, transformation, learning" },
+      { label: "Pricing", value: "Not published, no upfront costs or joining fees" },
+      { label: "Support", value: "Dedicated consultants, support desk and monthly online training" },
+      { label: "Contact", value: "087 758 0000, solutions@labournet.com" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "LabourNet is closer to a services firm with software than a software company with services. Its site groups six solution areas: Labour Law, Payroll, Health and Safety, Information Compliance covering POPIA, PAIA and the Consumer Protection Act, Transformation covering employment equity, BBBEE and skills development, and Learning with online courses in computer skills, soft skills, leadership and labour compliance.",
+        ],
+      },
+      {
+        heading: "The software",
+        paragraphs: [
+          "The People Management software is described as handling SARS and UIF integration, EMP201 and EMP501 documentation, leave management and online employee self service portals. Payroll can be run yourself or outsourced.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "No price appears on the site. It states there are no upfront costs or joining fees, which means you pay as you use the service, and you must ask for a written quote that covers software, support and any advice retainer.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "A consultancy model suits employers that want guidance more than self service. If you only want to run payslips cheaply, a product with a published price may be simpler.",
+        ],
+      },
+    ],
+    verdict:
+      "A credible choice for an employer that wants labour law expertise bundled with payroll. Ask for the quote in writing, and ask which parts are software and which are advisory time.",
+    sources: [{ label: "LabourNet", url: "https://www.labournet.com/" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "hr-companion",
+    headline: "No vendor page could be found, so this entry rests on the register's own figures.",
+    summary:
+      "The register lists HR Companion with a rating and a review count but no website, and web searches on 5 October 2026 found no vendor page for a South African HR product by that name. This entry therefore makes no claim about features, pricing or compliance.",
+    bestFor: ["Readers who already use the product and want to see how it ranks"],
+    thinkTwice: [
+      "You are considering it as a new purchase, because there is no vendor page we could read",
+      "You need to know it handles BCEA leave, which is unchecked",
+    ],
+    facts: [
+      { label: "Website", value: "None recorded" },
+      { label: "Price", value: "Quote only, none published" },
+      { label: "Compliance", value: "Unchecked" },
+    ],
+    sections: [
+      {
+        heading: "What we could and could not verify",
+        paragraphs: [
+          "We searched for the product by name and found other South African HR tools but no vendor page for this one. A review that guessed at features would mislead, so we state only what the register holds.",
+          "If you are a customer or the vendor and can supply a website, a price page and a statement of how the product handles leave and statutory reporting, the entry can be completed.",
+        ],
+      },
+    ],
+    verdict:
+      "Not enough evidence to recommend it as a new purchase. Ask the supplier for a written description of its leave and compliance features, a price with the VAT basis, and a reference customer.",
+    sources: [],
+    researchedAt: DATE,
+  },
+];

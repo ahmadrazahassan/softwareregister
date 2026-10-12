@@ -1,0 +1,138 @@
+/**
+ * Checks the bundled dataset against every figure NEW-SITE-BUILD.md states.
+ * Run with `npm run verify`. Exits non zero if any check fails, so it can sit
+ * in CI. A figure the spec states and the data cannot reproduce is a bug in the
+ * data, not in the spec.
+ */
+import { BRIEFINGS } from "../lib/data/briefings";
+import { COMPARISONS } from "../lib/data/comparisons";
+import { SA_AVAILABILITY } from "../lib/data/availability";
+import { getEditorialComparison, getEditorialReview } from "../lib/data/editorial";
+import { SECTORS } from "../lib/data/sectors";
+import { SOFTWARE } from "../lib/data/software";
+import { buildRegistry, buildVerdict, computeStats } from "../lib/registry";
+import { weightedScore } from "../lib/ranking";
+import { priceText } from "../lib/format";
+
+let failures = 0;
+function check(name: string, actual: unknown, expected: unknown) {
+  const ok = JSON.stringify(actual) === JSON.stringify(expected);
+  if (!ok) failures++;
+  console.log(`${ok ? "PASS" : "FAIL"}  ${name}${ok ? "" : `  expected ${JSON.stringify(expected)} got ${JSON.stringify(actual)}`}`);
+}
+
+const reg = buildRegistry(SOFTWARE);
+const stats = computeStats(reg, { sectors: SECTORS.length, comparisons: COMPARISONS.length, briefings: BRIEFINGS.length });
+
+console.log("\n-- Part 5: the data --");
+check("39 products", stats.products, 39);
+check("6 sectors", stats.sectors, 6);
+check("15 comparisons", stats.comparisons, 15);
+check("8 099 reviews", stats.reviews, 8099);
+
+const bySector = Object.fromEntries(SECTORS.map((s) => [s.slug, reg.ranked.filter((x) => x.sector === s.slug).length]));
+check("Accounting 8", bySector.accounting, 8);
+check("ERP 7", bySector.erp, 7);
+check("Payroll 6", bySector.payroll, 6);
+check("HR 6", bySector.hr, 6);
+check("CRM 6", bySector.crm, 6);
+check("Project management 6", bySector["project-management"], 6);
+
+check("11 priced products", stats.priced, 11);
+check("12 free products", stats.free, 12);
+check("16 quote only products", stats.quoted, 16);
+check("14 products bill in foreign currency", stats.foreign, 14);
+check("last checked 2026-08-21", stats.lastChecked, "2026-08-21");
+check("11 products carry a check date", stats.checkedCount, 11);
+
+const price = (slug: string) => priceText(reg.bySlug.get(slug)!);
+check("Sage Accounting price", price("sage-accounting"), "R240 /mo incl VAT");
+check("Sage 50cloud Pastel price", price("sage-50cloud-pastel"), "R1 375 /mo excl VAT");
+check("Sage Payroll price", price("sage-payroll"), "R72 /mo incl VAT");
+check("Sage HR price", price("sage-hr"), "R28 /employee /mo");
+check("Xero price", price("xero"), "R450 /mo incl VAT");
+check("QuickBooks Online price", price("quickbooks-online"), "R322 /mo");
+check("Smartsheet price", price("smartsheet"), "R170 /mo");
+check("PaySpace price", price("payspace"), "R21.49 /employee /mo");
+check("Pipedrive price", price("pipedrive"), "USD 14 /user /mo");
+check("FreshBooks price", price("freshbooks"), "USD 23 /mo");
+check("PeopleHR price", price("peoplehr"), "GBP 3 /employee /mo");
+
+console.log("\n-- Ranking --");
+const sageAcc = reg.bySlug.get("sage-accounting")!;
+const intacct = reg.bySlug.get("sage-intacct")!;
+check("412 at 4.2 outranks 96 at 4.3", sageAcc.score > intacct.score, true);
+console.log(`      priors: C=${reg.priors.meanRating.toFixed(4)} m=${reg.priors.weight.toFixed(2)}  Sage Accounting ${sageAcc.score.toFixed(4)} vs Sage Intacct ${intacct.score.toFixed(4)}`);
+check("score formula matches", Math.abs(weightedScore(4.2, 412, reg.priors) - sageAcc.score) < 1e-12, true);
+check("rank is a permutation of 1..39", reg.ranked.map((s) => s.rank).sort((a, b) => a - b), Array.from({ length: 39 }, (_, i) => i + 1));
+
+console.log("\n-- Integrity --");
+check("slugs are unique", new Set(SOFTWARE.map((s) => s.slug)).size, SOFTWARE.length);
+check("every comparison references real slugs", COMPARISONS.every((c) => reg.bySlug.has(c.a) && reg.bySlug.has(c.b)), true);
+check("comparison pair slugs are unique", new Set(COMPARISONS.map((c) => c.slug)).size, COMPARISONS.length);
+check("every briefing product slug exists", BRIEFINGS.every((b) => b.product_slugs.every((s) => reg.bySlug.has(s))), true);
+check("briefing slugs are unique", new Set(BRIEFINGS.map((b) => b.slug)).size, BRIEFINGS.length);
+check("every Sage product carries the Sage affiliate link", SOFTWARE.filter((s) => /^Sage\b/.test(s.vendor)).every((s) => s.affiliate_url === "https://sagesouthafrica.pxf.io/dyq0qK"), true);
+check("no non Sage product carries an affiliate link", SOFTWARE.filter((s) => !/^Sage\b/.test(s.vendor)).every((s) => s.affiliate_url === null), true);
+check("every check date is one of the two real dates", SOFTWARE.every((s) => s.price_checked_at === null || ["2026-08-12", "2026-08-21"].includes(s.price_checked_at)), true);
+check("no compliance claim has been invented", SOFTWARE.every((s) => s.compliance === null && s.bank_feeds === null), true);
+
+console.log("\n-- Copy rules --");
+// Prose only. Slugs and href targets legitimately contain hyphens, so strip markdown link targets first.
+const prose = JSON.stringify([
+  BRIEFINGS.map((b) => [b.title, b.standfirst, b.body]),
+  SOFTWARE.map((s) => s.summary),
+  SECTORS.map((s) => s.description),
+]).replace(/\]\([^)]*\)/g, "]");
+const dash = prose.match(/[‐-―−]| - | -- /g);
+check("no dashes in briefing, summary or sector copy", dash, null);
+const hyphenated = [...prose.matchAll(/\b[A-Za-z]+-[A-Za-z]+\b/g)].map((m) => m[0]);
+check("no hyphenated words in briefing, summary or sector copy", hyphenated, []);
+
+console.log("\n-- Editorial --");
+const reviews = SOFTWARE.map((s) => getEditorialReview(s.slug));
+check("every product has a researched review", reviews.every(Boolean), true);
+check("every curated comparison has a detailed write up", COMPARISONS.every((p) => Boolean(getEditorialComparison(p.slug))), true);
+check(
+  "every review names where it was read from, or says it could not be",
+  reviews.every((r) => r && (r.sources.length > 0 || /could not|no working|no vendor/i.test(r.headline + r.summary))),
+  true,
+);
+const NO_VENDOR_PAGE = ["payroll-online", "hr-companion"];
+check("every review has at least 3 cons", reviews.every((r) => r && r.cons.length >= 3), true);
+check(
+  "every review has at least 3 pros, except the two with no vendor page",
+  reviews.every((r) => r && (NO_VENDOR_PAGE.includes(r.slug) ? r.pros.length === 0 : r.pros.length >= 3)),
+  true,
+);
+check("no pro or con is repeated within a review", reviews.every((r) => r && new Set([...r.pros, ...r.cons]).size === r.pros.length + r.cons.length), true);
+check("every source link is https", reviews.every((r) => r && r.sources.every((s) => s.url.startsWith("https://"))), true);
+check("every review is dated", reviews.every((r) => r && /^\d{4}-\d{2}-\d{2}$/.test(r.researchedAt)), true);
+const editorialProse = JSON.stringify([
+  reviews.map((r) => r && [r.headline, r.summary, r.bestFor, r.thinkTwice, r.pros, r.cons, r.facts, r.sections, r.verdict]),
+  COMPARISONS.map((p) => {
+    const e = getEditorialComparison(p.slug);
+    return e && [e.headline, e.summary, e.chooseA, e.chooseB, e.glance, e.sections, e.verdict];
+  }),
+]);
+check("no dashes in reviews or comparisons", editorialProse.match(/[\u2010-\u2015\u2212]| - | -- /g), null);
+check("no banned marketing words in reviews or comparisons", editorialProse.match(/trusted by|seamless|empower|unlock|game changer/i), null);
+check("no hyphenated words in reviews or comparisons", [...editorialProse.matchAll(/\b[A-Za-z]+-[A-Za-z]+\b/g)].map((m) => m[0]), []);
+
+console.log("\n-- South African availability --");
+check("every product has an availability finding", SOFTWARE.every((s) => Boolean(SA_AVAILABILITY[s.slug])), true);
+check("every Sage product is sold in South Africa", SOFTWARE.filter((s) => /^sage\b/i.test(s.vendor)).every((s) => SA_AVAILABILITY[s.slug]?.status === "local"), true);
+const saProse = JSON.stringify(Object.values(SA_AVAILABILITY).map((a) => a.note));
+check(
+  "no dashes or hyphenated words in availability notes",
+  [saProse.match(/[\u2010-\u2015\u2212]| - | -- /g), [...saProse.matchAll(/\b[A-Za-z]+-[A-Za-z]+\b/g)].map((m) => m[0])],
+  [null, []],
+);
+
+console.log("\n-- Sample verdict --");
+const v = buildVerdict(reg.bySlug.get("sage-accounting")!, reg.bySlug.get("xero")!);
+console.log(`      winner: ${v.winner.name}`);
+v.paragraphs.forEach((p) => console.log(`      ${p}`));
+
+console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`);
+process.exit(failures === 0 ? 0 : 1);

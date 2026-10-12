@@ -1,0 +1,108 @@
+import { Check, X } from "lucide-react";
+import { formatDateLong } from "@/lib/format";
+import type { EditorialReview, EditorialSection } from "@/lib/types";
+import { ProsCons } from "./ProsCons";
+
+export function EditorialSections({ sections }: { sections: EditorialSection[] }) {
+  return (
+    <div className="space-y-10">
+      {sections.map((sec) => (
+        <div key={sec.heading}>
+          <h3 className="font-heading text-[22px] leading-7 font-bold tracking-[-0.01em]">{sec.heading}</h3>
+          <div className="mt-3 max-w-[68ch] space-y-4 text-[15px] leading-7">
+            {sec.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
+          {sec.bullets && sec.bullets.length > 0 && (
+            <ul className="mt-4 max-w-[68ch] border-t border-line">
+              {sec.bullets.map((b) => (
+                <li key={b} className="flex gap-3 border-b border-line py-2.5 text-[15px] leading-6">
+                  <Check size={18} strokeWidth={1.5} aria-hidden="true" className="mt-0.5 flex-none text-lime-text" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** The long form review: a headline, who it suits and who should think twice, the facts, the detail, a verdict and the sources. */
+export function EditorialReviewBlock({ r, name }: { r: EditorialReview; name: string }) {
+  return (
+    <div>
+      <p className="stamp text-muted">
+        {r.sources.length > 0 ? `Researched ${formatDateLong(r.researchedAt)} from the vendor's own pages` : `Searched ${formatDateLong(r.researchedAt)}, no vendor page found`}
+      </p>
+      <h3 className="mt-3 max-w-[30ch] font-heading text-[28px] leading-8 font-bold tracking-[-0.02em] md:text-[34px] md:leading-10">{r.headline}</h3>
+      <p className="mt-4 max-w-[68ch] text-[16px] leading-7">{r.summary}</p>
+
+      <div className="mt-8">
+        <ProsCons pros={r.pros} cons={r.cons} />
+      </div>
+
+      <div className="mt-5 grid gap-5 md:grid-cols-2">
+        <div className="rounded-[16px] border border-line-firm bg-surface p-5">
+          <p className="stamp text-lime-text">Best for</p>
+          <ul className="mt-3 space-y-2.5">
+            {r.bestFor.map((t) => (
+              <li key={t} className="flex gap-3 text-[15px] leading-6">
+                <Check size={18} strokeWidth={1.5} aria-hidden="true" className="mt-0.5 flex-none text-lime-text" />
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="rounded-[16px] border border-line-firm bg-surface p-5">
+          <p className="stamp text-muted">Think twice if</p>
+          <ul className="mt-3 space-y-2.5">
+            {r.thinkTwice.map((t) => (
+              <li key={t} className="flex gap-3 text-[15px] leading-6">
+                <X size={18} strokeWidth={1.5} aria-hidden="true" className="mt-0.5 flex-none text-muted" />
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {r.facts.length > 0 && (
+        <dl className="mt-8 grid border-t border-line sm:grid-cols-2 lg:grid-cols-3">
+          {r.facts.map((f) => (
+            <div key={f.label} className="min-w-0 border-b border-line py-4 sm:pr-4">
+              <dt className="stamp mb-1 text-muted">{f.label}</dt>
+              <dd className="m-0 text-[15px] leading-6 font-semibold">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
+      <div className="mt-10">
+        <EditorialSections sections={r.sections} />
+      </div>
+
+      <div className="mt-10 max-w-[68ch] rounded-[16px] border border-lime-deep/30 bg-lime-wash p-6">
+        <p className="stamp text-lime-text">Our verdict on {name}</p>
+        <p className="mt-3 text-[16px] leading-7">{r.verdict}</p>
+      </div>
+
+      {r.sources.length > 0 && (
+        <div className="mt-8 max-w-[68ch]">
+          <p className="stamp mb-2 text-muted">Pages this review was read from</p>
+          <ul className="space-y-1 text-[13px] leading-5">
+            {r.sources.map((s) => (
+              <li key={s.url}>
+                <a href={s.url} target="_blank" rel="noopener noreferrer" className="prose-link break-all">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}

@@ -1,0 +1,347 @@
+import type { EditorialReviewBase } from "../../types";
+
+const DATE = "2026-10-05";
+
+/**
+ * Project management reviews, written from each vendor's own pricing pages on the date above.
+ * Every product here bills in US dollars, so rand figures are converted at the 2 October 2026 reference
+ * rate of R16.73 per dollar and will move daily.
+ */
+export const PM_REVIEWS: EditorialReviewBase[] = [
+  {
+    slug: "asana",
+    headline: "A polished work management tool whose free plan now stops at two users.",
+    summary:
+      "Asana is a work management platform for teams. Its pricing page lists a free Personal plan for 2 users, Starter at $10.99 per user per month on annual billing, Advanced at $24.99, and custom priced Enterprise and Enterprise plus tiers. At the 2 October 2026 rate, Starter is about R184 and Advanced about R418 per user per month. It bills in dollars and the page mentions no free trial.",
+    bestFor: [
+      "Teams that want a clean, well designed way to plan and track work",
+      "Marketing and operations teams that need timelines, forms and reporting dashboards",
+      "Businesses that want unlimited free guests on paid plans",
+    ],
+    thinkTwice: [
+      "You counted on a generous free plan, because Personal is limited to 2 users",
+      "You need portfolios, goals and resource management, which start on Advanced at about R418 per user",
+      "You need rand billing, because Asana bills in dollars",
+    ],
+    facts: [
+      { label: "Personal", value: "Free, 2 users, unlimited tasks and projects" },
+      { label: "Starter", value: "$10.99 per user per month annual, $13.49 monthly" },
+      { label: "Advanced", value: "$24.99 per user per month annual, $30.49 monthly" },
+      { label: "Enterprise", value: "Custom pricing, plus an Enterprise plus tier" },
+      { label: "AI", value: "Included with limits, 5 requests per user per month on paid plans" },
+      { label: "Founded", value: "2008" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Asana is a project and work management tool built around tasks, projects and views. The free plan allows unlimited tasks and projects, list, board and calendar views, file uploads up to 100 megabytes and more than 100 integrations, but only for two users.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "Starter adds timeline and Gantt views, reporting dashboards, unlimited automations, forms, custom templates and unlimited free guests with no seat limits, at $10.99 per user per month on annual billing. Advanced adds unlimited portfolios, goals, resource management, approvals and proofing, time tracking and integrations with Salesforce, Tableau and Power BI, at $24.99. Enterprise adds SAML sign in, SCIM provisioning, capacity planning and view only licences at a custom price, and Enterprise plus adds SIEM integration, data residency, audit logs and dedicated workspaces.",
+          "A team of eight on Starter would pay about $88 a month on annual billing, roughly R1 470, and the figure moves with the exchange rate.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "The pricing page makes no South African claims and quotes dollars. Data residency is listed only on the Enterprise plus tier, which matters if your policies require data to stay in a region.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The free plan is small, the AI allowance is limited, and the features most teams grow into, such as goals and resource management, sit two tiers up. The page we read mentions no free trial.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: ["Against monday.com, Asana is more task centric and monday.com is more configurable. See the full comparison."],
+      },
+    ],
+    verdict:
+      "A strong team tool when the price per user is acceptable. Check the two user limit on the free plan, price your team at the Starter rate in rand, and confirm whether you need the Advanced features before you commit.",
+    sources: [{ label: "Asana pricing", url: "https://asana.com/pricing" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "clickup",
+    headline: "The cheapest paid plans in the sector, with a free plan that is generous on tasks and tight on storage.",
+    summary:
+      "ClickUp is an all in one work platform whose pricing page lists Free Forever, Unlimited at $7 per user per month annual, Business at $12 and a custom Enterprise tier, with AI add ons at $9 and $28 per user. At the 2 October 2026 rate, Unlimited is about R117 and Business about R201 per user per month. It bills in dollars.",
+    bestFor: [
+      "Budget conscious teams that want many features at a low per user price",
+      "Teams that want tasks, docs, goals, chat and whiteboards in one place",
+      "Small businesses that want unlimited storage and integrations without paying much",
+    ],
+    thinkTwice: [
+      "You want a simple tool, because ClickUp has a lot to configure",
+      "You plan to add the AI plans, which can double or triple the per user cost",
+      "You need rand billing, because the prices are dollars",
+    ],
+    facts: [
+      { label: "Free Forever", value: "Free, 60 MB storage, 5 spaces, 1 form, unlimited tasks" },
+      { label: "Unlimited", value: "$7 per user per month annual, $10 monthly" },
+      { label: "Business", value: "$12 per user per month annual, $19 monthly" },
+      { label: "AI add ons", value: "Brain AI at $9 and Everything AI at $28 per user per month" },
+      { label: "Automations", value: "5,000 a month on Business" },
+      { label: "Founded", value: "2017" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "ClickUp's free plan offers unlimited tasks, kanban boards, basic custom fields and round the clock support, but only 60 megabytes of storage, five spaces and one form. Unlimited lifts the storage, spaces and forms limits and adds unlimited integrations, native time tracking, goals, ClickUp Chat and email integration.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "Business at $12 per user per month on annual billing adds unlimited dashboards with advanced cards, unlimited message history, 5,000 automations a month, mind maps, private whiteboards, sprint points and proofing tools. Enterprise adds custom roles, SAML single sign on, audit logs, custom branding, HIPAA availability and a dedicated customer success manager at a custom price.",
+          "The AI plans are priced per user on top: Brain AI at $9, about R151, and Everything AI at $28, about R468. A team of ten on Business with Everything AI would pay about $400 a month, roughly R6 700.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: ["The pricing page mentions no South African support or billing details, so assume dollar billing and check how your card handles it."],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: ["The free plan's 60 megabyte storage ends quickly, the breadth of features can overwhelm a small team, and the AI add ons change the price picture."],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: ["Against Trello, ClickUp is far broader and Trello is simpler. See the full comparison."],
+      },
+    ],
+    verdict:
+      "Excellent value if you will use the breadth. Price the team with and without AI, expect to spend time on setup, and watch the free storage limit.",
+    sources: [{ label: "ClickUp pricing", url: "https://clickup.com/pricing" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "monday-com",
+    headline: "A configurable work platform where the real price is the seat minimum and the tier.",
+    summary:
+      "monday.com is a work management platform whose pricing page lists a Free plan for up to 2 seats, then Basic at $9, Standard at $12 and Pro at $19 per seat per month on annual billing, with a custom Enterprise tier. The page shows pricing for 10 seats as the example, so a team of that size pays about $90 to $190 a month, roughly R1 500 to R3 200. It bills in dollars.",
+    bestFor: [
+      "Teams that want to design their own boards, workflows and dashboards",
+      "Businesses that want free viewers and flexible views",
+      "Teams that also want CRM, service or dev products from the same vendor",
+    ],
+    thinkTwice: [
+      "You are a team of fewer than ten, because the price is shown for ten seats",
+      "You need Gantt and calendar views, which start on Standard",
+      "You need rand billing, because the prices are dollars",
+    ],
+    facts: [
+      { label: "Free", value: "Up to 2 seats, 3 boards, 3 Docs" },
+      { label: "Basic", value: "$9 per seat per month annual, shown for 10 seats at $90" },
+      { label: "Standard", value: "$12 per seat per month annual, shown for 10 seats at $120" },
+      { label: "Pro", value: "$19 per seat per month annual, shown for 10 seats at $190" },
+      { label: "Enterprise", value: "Custom, with portfolio and resource management" },
+      { label: "Founded", value: "2012" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "monday.com builds work management around boards and configurable columns. Free allows up to three boards, up to three Docs, more than 200 templates, eight column types and mobile apps. Basic adds unlimited items and unlimited free viewers. Standard adds three workflows, 250 automations a month, Timeline and Gantt views, calendar view, guest access and 1,000 API calls a day. Pro adds 20 workflows, 25,000 automations a month, private boards, advanced columns and 10,000 API calls a day.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "At the 2 October 2026 rate, Basic is about R151, Standard about R201 and Pro about R318 per seat per month, and the page quotes a ten seat minimum in its examples. Enterprise adds portfolio management, resource management, 250 workflows, 250,000 automations a month, a 99.9 percent uptime commitment and round the clock support at a custom price.",
+          "monday.com also sells separate CRM, service and dev products, with their own price lists.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: ["The page makes no South African claims. Support round the clock is listed only on Enterprise, so confirm support hours for the plan you buy."],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: ["The ten seat framing and the tier gating of views and automation limits mean a small team can pay for more than it needs. Dollar billing carries exchange rate risk."],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: ["Against Asana, monday.com is more configurable and visual. See the full comparison."],
+      },
+    ],
+    verdict:
+      "A flexible platform for teams who want to shape their own workflows. Price the actual number of seats, check which views you need, and convert the dollar price at today's rate.",
+    sources: [{ label: "monday.com pricing", url: "https://monday.com/pricing" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "smartsheet",
+    headline: "A spreadsheet style work platform for structured projects, recorded in rand on this register.",
+    summary:
+      "Smartsheet is a work management platform that presents projects as sheets, with Gantt, table, board and calendar views. Its pricing page lists Pro, Business, Enterprise and Advanced Work Management plans and a 30 day trial with no credit card. The dollar figures in the text we read did not look consistent with each other, so we do not repeat them as a price. The register records a starting price of R170 a month.",
+    bestFor: [
+      "Teams that think in spreadsheets and want structure, forms and reports",
+      "Organisations with many contributors, since contributors are free",
+      "Enterprises that need portfolios, scenario planning and single sign on",
+    ],
+    thinkTwice: [
+      "You need a price you can check, because the figures we read were inconsistent",
+      "You want a free plan, because the page offers a trial, not a free tier",
+      "You are a very small team, because plans start with member minimums",
+    ],
+    facts: [
+      { label: "Price recorded", value: "R170 a month on the register" },
+      { label: "Free trial", value: "30 days, no credit card" },
+      { label: "Plans", value: "Pro, Business, Enterprise and Advanced Work Management" },
+      { label: "Contributors", value: "Unlimited free contributors on Pro and above" },
+      { label: "Pro", value: "1 to 10 members, unlimited sheets, forms and reports, 250 automations a month" },
+      { label: "Founded", value: "2005" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Smartsheet is built around members who create and manage work, and contributors who update it. Pro covers one to ten members with unlimited sheets, forms and reports and 250 automations a month, and includes Gantt, table, board and calendar views. Business is for three or more members and adds timeline view, workload tracking, admin capabilities, unlimited automations and 1 terabyte of attachment storage. Enterprise adds scenario planning, portfolios, SAML based single sign on and directory integrations for ten or more members. Advanced Work Management adds Control Center, Dynamic View, Data Shuttle and premium support.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "The register records Smartsheet at R170 a month, the only product in this sector recorded in rand. The pricing page text we read showed dollar figures per member that were not consistent with each other, which suggests the page shows prices by script and by region, so no dollar figure is stated here. Confirm the price for your country and member count on the live page.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: ["The page makes no South African claims beyond regional pricing. Support options by plan should be confirmed with the vendor."],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: ["Member minimums, a paid only model and a price that varies by page make it harder to compare than its rivals."],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: ["Against Wrike, Smartsheet is more spreadsheet like and Wrike is more task and request oriented. See the full comparison."],
+      },
+    ],
+    verdict:
+      "A good fit for structured project teams. Confirm the rand price and member rules on the live page, take the 30 day trial, and count your members and contributors before you buy.",
+    sources: [{ label: "Smartsheet pricing", url: "https://www.smartsheet.com/pricing" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "trello",
+    headline: "The simplest board tool in the sector, and the cheapest paid plan at $5 per user.",
+    summary:
+      "Trello is Atlassian's card and board tool. Its pricing page lists a Free plan for up to 10 collaborators per workspace, Standard at $5 per user per month on annual billing, Premium at $10 and Enterprise at $17.50. At the 2 October 2026 rate, Standard is about R84, Premium about R167 and Enterprise about R293 per user per month. It bills in dollars and offers a free Premium trial.",
+    bestFor: [
+      "Small teams that want a simple, visual board for tasks",
+      "People who value speed and a gentle learning curve",
+      "Teams that already use Atlassian products",
+    ],
+    thinkTwice: [
+      "You need heavy reporting or resource planning, because Trello is deliberately light",
+      "You need views beyond the board, which start on Premium",
+      "You need rand billing, because Trello bills in dollars",
+    ],
+    facts: [
+      { label: "Free", value: "Up to 10 collaborators, 10 boards, 10 MB files, 250 command runs a month" },
+      { label: "Standard", value: "$5 per user per month annual, $6 monthly" },
+      { label: "Premium", value: "$10 per user per month annual, $12.50 monthly" },
+      { label: "Enterprise", value: "$17.50 per user per month annual" },
+      { label: "Trial", value: "Free Premium trial for all users" },
+      { label: "Vendor", value: "Atlassian, Trello founded 2011" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Trello organises work as cards on boards. The free plan allows up to ten boards per workspace and ten collaborators, with 10 megabytes of file storage and 250 workspace command runs a month. Standard adds unlimited boards, card mirroring, more automation with 1,000 command runs a month, 250 megabytes of file storage and AI capture. Premium adds five views, which are Calendar, Timeline, Table, Dashboard and Map, unlimited command runs, workspace level templates and admin controls. Enterprise adds unlimited workspaces, organisation wide permissions and single sign on with Atlassian Guard, plus round the clock support.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "A team of ten on Standard pays about $50 a month on annual billing, about R840, and about $100 on Premium, about R1 670. The register records Trello's starting price as free in dollars, which matches the Free plan.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: ["The page mentions no South African support or billing details. Round the clock support is listed only for Enterprise."],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: ["It is a lightweight tool by design, so complex projects with dependencies and resource plans will outgrow it. Views and unlimited automation sit on Premium."],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: ["Against ClickUp, Trello is far simpler and cheaper per user at the entry level. See the full comparison."],
+      },
+    ],
+    verdict:
+      "The right choice when you want simple boards at a low price. Try the free Premium trial to see whether you need the extra views, and convert the dollar price at today's rate.",
+    sources: [{ label: "Trello pricing", url: "https://trello.com/pricing" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "wrike",
+    headline: "A work management platform that is free to try, with business plans from $25 per user.",
+    summary:
+      "Wrike is a work management platform for teams that manage projects and requests. Its pricing page lists a Free plan, Team at $10 per user per month for 2 to 15 users, Business at $25 for 5 to 200 users, and custom priced Pinnacle and Apex tiers, with a 14 day trial and no credit card. At the 2 October 2026 rate, Team is about R167 and Business about R418 per user per month. It bills in dollars.",
+    bestFor: [
+      "Teams of 5 to 200 that want robust project and request management",
+      "Organisations that want AI features and templated workflows on a business plan",
+      "Enterprises that need resource planning, budgeting and advanced reporting on Pinnacle",
+    ],
+    thinkTwice: [
+      "You need more than the free plan's board and table views, because Gantt starts on Team",
+      "You are a single user, because paid plans have minimum users",
+      "You need rand billing, because Wrike bills in dollars",
+    ],
+    facts: [
+      { label: "Free", value: "Web, desktop and mobile apps, project and task management, board and table views" },
+      { label: "Team", value: "$10 per user per month annual, 2 to 15 users" },
+      { label: "Business", value: "$25 per user per month annual, 5 to 200 users" },
+      { label: "Pinnacle and Apex", value: "Contact for pricing" },
+      { label: "Trial", value: "14 days, no credit card, cancel anytime" },
+      { label: "Founded", value: "2006" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Wrike's free plan covers project and task management with board and table views. Team adds AI Essentials, a shareable dashboard and interactive Gantt charts. Business, marked as most popular, adds AI Elite features, the ability to templatise work and standard integrations. Pinnacle adds expanded AI, advanced resource and capacity planning, budgeting and advanced reporting and BI. Apex, marked as new, adds ten times more AI Elite actions, unlimited whiteboards, integrations and automations with Wrike Integrate and bi directional integrations with third party systems.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "The page states amounts per month billed annually per user. A team of ten on Business would pay about $250 a month, roughly R4 180. The register records Wrike's starting price as free in dollars, which matches the Free plan.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: ["The page makes no South African claims. Treat it as a global product billed in dollars and confirm support hours."],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: ["The user ranges on Team and Business, and the contact us pricing for the higher tiers, make budgeting harder for growing teams."],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: ["Against Smartsheet, Wrike is more request and task oriented. See the full comparison."],
+      },
+    ],
+    verdict:
+      "A capable platform for mid sized teams. Take the 14 day trial, check the user range for your plan, and price it in rand at today's rate.",
+    sources: [{ label: "Wrike pricing", url: "https://www.wrike.com/price/" }],
+    researchedAt: DATE,
+  },
+];

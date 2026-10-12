@@ -1,0 +1,384 @@
+import type { EditorialReviewBase } from "../../types";
+
+const DATE = "2026-10-05";
+
+/** Payroll reviews, written from each vendor's own South African pages on the date above. */
+export const PAYROLL_REVIEWS: EditorialReviewBase[] = [
+  {
+    slug: "simplepay",
+    headline: "Cloud payroll that a non accountant can run, priced by headcount with an instant quote.",
+    summary:
+      "SimplePay is a South African cloud payroll product built around one plan with every feature switched on. You enter your company details and get an instant quote that scales with the number of employees, all quoted excluding VAT. A 30 day free trial includes full support. It is the top ranked product on this register, and its pitch is that even a person without an accounting background can run it.",
+    bestFor: [
+      "Small and mid sized employers that want payroll without hiring a specialist",
+      "Businesses that keep their books in Xero or QuickBooks and want payroll to connect",
+      "Accounting firms that want to refer clients to a product their own clients can use",
+    ],
+    thinkTwice: [
+      "You have more than 500 employees, because SimplePay asks you to contact it for a custom arrangement",
+      "You run payroll for clients as a bureau, which also needs an individual arrangement",
+      "You have several companies, because each is billed and quoted separately",
+    ],
+    facts: [
+      { label: "Pricing model", value: "One plan, quoted per employee, excluding VAT" },
+      { label: "Free trial", value: "30 days with full access and support" },
+      { label: "Quote", value: "Instant online quote from your headcount" },
+      { label: "Apps", value: "iOS and Android" },
+      { label: "Security", value: "Two factor authentication and role based access" },
+      { label: "Support", value: "Free support, online help and free training" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "SimplePay describes itself as cloud payroll software for South African employers and targets small to mid sized businesses. Its sign up page says that even a non accounts person can use the program, and it carries a section for accountants, which suggests that accounting firms are a real part of its audience.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "There is a single plan, which the page calls The One Plan, with every feature included. Prices are quoted excluding VAT and depend on the number of employees, and the site generates an instant quote from your company details. The rate per employee did not appear in the text of the page when it was read on 5 October 2026, because the quote is calculated live, so the register records SimplePay as quote only and no price is invented here. Third party sites show conflicting starting figures, which is a reason to take your own quote.",
+          "Multiple companies are billed separately and each needs its own quote. Employers with more than 500 employees, and accounting firms or bureaus that process payroll for clients, are asked to get in touch for a custom arrangement.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "The plan includes PAYE, UIF and SDL calculations, unlimited custom income and deduction items, leave management with custom policies, an employee self service portal, mobile apps, two factor authentication and role based access. Payslips can be issued through the portal and payment files can be generated for your bank.",
+        ],
+        bullets: [
+          "PAYE, UIF and SDL calculated for you",
+          "Tax certificates exported for upload to SARS eFiling or e@syFile",
+          "EMP201 data and monthly UIF reporting, with pre filing validations for the bi annual reconciliations",
+          "Leave requests and approvals through self service, with sick and family responsibility leave built in",
+          "Bank payment files and an API for automation",
+          "Integrations with Xero and QuickBooks",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Compliance is the point of the product. SimplePay says it keeps employers compliant with SARS and the Department of Labour. It is listed on the Xero marketplace as a local payroll app, and Xero names SimplePay among the local apps that connect to it. The features page does not mention COIDA, time and attendance or a Sage integration, so confirm those if you need them.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The lack of a published per employee rate means you cannot compare it with PaySpace or Sage Payroll without running the quote yourself. Larger employers and bureaus cannot use the standard plan. The page does not describe time and attendance, so a business with shift work will need a separate tool.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against PaySpace, SimplePay is simpler and aimed at smaller employers, while PaySpace offers tiers up to multinational payroll. Against Sage Payroll, SimplePay is quote driven while Sage publishes an annual price, and Sage connects natively to Sage Accounting. See the full comparisons.",
+        ],
+      },
+    ],
+    verdict:
+      "Easy to see why it ranks first: it is focused, local and comes with a trial that includes support. Run the instant quote for your headcount, remember that it excludes VAT, and check any needs outside its list, such as time and attendance, before you commit.",
+    sources: [
+      { label: "SimplePay home", url: "https://www.simplepay.co.za/" },
+      { label: "SimplePay pricing", url: "https://www.simplepay.co.za/pricing" },
+      { label: "SimplePay features", url: "https://www.simplepay.co.za/features" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "payspace",
+    headline: "Payroll and HR that scales from fifty employees to multinational, priced per employee.",
+    summary:
+      "PaySpace is a South African payroll and HR platform with three tiers: Lite for up to 50 employees, Premier for growing businesses and Master for large or multinational organisations. It says it serves more than 20,000 customers across 45 plus countries, publishes no rate on its homepage, and describes its pricing as per employee per month with no annual licence. The register recorded R21.49 per employee per month when it was read on 21 August 2026.",
+    bestFor: [
+      "Growing employers that expect to need analytics and more advanced payroll later",
+      "Companies with staff in several African countries",
+      "Businesses that want the option of outsourced, managed payroll",
+    ],
+    thinkTwice: [
+      "You are a very small employer that wants to see a rate and sign up in minutes",
+      "You need a published price to compare, because the homepage names none",
+      "You only need basic payslips, where a simpler product may do",
+    ],
+    facts: [
+      { label: "Tiers", value: "Lite, Premier and Master" },
+      { label: "Lite limit", value: "Up to 50 employees" },
+      { label: "Reach", value: "45 plus countries, 49 with statutory rules configured" },
+      { label: "Customers", value: "More than 20,000, by PaySpace's own count" },
+      { label: "Price recorded", value: "R21.49 per employee per month, read 21 August 2026" },
+      { label: "Self service", value: "Includes a WhatsApp employee self service channel" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "PaySpace offers payroll, HR, an AI assistant that answers employee and administrator questions, and employee self service delivered through WhatsApp. It runs a self serve model and a managed model, and it provides sandbox environments for testing. Its three tiers make it one of the few products in this sector that scales from a small business to a multinational.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "The homepage describes transparent per employee per month pricing, with no annual licence and no hidden software fees, but names no rates. The register's recorded figure of R21.49 per employee per month was read on 21 August 2026, and this review could not confirm it against a published rate on 5 October 2026. Confirm the figure and what it excludes, since the register's price does not state whether VAT is included.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "PaySpace says it automates tax updates and statutory reporting, and offers more than 95 country specific reports, pre populated to meet local revenue authority standards. HR features cover employee records, leave management, electronic onboarding and performance tracking.",
+        ],
+        bullets: [
+          "Payroll with automated tax updates and statutory reporting",
+          "HR: records, leave, onboarding and performance",
+          "AI Assist for payroll questions",
+          "WhatsApp self service for payslips, tax documents, leave and expense claims",
+          "General ledger integrations with Xero, QuickBooks and Acumatica",
+          "Workday, Power BI and Power Automate connectors on advanced tiers",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "PaySpace is South African in origin and handles employees' tax and social security contributions across its markets. The homepage does not spell out SARS returns, UIF, Employment Equity or COIDA by name, so ask for a written list of South African statutory outputs. Search results also describe a Deel Local Payroll offering powered by PaySpace.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The missing public rate is the obvious gap, and so is the absence of named South African statutory detail on the homepage. For a ten person business, the breadth of the platform may be more than is needed.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against SimplePay, PaySpace is broader and more international, and SimplePay is simpler to try. Read the full comparison for the trade offs.",
+        ],
+      },
+    ],
+    verdict:
+      "A strong choice for a business that expects to grow or operate beyond South Africa. Get the per employee rate in writing, with the VAT basis, and ask for the South African statutory outputs to be listed.",
+    sources: [{ label: "PaySpace", url: "https://www.payspace.com/" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "sage-payroll",
+    headline: "Online payroll with every feature in every package, priced by how many people you employ.",
+    summary:
+      "Sage Payroll is the small business cloud payroll product from Sage. Its pricing page says you get all features with every package and prices by employee bands from 1 to 2 up to more than 200. The page showed a starting price of R1 080 a year including VAT on 5 October 2026, and a 30 day free trial. It handles PAYE, UIF and SDL, ACB bank files, leave under the BCEA, and the EMP201, EMP501 and IRP5 returns.",
+    bestFor: [
+      "Small employers that want clearly banded pricing with every feature included",
+      "Businesses already on Sage Accounting that want payroll to connect to it",
+      "Firms that manage payroll for several companies, since companies and users are unlimited",
+    ],
+    thinkTwice: [
+      "You expected the register's R72 a month, because the vendor now shows R1 080 a year, or about R90 a month",
+      "You have more than 200 employees, where you move to a different product and a quote",
+      "You want payroll and HR in one, where Sage's newer Payroll Advanced is aimed instead",
+    ],
+    facts: [
+      { label: "In South Africa", value: "Sold and supported in South Africa by Sage South Africa" },
+      { label: "Starting price", value: "From R1 080 a year including VAT, for 1 to 2 employees" },
+      { label: "Free trial", value: "30 days, cancel any time" },
+      { label: "Package rule", value: "All features in every package" },
+      { label: "Companies and users", value: "Unlimited" },
+      { label: "Pay cycles", value: "Monthly, fortnightly and weekly" },
+      { label: "Security", value: "ISO 27001 certified, by Sage's own statement" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Sage Payroll is described as intuitive online payroll for start ups and small business, with automatic updates. It is sold in bands by number of employees, from 1 to 2 employees up to more than 200, and Sage says every package carries every feature.",
+        ],
+      },
+      {
+        heading: "Pricing in rand",
+        paragraphs: [
+          "On 5 October 2026 the payroll page showed a price from R1 080 a year including VAT, which works out to R90 a month, and Sage's accounting pricing page showed payroll from R97 a month including VAT. The register recorded R72 a month including VAT, which is lower than either figure, so the vendor's current price is higher. The page showed one entry price that is shared across the first band, so your own price depends on the band your headcount falls into.",
+          "Sage also sells a bundle of Accounting Standard plus Payroll on an annual subscription only.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "The product covers onboarding with bulk employee import, once off and fixed payments and deductions with PAYE, UIF and SDL calculated for you, payslips by print or email, ACB payment files that your banking software can import, leave management under the Basic Conditions of Employment Act, and the statutory returns.",
+        ],
+        bullets: [
+          "Monthly, fortnightly and weekly pay cycles",
+          "EMP201 monthly declarations and EMP501 reconciliations",
+          "IRP5 tax certificates and the UIF declaration to the Department of Labour",
+          "Bonuses, travel allowances, commissions, overtime, medical aid and retirement funds",
+          "Independent contractors and labour brokers",
+          "Integration with Sage Accounting",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "The feature list reads like a South African compliance checklist, and it is: this is a product Sage South Africa builds, sells and supports for South African employers. Support comes through online chat, a help centre, how to videos and the Sage Community Hub. Sage has an ISO 27001 certification, which it cites for information security.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "It is a payroll product, not a full HR system, so recruitment and performance sit elsewhere. The price you pay depends on a band table that is only partly visible, so ask for your exact band price in writing.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against SimplePay, Sage Payroll publishes an annual entry price and connects to Sage Accounting, while SimplePay is quote driven and connects to Xero and QuickBooks. See the full comparison.",
+        ],
+      },
+    ],
+    verdict:
+      "A solid, compliance first payroll for a small employer, especially one on Sage Accounting. Check the exact band price, note that it has risen since the register's figure was read, and take the 30 day trial.",
+    sources: [
+      { label: "Sage Business Cloud Payroll", url: "https://www.sage.com/en-za/sage-business-cloud/payroll/" },
+      { label: "Sage Accounting pricing, payroll bundle", url: "https://www.sage.com/en-za/sage-business-cloud/accounting/pricing/" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "sage-pastel-payroll",
+    headline: "The long running desktop payroll that Sage still updates, sold by quote.",
+    summary:
+      "Sage Pastel Payroll is the desktop payroll product that many South African employers have run for years. Sage's community hub shows it still receives legislative updates, with a 2025 Update 2a released on 12 November 2024. Sage's current cloud payroll range sits beside it, and the register records Pastel Payroll as quote only.",
+    bestFor: [
+      "Established employers already running Pastel Payroll who want continuity",
+      "Bookkeepers who know the product well and prefer a desktop workflow",
+    ],
+    thinkTwice: [
+      "You want a cloud product with automatic updates and anywhere access, where Sage Payroll or Payroll Professional fit better",
+      "You want a published price, because Pastel Payroll is sold by quote",
+      "You expect payroll and HR in one browser based product",
+    ],
+    facts: [
+      { label: "In South Africa", value: "Sold and supported in South Africa by Sage South Africa" },
+      { label: "Type", value: "Desktop payroll" },
+      { label: "Pricing", value: "Quote only" },
+      { label: "Updates", value: "Legislative releases continue, for example 2025 Update 2a in November 2024" },
+      { label: "Cloud siblings", value: "Sage Payroll, Payroll Professional, Payroll Advanced and 300 People" },
+      { label: "Vendor", value: "Sage Group plc, founded 1981" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Pastel Payroll is the desktop payroll and HR software from Sage's Pastel heritage. Its updates are announced on the Sage community hub, where legislative releases such as the 2025 Update 1c on 5 August 2024 and Update 2a on 12 November 2024 are posted, which shows the product is still maintained.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "No price is published for Pastel Payroll, and the register records it as quote only. Sage's newer cloud products show the contrast: Sage Payroll is priced in published bands, and Payroll Professional is sold by quote through a Request a quote button.",
+        ],
+      },
+      {
+        heading: "The cloud successors",
+        paragraphs: [
+          "Sage Business Cloud Payroll Professional is a true cloud payroll with automatic updates, Employment Equity guidance, leave management, personnel management and employee and manager self service, and Sage says it is available across Southern Africa and the wider continent. Sage Payroll Advanced adds built in HR, and Sage 300 People targets South African businesses with 100 or more employees. Sage publishes a migration path for existing customers. For SARS, Sage's South African community hub documents how Payroll Professional produces the live run IRP5 file and how that file is imported into SARS e@syFile, where the EMP501 declaration, including the EMP201 values for PAYE, SDL, UIF and ETI, is completed and submitted.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "As a desktop product it needs installation, updates and backups to be managed, and it cannot match a cloud product's remote access. The cost cannot be compared without a quote.",
+        ],
+      },
+    ],
+    verdict:
+      "Right for an employer that already runs it and has no wish to move. For a new purchase, look at Sage Payroll for a small business or Payroll Professional for a larger one, and ask Sage what the migration path costs.",
+    sources: [
+      { label: "Sage Payroll Professional", url: "https://www.sage.com/en-za/sage-business-cloud/payroll-professional/" },
+      { label: "Sage 300 People", url: "https://www.sage.com/en-za/products/sage-300-people/" },
+      { label: "SARS submission from Sage Payroll Professional, Sage Community Hub", url: "https://communityhub.sage.com/za/sage-payroll-professional/sage-payroll-professional-year-end-centre/w/sage-payroll-professional-year-end-articles/2874/sars-mid-year-submission-submission-to-sars/revision/6" },
+      { label: "Sage Pastel Payroll update announcement, Sage Community Hub", url: "https://communityhub.sage.com/za/sage-pastel-payroll/f/announcements/235952/latest-update-2025-update-2a-release-date-12-november-2024" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "paysoft",
+    headline: "A payments company first: salaries, collections and account verification, quoted on request.",
+    summary:
+      "PaySoft's own website presents a payments business rather than a payroll calculator. Its five offerings are salary, supplier and SARS payments, debit order collections, account verification, an integration with Xero, and a service for non profits and schools. It publishes no pricing and asks you to request a quote or book a demonstration. It is listed on this register as payroll software, so read it as the payment side of payroll.",
+    bestFor: [
+      "Employers that already calculate payroll elsewhere and need reliable salary payment files",
+      "Businesses that collect recurring payments by DebiCheck or debit order",
+      "Non profits and schools that need debit order processing and Section 18A certificate handling",
+    ],
+    thinkTwice: [
+      "You need a tool that calculates PAYE, UIF and payslips, which the website does not describe",
+      "You want a price before you talk to a salesperson",
+    ],
+    facts: [
+      { label: "Core offer", value: "Payments, collections and account verification" },
+      { label: "Pricing", value: "Not published, request a quote or demo" },
+      { label: "Deployment", value: "Cloud platform" },
+      { label: "Integration", value: "Direct Xero reconciliation" },
+      { label: "Support", value: "Phone on 021 551 0891 and email support@paysoft.co.za" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "The PaySoft site lists five solutions. Payments Made Simple handles salary, supplier and SARS payments with real time or immediate settlement options. Secure Fund Collections covers DebiCheck, EFT debit orders and registered mandates. Verify Before You Pay covers account verification, check digit validation and ID verification. Flow into Xero provides automated reconciliation. A fifth offering is built for non profits and schools, including debit orders and Section 18A certificates.",
+          "The site says it serves businesses of all sizes, from those processing millions of transactions to those making a few payments a month, and names more than twenty clients, including Access Bank, Pick n Pay, Heineken and Media24.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "No price is shown. The site asks visitors to request a quote or book a demonstration, which is why the register records PaySoft as quote only.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "The compliance features described are payment specific: SARS payments, authenticated and bank verified collections, and Section 18A certificates for approved organisations. The site is bank agnostic and works with major financial institutions. Support is local, by phone and email.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "If you were looking for payslips and EMP201 returns, the site does not describe them. Treat PaySoft as a payments partner that pairs with a payroll engine, and confirm with the vendor whether it also offers payroll calculation.",
+        ],
+      },
+    ],
+    verdict:
+      "A good fit for the money moving part of payroll and collections, and not a like for like alternative to SimplePay or Sage Payroll. The register's classification as payroll is worth treating with care until the vendor confirms a payroll calculation product.",
+    sources: [{ label: "PaySoft", url: "https://www.paysoft.co.za/" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "payroll-online",
+    headline: "No working vendor website could be found, so this entry rests on the register's own figures.",
+    summary:
+      "The register lists Payroll Online with a rating and a review count, but no website. The domain payrollonline.co.za returns a placeholder page from a domain registrar rather than a product, and web searches on 5 October 2026 found no vendor page. This review therefore makes no claim about features, pricing or compliance.",
+    bestFor: ["Readers who already use the product and want to see how it ranks"],
+    thinkTwice: [
+      "You are considering it as a new purchase, because there is no vendor page we could read",
+      "You need to know it files with SARS, which is unchecked",
+    ],
+    facts: [
+      { label: "Website", value: "None recorded" },
+      { label: "Price", value: "Quote only, none published" },
+      { label: "SARS filing", value: "Unchecked" },
+    ],
+    sections: [
+      {
+        heading: "What we could and could not verify",
+        paragraphs: [
+          "We tried the domain payrollonline.co.za, which showed a registrar's placeholder, and searched the web for a vendor page and found none. Because a review that invents features would be worse than none, we state only what the register holds: a rating, a review count and a quote only price status.",
+          "If you are a customer or the vendor and can supply a working website, a price page and a statement of what the product files with SARS, the entry can be completed.",
+        ],
+      },
+    ],
+    verdict:
+      "Not enough evidence to recommend it as a new purchase. Ask the supplier for a written description of what it files with SARS, the price with the VAT basis, and a reference customer.",
+    sources: [],
+    researchedAt: DATE,
+  },
+];

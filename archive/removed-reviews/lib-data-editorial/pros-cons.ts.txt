@@ -1,0 +1,569 @@
+/**
+ * Pros and cons for every reviewed product, set beside the long form reviews.
+ *
+ * Each line restates something the review itself already says, from the vendor's
+ * own pages as read on 5 October 2026. Nothing here adds a claim the review does
+ * not make. Where a product's vendor page could not be found, the pros are left
+ * empty on purpose: a strength we cannot read is a strength we will not invent.
+ *
+ * House rules for this file: no dashes, no hyphenated words, and none of the
+ * banned marketing words. `npm run verify` checks all three.
+ */
+export interface ProsCons {
+  pros: string[];
+  cons: string[];
+}
+
+export const PROS_CONS: Record<string, ProsCons> = {
+  /* ------------------------------------------------------------ accounting */
+  "sage-accounting": {
+    pros: [
+      "Priced in rand including VAT, with a 30 day free trial and a 30 day refund promise",
+      "Direct bank feeds with FNB, Nedbank and Investec",
+      "Sold and supported in South Africa, with a local phone line",
+      "An accountant can submit your VAT201 to SARS eFiling from Sage Accountants Edition",
+      "Payroll from the same vendor, sold separately and connected",
+    ],
+    cons: [
+      "VAT returns are listed only on Standard, from R490 a month, not the R270 headline",
+      "Add ons stack up: extra users are R85 a month and an extra company is R460 a month",
+      "The vendor's price is now higher than the R240 the register last recorded",
+      "The entry plan is for a single user",
+    ],
+  },
+  "sage-50cloud-pastel": {
+    pros: [
+      "Desktop depth for an in house bookkeeper, with two to five companies included in the plans",
+      "Sold and supported in South Africa, and well known to local accountants and bookkeepers",
+      "Automatic bank reconciliation with a live bank feed",
+      "A request a quote route sits beside buy now",
+    ],
+    cons: [
+      "From R1 375 a month excluding VAT, several times the cloud products",
+      "Modules such as Point of Sale at R725 and Advanced Reporting at R650 a month add up quickly",
+      "A desktop product, so installation, updates and backups are yours to manage",
+      "Quoted excluding VAT, so a business that is not registered pays about R1 581",
+    ],
+  },
+  xero: {
+    pros: [
+      "A polished product with a large app marketplace, including PayFast, Yoco and SimplePay",
+      "Rand pricing including VAT, a 30 day trial and 80 percent off the first three months",
+      "Bank feeds with FNB, Absa, Standard Bank, Nedbank and others, plus a direct Nedbank feed",
+      "A free iOS and Android app on every plan",
+      "Round the clock support is promised",
+    ],
+    cons: [
+      "Starter is capped at 20 invoices and five bills a month, so most firms need Standard at R795",
+      "No built in payroll and no free plan",
+      "The page publishes no South African phone number",
+      "Multiple currencies only come with Premium at R1 095",
+    ],
+  },
+  "quickbooks-online": {
+    pros: [
+      "Free phone support with a paid plan, round the clock live chat and free setup sessions",
+      "A clear ladder of four plans, from one user up to 25",
+      "A 30 day trial, no contract and no cancellation fee",
+      "Bank feeds on every plan, and invoice capture from photos, PDFs and forwarded emails",
+    ],
+    cons: [
+      "The rand prices could not be read on the page, so the price must be confirmed",
+      "The page does not list which South African banks connect",
+      "Less common among South African bookkeepers than Xero or Sage",
+      "Multiple currencies start on Essentials",
+    ],
+  },
+  freshbooks: {
+    pros: [
+      "Friendly invoicing, with unlimited invoices on every plan",
+      "A 30 day trial with no card required",
+      "Proposals, retainers and project profitability on the higher plans",
+    ],
+    cons: [
+      "Billed in US dollars, so the rand price moves every day",
+      "The pricing page makes no claim about VAT returns or South Africa",
+      "Lite is limited to five billable clients",
+      "Team members cost $11 a month each",
+    ],
+  },
+  "sage-intacct": {
+    pros: [
+      "Multi entity accounting with consolidation and automated eliminations",
+      "Dimensional dashboards and reporting across financial and operational data",
+      "AI agents for bill entry, outlier checks and month end close",
+      "Launched locally in 2020, with switching paths from Sage 50 Pastel and Sage 200 Evolution",
+    ],
+    cons: [
+      "No published price: you request pricing",
+      "Too much product for a small business",
+      "Claims such as closing books up to 90 percent faster are Sage's own and untested here",
+      "A platform of this kind is usually implemented, not just switched on",
+    ],
+  },
+  "zoho-books": {
+    pros: [
+      "A genuine free plan for businesses with annual revenue under R1 million",
+      "Rand pricing that starts at R99 a month on Standard, which includes VAT returns",
+      "VAT 201 reports and a South African support line",
+      "Inventory and multi currency from Professional at R199 a month",
+      "Mobile apps for iOS and Android and a Windows desktop app",
+    ],
+    cons: [
+      "The free plan excludes VAT tracking and bank feeds",
+      "The page names no South African banks for its feeds",
+      "Fewer South African accountants use Zoho than Xero or Sage",
+      "The page does not say which South African payment gateways connect",
+    ],
+  },
+  "wave-accounting": {
+    pros: [
+      "A free Starter plan with unlimited invoices, bills and bookkeeping records",
+      "A mobile app and cash flow dashboards",
+      "A useful free dollar priced tool to set against a rand priced plan",
+    ],
+    cons: [
+      "Priced in US and Canadian dollars",
+      "Its pages describe no SARS return, VAT report or South African bank connection",
+      "Support hours run on Eastern time",
+      "Wave said in December 2020 that it was withdrawing from markets outside North America",
+      "Card payments cost 2.9 percent plus $0.60 on Starter",
+    ],
+  },
+
+  /* --------------------------------------------------------------- payroll */
+  simplepay: {
+    pros: [
+      "One plan with every feature, and an instant online quote from your headcount",
+      "A 30 day trial with full access and support",
+      "PAYE, UIF and SDL calculated, with tax certificates for SARS eFiling or e@syFile",
+      "Connects to Xero and QuickBooks",
+      "An employee self service portal and iOS and Android apps",
+    ],
+    cons: [
+      "No per employee rate is printed: you must run the quote",
+      "Employers above 500 employees and bureaus need a custom arrangement",
+      "Several companies are billed and quoted separately",
+      "The page does not describe time and attendance, COIDA or a Sage integration",
+    ],
+  },
+  payspace: {
+    pros: [
+      "Three tiers that scale from up to 50 employees to multinational payroll",
+      "More than 95 country specific reports across 45 plus countries",
+      "WhatsApp employee self service and an AI assistant",
+      "General ledger integrations with Xero, QuickBooks and Acumatica",
+      "Self serve and managed payroll options",
+    ],
+    cons: [
+      "No rate on the homepage: the R21.49 per employee figure was read on 21 August 2026 and could not be confirmed",
+      "The homepage does not name SARS returns, UIF, Employment Equity or COIDA",
+      "May be more platform than a ten person business needs",
+      "The register's price does not state whether VAT is included",
+    ],
+  },
+  "sage-payroll": {
+    pros: [
+      "Every feature in every package, priced in bands by number of employees",
+      "Unlimited companies and users",
+      "EMP201, EMP501 and IRP5 returns, plus the UIF declaration",
+      "Connects to Sage Accounting",
+      "A 30 day free trial, sold and supported in South Africa",
+    ],
+    cons: [
+      "From R1 080 a year including VAT, higher than the R72 a month the register recorded",
+      "The band table is only partly visible, so ask for your exact band price in writing",
+      "Payroll only: it is not a full HR system",
+      "Above 200 employees you move to a different product and a quote",
+    ],
+  },
+  "sage-pastel-payroll": {
+    pros: [
+      "Long running desktop payroll that still receives legislative updates",
+      "Well known to many South African bookkeepers",
+      "Sold and supported in South Africa",
+      "Sage publishes a migration path to its cloud payroll products",
+    ],
+    cons: [
+      "No published price: it is sold by quote",
+      "A desktop product, so installation, updates and backups are yours to manage",
+      "No remote access of the kind a cloud product gives",
+      "For a new purchase, Sage's cloud payroll products fit better",
+    ],
+  },
+  paysoft: {
+    pros: [
+      "Salary, supplier and SARS payments, with real time or immediate settlement options",
+      "DebiCheck, EFT debit orders and account verification",
+      "Direct Xero reconciliation",
+      "Section 18A certificate handling for non profits and schools",
+      "Local phone and email support",
+    ],
+    cons: [
+      "The site does not describe PAYE, UIF, payslips or EMP201 returns",
+      "No published price: request a quote or a demo",
+      "Not a like for like alternative to SimplePay or Sage Payroll",
+      "Listed as payroll on this register, but it reads as a payments business",
+    ],
+  },
+  "payroll-online": {
+    pros: [],
+    cons: [
+      "No vendor website could be found: the domain shows a registrar's placeholder",
+      "Features and pricing could not be checked",
+      "Whether it files with SARS is unchecked",
+    ],
+  },
+
+  /* -------------------------------------------------------------------- hr */
+  "sage-hr": {
+    pros: [
+      "Core HR and leave management included, with other modules added only when you need them",
+      "Priced in rand and sold locally by Sage South Africa",
+      "A 30 day trial with no credit card, and nothing to cancel",
+      "Modules for performance, shifts, timesheets, expenses and recruitment",
+      "Pairs with Sage Payroll for payroll",
+    ],
+    cons: [
+      "The final price comes from a calculator, not a table",
+      "Payroll is not part of it",
+      "The page does not say how South African leave types are configured",
+      "Larger employers are pointed to Sage 300 People",
+    ],
+  },
+  peoplehr: {
+    pros: [
+      "Clear per employee tiers, from £3 to £9.50 a month",
+      "A 14 day trial with no credit card",
+      "Covers employee records, absence, onboarding and a mobile app",
+      "A natural fit for a company with UK staff",
+    ],
+    cons: [
+      "Priced in British pounds",
+      "The payroll plans are built for the UK and HMRC",
+      "The page does not mention South Africa, the rand or local leave law",
+      "Add ons such as timesheets cost £1.50 per employee each",
+    ],
+  },
+  bamboohr: {
+    pros: [
+      "Published per employee prices of $10, $17 and $25 a month",
+      "Performance reviews, onboarding, time off and employee surveys in a friendly interface",
+      "Elite adds compensation benchmarking and more than 300 compliance courses",
+      "A well established platform, founded in 2008",
+    ],
+    cons: [
+      "Payroll and benefits are for US employees only",
+      "Companies under 25 employees pay a flat $250 a month or more",
+      "Billed in US dollars",
+      "The page describes no South African leave law or statutory reporting",
+    ],
+  },
+  personio: {
+    pros: [
+      "One suite across the employee lifecycle: recruiting, performance, compensation and surveys",
+      "A published starting price of €7.60 per employee per month",
+      "Payroll connections that include Xero and Sage 50",
+      "Used by more than 16,000 companies, by its own count",
+    ],
+    cons: [
+      "Billed in euros",
+      "The payroll connections are European in character",
+      "The page does not mention South Africa",
+      "The sale is demo led, so there is no quick start",
+    ],
+  },
+  labournet: {
+    pros: [
+      "Labour law consulting from a firm established in 1996, serving more than 6,500 businesses by its own count",
+      "Payroll alongside health and safety, POPIA and BBBEE support",
+      "SARS and UIF integration, with EMP201 and EMP501 documents",
+      "Dedicated consultants and monthly online training",
+      "No upfront costs or joining fees",
+    ],
+    cons: [
+      "No published price",
+      "A service heavy model, so it is not a software purchase you complete online",
+      "It is hard to tell software cost from advisory time without a written quote",
+      "A product with a published price may be simpler if you only need payslips",
+    ],
+  },
+  "hr-companion": {
+    pros: [],
+    cons: [
+      "No vendor page could be found for a South African HR product by this name",
+      "Features and pricing could not be checked",
+      "Whether it handles BCEA leave is unchecked",
+    ],
+  },
+
+  /* ------------------------------------------------------------------- crm */
+  hubspot: {
+    pros: [
+      "Free CRM tools with no time limit",
+      "Marketing, sales and service tools in one platform",
+      "Starter from $7 per seat per month on an annual commitment",
+      "A large library of training and integrations",
+    ],
+    cons: [
+      "Billed in US dollars",
+      "A big jump from Starter to Professional, which also carries a reported onboarding fee",
+      "Costs scale with seats and tiers, so the bill is hard to predict",
+      "The Professional and Enterprise prices were not shown on the page",
+    ],
+  },
+  pipedrive: {
+    pros: [
+      "A focused pipeline view that is quick for a salesperson to learn",
+      "The lowest paid entry price among the big names, at $14 per user per month",
+      "Simpler than a full platform",
+    ],
+    cons: [
+      "Billed in US dollars",
+      "Narrower than HubSpot: no marketing or service tools",
+      "Pipedrive's own pricing page could not be read, so higher plan prices come from price trackers",
+      "A team of ten on the second plan pays roughly $390 a month",
+    ],
+  },
+  freshsales: {
+    pros: [
+      "Three clear tiers at $9, $39 and $59 per user per month on annual billing",
+      "A 21 day trial of the fully loaded CRM",
+      "Phone, email and chat inside the CRM",
+      "Every paid plan comes with 500 free bot sessions",
+    ],
+    cons: [
+      "The page shows no free tier, although the register records one",
+      "Billed in US dollars",
+      "Forecasting starts on Enterprise",
+      "AI sessions and branded documents cost extra, at $49 per 100 sessions and $19 per user",
+    ],
+  },
+  "zoho-crm": {
+    pros: [
+      "A free edition for three users",
+      "Team user licences keep colleagues outside sales connected at a lower cost",
+      "Free onboarding is advertised",
+      "Part of the wider Zoho suite, with a South African regional site",
+    ],
+    cons: [
+      "Paid prices load by script and could not be read",
+      "The flexibility brings a learning curve",
+      "Fewer local consultants than the big names",
+      "Free only for up to three users",
+    ],
+  },
+  "salesforce-sales-cloud": {
+    pros: [
+      "A Free Suite at $0, then a ladder of six editions",
+      "Deep customisation, forecasting and AI at the higher editions",
+      "An enormous ecosystem of partners and consultants, including South African ones",
+    ],
+    cons: [
+      "Paid editions are billed in dollars, from $25 to $550 per user per month",
+      "The step from Starter Suite at $25 to Pro Suite at $100 is a factor of four",
+      "Usually needs an administrator",
+      "Ten users on Core would pay about R32 600 a month at the reference rate",
+    ],
+  },
+  "sage-crm": {
+    pros: [
+      "Joins CRM data to a Sage ERP such as Sage 300",
+      "Sales, marketing and service modules, taken together or separately",
+      "A MailChimp connection for campaigns",
+      "Sold and supported in South Africa",
+    ],
+    cons: [
+      "No published price: only a request a callback route",
+      "Little reason to choose it if you do not use Sage elsewhere",
+      "The page is light on specifics such as limits and mobile apps",
+      "Sage Sales Management may suit a fresh start better",
+    ],
+  },
+
+  /* ------------------------------------------------------------------- erp */
+  "sage-200-evolution": {
+    pros: [
+      "Financials, sales, customers, inventory and billing in one modular system",
+      "A direct bank connection and automated reconciliation",
+      "Integrated business intelligence, with dashboards and alerts",
+      "VAT201 submission to SARS has been available since Evolution version 11",
+      "Sold and supported locally through Evolution business partners",
+    ],
+    cons: [
+      "No published price: request a demo",
+      "The page gives no user limits, deployment model or integration detail",
+      "Set up should be done by a qualified Evolution business partner",
+      "More than a very small business needs, where Sage Accounting is simpler",
+    ],
+  },
+  "sage-x3": {
+    pros: [
+      "Multi entity and multi country consolidation, with multiple currencies",
+      "Discrete, process and mixed mode manufacturing",
+      "Lot, batch and recall traceability",
+      "Low code tools and modern APIs",
+      "Sage Copilot built into workflows",
+    ],
+    cons: [
+      "No published price: request pricing",
+      "Built for complexity, so heavy for a small single entity business",
+      "Headline claims such as 75 percent of orders automated are Sage's own",
+      "Implementation, customisation and training are large costs the page does not state",
+    ],
+  },
+  syspro: {
+    pros: [
+      "Built for manufacturers and distributors, and South African in origin since 1978",
+      "Cloud and on premise deployment, cloud first",
+      "Finance, manufacturing and supply chain, with lot traceability",
+      "SIDEKICK, an AI co pilot",
+    ],
+    cons: [
+      "No published price",
+      "Aimed at manufacturing and distribution, so less to like for retail or services",
+      "The pricing model is moving to a named user subscription, which changes how you compare quotes",
+      "The page lists no SARS or VAT features",
+    ],
+  },
+  "sap-business-one": {
+    pros: [
+      "A recognised ERP brand for small and midsize businesses",
+      "Covers financials, purchasing, inventory, sales, customers and reporting",
+      "Integrates with SAP HANA",
+      "Delivered through local partners",
+    ],
+    cons: [
+      "No published price: request a quote",
+      "The page is brief and marketing led",
+      "The experience varies with the implementation partner",
+      "The page lists no South African tax features",
+    ],
+  },
+  netsuite: {
+    pros: [
+      "A well known cloud ERP for mid market and growing businesses",
+      "Often considered for subscription and multi entity needs",
+      "Modules for financials, inventory, order management and CRM",
+    ],
+    cons: [
+      "Oracle publishes no price: price guides suggest a base fee from about $999 a month plus $99 to $199 per user",
+      "Oracle's pages blocked our readers, so features could not be confirmed",
+      "South African localisation could not be confirmed",
+      "Implementation can exceed the first year's subscription",
+    ],
+  },
+  acumatica: {
+    pros: [
+      "A cloud ERP for distribution, manufacturing, construction, retail and professional services",
+      "Project accounting, CRM, payroll management and warehouse management",
+      "Lists South Africa among its localisation countries",
+      "Used by more than 10,000 businesses, by its own count",
+    ],
+    cons: [
+      "No price in the page text: it points to calculators",
+      "The page names no local partner or South African support details",
+      "A general page, so you rely on a demonstration and a partner's quote",
+    ],
+  },
+  odoo: {
+    pros: [
+      "One App Free at $0, with unlimited users and hosting included",
+      "Standard at $7.95 per user per month on yearly billing, with all apps",
+      "Hundreds of apps under one login",
+      "An open model that suits developers and partners who customise",
+    ],
+    cons: [
+      "Shown in dollars on the page: rand billing could not be confirmed",
+      "The page lists no South African tax features",
+      "Support runs Monday to Friday, not seven days",
+      "The total cost depends on implementation and your local partner",
+    ],
+  },
+
+  /* ---------------------------------------------------- project management */
+  asana: {
+    pros: [
+      "A clean, well designed tool for planning and tracking work",
+      "A free Personal plan with unlimited tasks and projects",
+      "Unlimited free guests on paid plans",
+      "Timelines, forms, reporting dashboards and more than 100 integrations",
+    ],
+    cons: [
+      "The free plan stops at two users",
+      "Goals, portfolios and resource management start on Advanced at $24.99",
+      "AI is limited to 5 requests per user per month on paid plans",
+      "Billed in US dollars, and the page mentions no free trial",
+    ],
+  },
+  clickup: {
+    pros: [
+      "The cheapest paid plans in the sector, from $7 per user per month",
+      "Tasks, docs, goals, chat and whiteboards in one place",
+      "A Free Forever plan with unlimited tasks",
+      "Unlimited storage and integrations on paid plans",
+    ],
+    cons: [
+      "The free plan's 60 MB of storage ends quickly",
+      "A lot to configure, which can overwhelm a small team",
+      "The AI plans at $9 and $28 per user change the price picture",
+      "Billed in US dollars",
+    ],
+  },
+  "monday-com": {
+    pros: [
+      "Boards, workflows and dashboards you shape yourself",
+      "A free plan for up to two seats",
+      "Unlimited free viewers on Basic",
+      "CRM, service and dev products from the same vendor",
+    ],
+    cons: [
+      "Prices are shown for ten seats, which can overstate the need of a smaller team",
+      "Gantt and calendar views start on Standard",
+      "Round the clock support is listed only on Enterprise",
+      "Billed in US dollars",
+    ],
+  },
+  smartsheet: {
+    pros: [
+      "A spreadsheet style structure with Gantt, table, board and calendar views",
+      "Unlimited free contributors on Pro and above",
+      "A 30 day trial with no credit card",
+      "Portfolios, scenario planning and single sign on on Enterprise",
+    ],
+    cons: [
+      "The dollar figures on the page were inconsistent, so the price needs checking",
+      "A trial, not a free tier",
+      "Member minimums on some plans",
+      "Harder to compare on price than its rivals",
+    ],
+  },
+  trello: {
+    pros: [
+      "The simplest board tool in the sector, with a gentle learning curve",
+      "The cheapest paid plan, at $5 per user per month",
+      "A free plan for up to 10 collaborators",
+      "A free Premium trial for all users",
+    ],
+    cons: [
+      "Light by design: complex projects with dependencies will outgrow it",
+      "Views beyond the board start on Premium",
+      "Free plan files are limited to 10 MB",
+      "Billed in US dollars",
+    ],
+  },
+  wrike: {
+    pros: [
+      "A free plan with board and table views",
+      "A 14 day trial with no credit card",
+      "Business templatises work and adds AI features",
+      "Resource planning, budgeting and advanced reporting on Pinnacle",
+    ],
+    cons: [
+      "Gantt charts start on Team",
+      "Paid plans have user ranges: 2 to 15 on Team and 5 to 200 on Business",
+      "Pinnacle and Apex are priced on request",
+      "Billed in US dollars",
+    ],
+  },
+};

@@ -1,0 +1,602 @@
+import type { EditorialReviewBase } from "../../types";
+
+const DATE = "2026-10-05";
+
+/**
+ * Accounting reviews, written from each vendor's own South African pages on the date above.
+ * Prices are quoted as the vendor showed them. Where the register's own recorded price differs,
+ * the review says so, because a reader deserves to see both.
+ */
+export const ACCOUNTING_REVIEWS: EditorialReviewBase[] = [
+  {
+    slug: "sage-accounting",
+    headline: "The familiar South African name, now sold as a simple cloud subscription.",
+    summary:
+      "Sage Accounting is the cloud product Sage sells to sole traders and small businesses in South Africa. It prices in rand including VAT, offers a 30 day free trial and a 30 day refund promise, and connects directly to FNB, Nedbank and Investec. The entry plan is built for one user and the Standard plan adds VAT returns and up to five users, so the choice of plan decides whether it can run your VAT at all.",
+    bestFor: [
+      "Sole traders and micro businesses that want a rand priced, locally supported cloud product",
+      "Small firms whose bookkeeper or accountant already knows Sage",
+      "Businesses that want payroll from the same vendor, sold separately but connected",
+    ],
+    thinkTwice: [
+      "You are VAT registered and are tempted by the cheaper Start plan, which does not list VAT returns",
+      "You need several companies, because each extra company is R460 a month",
+      "You expect the register's earlier R240 figure, because Sage South Africa now shows R270",
+    ],
+    facts: [
+      { label: "Vendor", value: "Sage Group plc, founded 1981" },
+      { label: "In South Africa", value: "Sold and supported in South Africa by Sage South Africa" },
+      { label: "Free trial", value: "30 days, plus a 30 day refund promise" },
+      { label: "Billing", value: "Rand, VAT included, monthly or annual" },
+      { label: "Users", value: "1 on Start, 2 to 5 on Standard" },
+      { label: "Bank feeds", value: "Direct feeds with FNB, Nedbank and Investec" },
+      { label: "Support", value: "Phone on 0861 237 243, knowledgebase and community" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Sage Accounting is the small business cloud product in Sage's South African range. Sage sells it for sole traders, freelancers and growing small businesses, and its own pricing page calls the entry plan popular with sole traders and micro businesses. Larger finance teams are pointed to Sage Intacct, Sage 200 Evolution and Sage X3 instead.",
+          "The product covers the everyday work of a small business: invoices, tracking what customers owe, bank reconciliation, bookkeeping and VAT. Sage also leans on AI features, which its page describes as creating draft bills from invoices and writing personalised customer emails.",
+        ],
+      },
+      {
+        heading: "Pricing in rand",
+        paragraphs: [
+          "On 5 October 2026 the pricing page showed two plans. Accounting Start was listed from R270 a month including VAT, or R3 240 a year when billed annually, for a single user. Accounting Standard was listed from R490 a month including VAT, or R5 880 a year, for two users and up to five. The register recorded R240 a month including VAT when it was last read on 12 August 2026, so the vendor's current figure is higher. The page does not say whether R240 was a promotion, an annual rate or an older price.",
+          "The base package includes two users and one company, and Sage sells the rest as add ons: extra users at R85 a month, an extra company at R460 a month, Advanced Inventory at R465 a month, Debtors Manager at R325 a month, Time Tracking at R185 a month, multi currency payments at R185 a month and extra storage at R20 a month for each gigabyte. Those add ons are what can turn an advertised R490 into a very different bill.",
+          "Payroll is a separate product from R97 a month including VAT. Sage also sells a Standard plus Payroll bundle, which the page says is bought on an annual subscription only.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "Start gives you invoicing in seconds, tracking of what you are owed, work from anywhere access, automatic bank reconciliation and the AI features. Standard includes everything in Start and adds bookkeeping, VAT return calculation, up to five users, digital receipt capture with AutoEntry and the option to collaborate with your accountant.",
+        ],
+        bullets: [
+          "Invoicing, quotes and a debtors view of who owes you",
+          "Automatic bank reconciliation on every plan",
+          "VAT return calculation on the Standard plan",
+          "AutoEntry for capturing receipts and supplier documents digitally",
+          "Optional access for your accountant",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "This is where Sage is strongest, because it is a South African product sold and supported by Sage South Africa, not an import. Its VAT page describes a monthly snapshot of what you owe, a record of previous submissions and a digital paper trail, and says the product is built to keep you compliant with SARS. Sage also built a SARS eFiling integration. Through Sage Accountants Edition, which is free to accounting practices, an accountant can prepare, submit and track a client's VAT201 return straight to SARS eFiling without leaving Sage, while the tax payment itself is still made on eFiling. If your accountant already works in Sage, your VAT201 can therefore go to SARS from the same system.",
+          "Sage lists direct bank feeds with First National Bank, Nedbank and Investec, which means no CSV files and no third party in the middle, and says it connects to more banks beyond those. It also warns that a bank may be supported while a particular account type is not, so check your exact account.",
+          "Support is local, with a South African phone line, a knowledgebase and a community hub. For a business that wants to phone someone in its own time zone, that counts for a lot.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The plan structure is the main trap. If you are VAT registered, the plan that lists VAT returns is Standard, which starts at R490, not the R270 headline. Extra companies are expensive at R460 each, so a small group of related businesses will pay far more than a sole trader would.",
+          "The price you will see has also moved since the register last read it, which is a reminder to check the live page on the day you buy.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against Xero, Sage is cheaper at the entry level and offers phone support, while Xero advertises a larger app marketplace and round the clock support. Against Zoho Books, Sage costs more but is better known to South African accountants, and Zoho's free plan is hard to beat for a very small business. Read our full comparisons for the detail.",
+        ],
+      },
+    ],
+    verdict:
+      "A sensible, locally supported choice for a small South African business, provided you buy the plan that matches your VAT status and add up the add ons before you sign. Take the 30 day trial, confirm how a VAT return reaches SARS, and check the live price, because it has moved.",
+    sources: [
+      { label: "Sage Accounting pricing, Sage South Africa", url: "https://www.sage.com/en-za/sage-business-cloud/accounting/pricing/" },
+      { label: "Sage Accounting features", url: "https://www.sage.com/en-za/sage-business-cloud/accounting/features/" },
+      { label: "Sage Accounting VAT", url: "https://www.sage.com/en-za/sage-business-cloud/accounting/features/vat/" },
+      { label: "Sage Accounting bank connections", url: "https://www.sage.com/en-za/sage-business-cloud/accounting/features/connect-my-bank/" },
+      { label: "Automated VAT201 submissions, Sage Accountants Edition", url: "https://www.sage.com/en-za/accountants/products/accountants-edition/automated-vat-submissions/" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "sage-50cloud-pastel",
+    headline: "Desktop accounting for businesses with an in house bookkeeper, with the cloud bolted on.",
+    summary:
+      "Sage 50cloud Pastel is the long running desktop accounting product from Sage, now connected to the cloud. It is priced in rand excluding VAT from R1 375 a month for two users and two companies, which makes it one of the dearer options in this sector, and it is aimed at businesses with a bookkeeper who wants depth rather than a quick start.",
+    bestFor: [
+      "Businesses with an in house bookkeeper who wants desktop speed and depth",
+      "Firms that need several companies under one roof, because the plans include two to five",
+      "Businesses already running Pastel who want to stay on a path they know",
+    ],
+    thinkTwice: [
+      "You are a sole trader or micro business, because the price is far above the cloud products",
+      "You want to work entirely in a browser with no desktop software to maintain",
+      "You assumed the price includes VAT, because it is quoted excluding VAT",
+    ],
+    facts: [
+      { label: "Vendor", value: "Sage Group plc, founded 1981" },
+      { label: "In South Africa", value: "Sold and supported in South Africa by Sage South Africa" },
+      { label: "Type", value: "Desktop accounting connected to the cloud" },
+      { label: "Billing", value: "Rand, VAT excluded, monthly or annual" },
+      { label: "Users and companies", value: "2 and 2 on Start, 4 and 4 on Core, up to 5 and 5 on Plus" },
+      { label: "Quote option", value: "A request a quote button sits beside buy now" },
+      { label: "Support", value: "Phone on 086 123 7243" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Sage describes 50cloud Pastel as accounting software for small businesses with in house bookkeepers who need to simplify everyday invoicing and financial management alongside more complex accounting and payroll tasks. It combines desktop power with cloud connectivity. Sage says it has over 30 years of experience behind it and that it is used by over 2 million businesses, which is a claim about the whole Sage range rather than this product alone.",
+          "In practice this is the product for a business that has outgrown a simple cloud tool, or that has always run Pastel and sees no reason to change.",
+        ],
+      },
+      {
+        heading: "Pricing in rand",
+        paragraphs: [
+          "On 5 October 2026 the page listed three plans, all quoted in rand plus VAT. Start was from R1 375 a month and includes two users and two companies. Core was from R1 915 a month and includes four users and four companies. Plus was from R2 715 a month and includes up to five users and five companies, with extra users at R265 a month. The R1 375 figure matches what the register recorded.",
+          "Because the price excludes VAT, a VAT registered business reclaims the VAT, so R1 375 is the real cost, while a business that is not registered pays about R1 581 with VAT added at 15 percent.",
+          "Sage then sells a long list of modules on top: foreign currency at R460 a month, Point of Sale at R725, multiple warehouses at R460, serial number tracking at R460, Advanced Reporting at R650, time and billing at R460, GL Manager at R725, Debtors Manager at R595 and Receipting at R460. Stock tracking is described as available as an add on module. A fully loaded installation costs far more than the headline.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "The base product covers personalised invoices and quotes, cash flow, income, expenses and payments, automatic discounts on invoices, automatic bank reconciliation and stock tracking. Core adds supplier payments, recurring invoices and transactions, bespoke reports, and the ability to manage multiple companies, departments and budgets.",
+        ],
+        bullets: [
+          "A personalised dashboard and automatically generated reports",
+          "A live feed from your bank account and rules for future transactions",
+          "Supplier payments, so paying creditors is simpler",
+          "Stock and purchase order management, sold as an add on module",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Pastel is Sage's South African accounting brand, and Sage South Africa sells and supports the product locally. Sage describes it as built to keep you VAT compliant and offers direct bank feeds. Because the product is a desktop application with a long South African history, local accountants and bookkeepers tend to know it well, which is a practical advantage when you need help.",
+          "Support is by phone on 086 123 7243 and through the same knowledgebase and community that Sage runs for its other South African products.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The cost is the obvious drawback for a small business, and the module pricing makes it hard to know the final bill without a quote. Sage itself offers a request a quote route alongside buy now. A desktop product also means installation, updates and backups are your responsibility in a way a browser product does not require.",
+          "If you want something you can open on any device in thirty seconds, the cloud products in this sector are a better match.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Within Sage's own range it sits above Sage Accounting and below Sage 200 Evolution. Against Xero or Zoho Books it costs several times more, so it only makes sense when you need what it adds: multiple companies, deeper stock and reporting, and a desktop workflow your bookkeeper prefers.",
+        ],
+      },
+    ],
+    verdict:
+      "Worth it for an established business with a bookkeeper and a need for multi company depth, and hard to justify for a small business that mainly wants to invoice and file VAT. Ask for a written quote that lists every module you will use, and remember that the R1 375 excludes VAT.",
+    sources: [
+      { label: "Sage 50cloud Pastel, Sage South Africa", url: "https://www.sage.com/en-za/products/sage-50cloud/" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "xero",
+    headline: "The polished cloud favourite, with a bank feed list that reaches into South African banking.",
+    summary:
+      "Xero is the New Zealand cloud accounting product that has built a serious South African following. Its three plans are priced in rand including VAT from R450 a month, with a 30 day free trial and an 80 percent discount for the first three months for new South African customers. The entry plan caps invoices and bills, so most businesses end up on Standard at R795.",
+    bestFor: [
+      "Small businesses that want a polished product with a large app marketplace",
+      "Businesses that bank with FNB, Absa, Standard Bank, Nedbank or Investec",
+      "Firms that work closely with an accountant or bookkeeper who uses Xero",
+    ],
+    thinkTwice: [
+      "You send more than twenty invoices or enter more than five bills a month, because Starter is capped",
+      "You want phone support included, because the page promises round the clock help but names no phone line",
+      "You need multiple currencies, which only the Premium plan at R1 095 includes",
+    ],
+    facts: [
+      { label: "Vendor", value: "Xero Limited, a New Zealand company, founded 2006" },
+      { label: "Free trial", value: "30 days with all features" },
+      { label: "Billing", value: "Rand, VAT included" },
+      { label: "Launch offer", value: "80 percent off the first three months for new South African customers" },
+      { label: "Customers", value: "5 million worldwide, by Xero's own count" },
+      { label: "Mobile", value: "Free iOS and Android app on every plan" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Xero is a cloud accounting platform for small businesses and the accountants and bookkeepers who serve them. Its South African pages emphasise getting paid faster through online invoice payments, SARS compliant tax invoices, VAT returns prepared inside the product and automated bank feeds.",
+        ],
+      },
+      {
+        heading: "Pricing in rand",
+        paragraphs: [
+          "On 5 October 2026 Xero listed three plans in rand, all including VAT. Starter was R450 a month, Standard R795 and Premium R1 095. New South African customers could take 80 percent off for the first three months, which made the opening prices R90, R159 and R219. The R450 starting price matches what the register recorded.",
+          "The plans differ in more than price. Starter lets you send quotes and 20 invoices and enter five bills, then stops. Standard removes those limits, adds bulk reconciliation, scorecards, a 60 day cashflow forecast and three budgets, and includes auto reconciliation. Premium adds multiple currencies, KPI analysis, a 180 day cashflow forecast and benchmarking against your industry.",
+          "Add ons run on top: expense and mileage claims from R69 a month, project tracking from R120.75 a month, and auto reconciliation on Starter at R100 a month. Because the discount ends after three months, judge the product on the full price, not the opening one.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "Every plan includes online invoice payments, bank reconciliation, Smart Document Capture, real time reports and a cashflow forecast. Xero says it connects to hundreds of third party apps, naming local ones such as PayFast, Yoco and SimplePay. Payroll in South Africa runs through that marketplace rather than being built in, so check how SimplePay or another payroll app connects before you rely on it.",
+        ],
+        bullets: [
+          "Online invoice payments and automatic reminders",
+          "Smart Document Capture for receipts and bills",
+          "30, 60 or 180 day cashflow forecasts depending on plan",
+          "A free mobile app for iOS and Android",
+          "A directory for finding an accountant or bookkeeper who uses Xero",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Xero's page promises automated VAT calculations, VAT returns prepared in line with SARS requirements and reminders for VAT deadlines. It connects to FNB, Absa, Standard Bank, Nedbank and other major banks through bank feeds. Separately, press releases from Xero and Nedbank describe a fully digital, API enabled Nedbank feed, and Xero has announced a similar feed with Investec, which are direct, API based connections rather than file uploads.",
+          "Xero says support is available around the clock. The page does not publish a South African phone number, so if phone support matters to you, ask before you buy.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The Starter cap is the main catch, because a business that issues more than twenty invoices a month has outgrown the cheapest plan on day one. The jump from R450 to R795 for unlimited invoices and bills is the real entry price for many firms. There is also no built in payroll and no free plan.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against Sage Accounting, Xero costs more but has a larger marketplace. Against Zoho Books, it costs much more, and Zoho offers a free plan and local phone support. Against QuickBooks Online, the two are close in ambition, and QuickBooks advertises free phone support. Read the full comparisons for how those trade offs fall.",
+        ],
+      },
+    ],
+    verdict:
+      "A strong product that suits businesses that value polish, integrations and an accounting community that already uses Xero. Budget for Standard at R795 rather than Starter at R450, ignore the three month discount when you compare, and confirm how your payroll app connects.",
+    sources: [
+      { label: "Xero South Africa pricing", url: "https://www.xero.com/za/pricing/" },
+      { label: "Xero accounting software, South Africa", url: "https://www.xero.com/za/accounting-software/" },
+      { label: "Xero and Nedbank bank feed", url: "https://blog.xero.com/product-updates/xero-and-nedbank-bank-feed-south-africa" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "quickbooks-online",
+    headline: "Intuit's cloud accounting, with free phone support and a ladder from one user to twenty five.",
+    summary:
+      "QuickBooks Online comes from Intuit and is sold in South Africa in four plans, from Simple Start for one user to Advanced for twenty five. It offers a 30 day free trial, no contract, free phone support with a paid subscription and round the clock chat. Its rand prices load dynamically on the vendor's page, so they could not be read as plain text, and the register's recorded figure should be checked on the live page.",
+    bestFor: [
+      "Small businesses that value free phone support and free setup sessions",
+      "Growing teams that may need more than three users or inventory later",
+      "Businesses that want a clear ladder of plans in one product",
+    ],
+    thinkTwice: [
+      "You need the price in black and white before you decide, because the page loads it dynamically",
+      "You need multiple currencies, which start on Essentials and above",
+      "You want a large South African accounting community, where Xero and Sage are more common",
+    ],
+    facts: [
+      { label: "Vendor", value: "Intuit Inc., founded 1983" },
+      { label: "Plans", value: "Simple Start, Essentials, Plus and Advanced" },
+      { label: "Users", value: "1, 3, 5 and 25" },
+      { label: "Free trial", value: "30 days on all plans" },
+      { label: "Support", value: "Free phone support with a paid plan, plus 24/7 live chat" },
+      { label: "Contract", value: "None, cancel anytime with no fee" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "QuickBooks Online is the cloud accounting product from Intuit, the company behind a long line of QuickBooks software. The South African site presents it for small businesses that want to send invoices their customers can pay online, track VAT, keep expenses sorted and stay in sync with time tracking and payroll.",
+        ],
+      },
+      {
+        heading: "Pricing in rand",
+        paragraphs: [
+          "The South African pricing page shows four plans, but on 5 October 2026 its rand figures were drawn in by script and showed only a loading message, so they could not be read as text. The register records a starting price of R322 a month, without a stated VAT basis, and that figure has not been confirmed against the live page on a date we can state. Treat it as an indication and confirm it before you buy.",
+          "The structure is clear even without the prices. Simple Start serves one user. Essentials serves three users, adds multiple currencies and four custom fields. Plus serves five users, adds inventory and project management. Advanced serves twenty five users with twelve custom fields. Bank feeds are listed on all four plans. Every plan carries a 30 day free trial, and the page states there is no contract and no cancellation fee.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "Intuit highlights invoices you can create from handwritten notes, PDFs, photos and forwarded emails, online payment of invoices, VAT tracking and tax return preparation with error checking, bank feeds, expense sorting, inventory with purchase and sales orders, and a mobile app. It says QuickBooks connects with hundreds of integrations, naming PayPal, Square, ServiceM8 and Dext.",
+        ],
+        bullets: [
+          "Invoice capture from photos, PDFs and forwarded emails",
+          "VAT tracking and tax return preparation with error checking",
+          "Bank feeds on every plan",
+          "Inventory, purchase orders and sales orders from Plus",
+          "A mobile app and hundreds of integrations",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Support is the standout. The page says phone support is free and included with a paid subscription, that live chat is available around the clock and that experts run free setup sessions. A South African support number is published on Intuit's pages. The VAT tools are described in general terms, and the page does not list which South African banks are supported, so ask which of your accounts will connect.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The unreadable price is a transparency gap, and the register cannot fill it. QuickBooks is also less common among South African bookkeepers than Xero or Sage, which matters when you want an accountant who can pick up your file. The product has a strong global history, but its South African listing gives fewer local specifics than Sage or Zoho do.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against Xero, QuickBooks leads on included phone support and a broader user ladder, and Xero leads on its published bank feed relationships. Against Sage Accounting, Sage is clearer about rand pricing and bank names. See the full comparisons.",
+        ],
+      },
+    ],
+    verdict:
+      "A credible option, especially if free phone support and a plan ladder up to twenty five users appeal. Open the live pricing page in a browser to see the rand figures, confirm the VAT basis, and ask which of your banks connect before you start the trial.",
+    sources: [
+      { label: "QuickBooks South Africa", url: "https://quickbooks.intuit.com/za/" },
+      { label: "QuickBooks South Africa pricing", url: "https://quickbooks.intuit.com/za/pricing/" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "freshbooks",
+    headline: "A friendly invoicing product built for North American freelancers, billed in dollars.",
+    summary:
+      "FreshBooks is an invoicing and accounting product for freelancers and small service businesses. It bills in US dollars from $23 a month on its Lite plan, offers a 30 day free trial with no card, and limits plans by the number of clients you bill. Its pricing page says nothing about South Africa, the rand or VAT, so a South African business should treat it as an imported tool.",
+    bestFor: [
+      "Freelancers and service businesses that bill a handful of clients and want friendly invoicing",
+      "Consultants who want proposals, retainers and project profitability on higher plans",
+      "Businesses comfortable paying in dollars and handling VAT outside the product",
+    ],
+    thinkTwice: [
+      "You need VAT returns, because the pricing page makes no claim about them",
+      "You are on a tight rand budget, because the price moves with the exchange rate",
+      "You have more than five clients on the cheapest plan, which caps billable clients",
+    ],
+    facts: [
+      { label: "Vendor", value: "FreshBooks, founded 2003" },
+      { label: "Billing", value: "US dollars" },
+      { label: "Plans", value: "Lite, Plus, Premium and Select" },
+      { label: "Free trial", value: "30 days, no credit card required" },
+      { label: "Billable clients", value: "5 on Lite, 50 on Plus, unlimited on Premium" },
+      { label: "South Africa", value: "Not mentioned on the pricing page" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "FreshBooks began as invoicing software for freelancers and has grown into a light accounting product. It is organised around clients rather than around a general ledger, which suits a consultant or agency more than a trading business with stock and suppliers.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "On 5 October 2026 the pricing page listed Lite at a regular $23 a month, with a promotional first year price shown at $1 a month, Plus at $43 and Premium at $70, plus a Select plan with custom pricing. The register records the Lite figure of USD 23 a month. At the reference rate used on this site, $23 is about R385 a month, but the rand figure will move every day.",
+          "The plans are limited by billable clients: five on Lite, fifty on Plus and unlimited on Premium. Add ons include team members at $11 a month each, advanced payments at $20 a month and a payroll product at $40 a month plus $6 per user. Select adds lower card fees, dedicated phone support, two free team members, data migration help and custom onboarding.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "Lite covers unlimited invoices, expense tracking, estimates, payment acceptance and tax reports. Plus adds proposals, client retainers, accounting reports, expense receipt scanning, accountant access and double entry accounting. Premium adds project profitability, customised email templates and automatic bill receipt capture.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "The pricing page makes no mention of South African customers, the rand or VAT. That does not prove it cannot be used, but it means the register cannot say it files or prepares VAT returns, and a South African business should check that before relying on it. Payments and payroll add ons are described in North American terms.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The dollar billing, the client caps and the absence of any South African claims are the three limits. If your accountant needs a VAT201 workflow or a South African bank feed, the local products are better matched.",
+        ],
+      },
+    ],
+    verdict:
+      "A pleasant tool for a freelancer who bills a few clients and does not need local compliance features. For a VAT registered South African business, a rand billed local product is the safer starting point.",
+    sources: [{ label: "FreshBooks pricing", url: "https://www.freshbooks.com/pricing" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "sage-intacct",
+    headline: "Enterprise grade cloud financials for finance teams that have outgrown small business software.",
+    summary:
+      "Sage Intacct is Sage's cloud financial management platform for mid sized and growing businesses. It publishes no price and asks you to request pricing. Sage's page stresses multi entity consolidation, dimensional reporting and a set of AI agents for tasks such as bill entry, anomaly detection and month end close.",
+    bestFor: [
+      "Finance teams running several entities that need consolidation and eliminations",
+      "Businesses in industries Sage targets, such as professional services, SaaS, wholesale and non profits",
+      "Companies that have outgrown Sage 50 Pastel or Sage 200 Evolution",
+    ],
+    thinkTwice: [
+      "You run a small business, because this is built for finance teams, not for one person",
+      "You need a price to compare, because Sage asks you to request pricing",
+      "You expect a quick start, because a platform of this kind is usually implemented, not just switched on",
+    ],
+    facts: [
+      { label: "Vendor", value: "Sage Group plc, founded 1981" },
+      { label: "In South Africa", value: "Launched in South Africa by Sage South Africa in 2020" },
+      { label: "Pricing", value: "Request pricing, nothing published" },
+      { label: "Scale", value: "Sage cites 30,000 plus finance teams worldwide" },
+      { label: "Strengths", value: "Multi entity accounting, dashboards, AI agents" },
+      { label: "Industries", value: "Financial services, SaaS, professional services, non profits and more" },
+      { label: "Support", value: "Phone on 0861 237 243" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Sage Intacct is a cloud financial management and accounting system. Sage's South African page lists it among its products for medium businesses and describes it as AI powered, high performance finance software that delivers real time insights. It sits above Sage Accounting and Sage 50 Pastel in the range, and Sage publishes migration pages for businesses switching from Sage 50 Pastel and Sage 200 Evolution.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "There is no published price. The page offers a Request pricing button, so the register records Intacct as quote only. Because the platform is configured by entity count, users and modules, a quote is normal, and you should ask for it in writing with the VAT basis and the billing currency stated.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "Sage highlights multi entity accounting that lets you manage all entities in a single system and consolidate hundreds of them in minutes with automated eliminations and adjustments. It also describes dashboards and reporting across financial and operational data, a set of AI agents and industry tailored configurations.",
+        ],
+        bullets: [
+          "Multi entity accounting and consolidation",
+          "Multi dimensional dashboards and reporting",
+          "AP Automation agent for bill entry, matching and duplicate detection",
+          "Financial Assurance agent that watches for outliers and reconciliation mismatches",
+          "Close agent for month end and year end close",
+          "Natural language questions through a financial intelligence agent",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Sage South Africa launched Intacct locally in 2020 and sells and supports it on the same phone line as its other products. Sage's Africa pages describe South African VAT and statutory reporting support, and its South African page offers switching paths from Sage 50 Pastel and Sage 200 Evolution, which are South African products. The product page itself speaks in global terms, so ask Sage for a demonstration of your own VAT and banking set up.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "It is too much product for a small business, it publishes no price and the claims on the page, such as closing books up to 90 percent faster, are Sage's own and are not independently tested here.",
+        ],
+      },
+    ],
+    verdict:
+      "A serious option when consolidation and reporting matter more than a quick start. Treat the efficiency claims as marketing, ask Sage South Africa for a written quote, and ask for a demonstration of your own VAT and banking set up.",
+    sources: [
+      { label: "Sage Intacct, Sage South Africa", url: "https://www.sage.com/en-za/sage-business-cloud/intacct/" },
+      { label: "Sage Intacct Essentials, Sage Africa", url: "https://www.sage.com/africa/sage-business-cloud/intacct/essentials/" },
+      { label: "Sage launches Intacct in three more countries, Enterprise Times", url: "https://www.enterprisetimes.co.uk/2022/10/06/sage-launches-intacct-in-three-more-countries-but-maybe-not-where-you-would-expect/" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "zoho-books",
+    headline: "The value pick: a genuine free plan and rand pricing that stays low as you grow.",
+    summary:
+      "Zoho Books is the accounting product from Zoho, priced in rand and published openly across six plans. It has a free plan for businesses with annual revenue under R1 million, a 14 day trial of paid plans, VAT returns from the R99 Standard plan and a South African support line. It is the cheapest serious option in this sector, and the main questions are bank feeds and local accountant familiarity.",
+    bestFor: [
+      "Very small businesses that want to start free",
+      "Businesses that already use other Zoho products and want one suite",
+      "Price sensitive firms that still want VAT reports and a South African support line",
+    ],
+    thinkTwice: [
+      "You turn over more than R1 million a year, because the free plan then no longer applies",
+      "You need bank feeds, because the free plan excludes them and the page names no South African banks",
+      "Your accountant works only in Xero or Sage",
+    ],
+    facts: [
+      { label: "Vendor", value: "Zoho Corporation, founded 1996" },
+      { label: "Free plan", value: "R0, for annual revenue up to R1 million" },
+      { label: "Free trial", value: "14 days on paid plans" },
+      { label: "Billing", value: "Rand, monthly or annual" },
+      { label: "Apps", value: "iOS, Android and a Windows desktop app" },
+      { label: "Support", value: "South African phone line and email" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Zoho Books is a full accounting package in the cloud: invoices, quotes, sales orders, bills, purchase orders, projects, banking, inventory, expenses, documents and reporting. Zoho sells it as part of a wide software suite, so a business that already uses Zoho CRM or other Zoho apps can connect them.",
+        ],
+      },
+      {
+        heading: "Pricing in rand",
+        paragraphs: [
+          "The South African pricing page lists six plans in rand. Free is R0, with one user and one accountant, up to 1,000 invoices and 1,000 bills a year and 50 receipt scans a month, and it stays free as long as annual revenue is under R1 million. Standard is R99 a month, or R82.50 a month billed annually, for three users, with VAT tracking, VAT returns, bank feeds, custom fields and API access. Professional is R199 a month and adds multi currency, inventory, purchase orders, timesheets and project profitability.",
+          "Premium at R299 a month adds fixed assets, budgets and cashflow forecasting. Elite at R1,290 a month adds advanced inventory control with warehouses and serial tracking. Ultimate at R2,490 a month adds advanced analytics. Add ons include extra users at R20 a month, document autoscans at R120 for 50 a month and expense claims at R90 per user a month. The register records the Free plan at R0, and the vendor's first paid price is R99.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "Even the free plan carries invoices, quotes, expenses, journals, online payments, a customer portal, bank reconciliation, recurring invoices and more than 50 reports. Paid plans stack inventory, projects, approval workflows, budgets and forecasting.",
+        ],
+        bullets: [
+          "VAT 201 reports, VAT audit reports and VAT correction reports",
+          "Bank reconciliation on every plan, with bank feeds from Standard",
+          "Inventory and multi currency from Professional",
+          "Mobile apps for iOS and Android and a Windows desktop app",
+          "A customer portal and online payments",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Zoho says it supports VAT in line with SARS requirements and lists VAT 201 reports among its outputs. It publishes a South African support phone number and email address, which is a good sign for local help. The page does not name the South African banks its feeds support, so ask before you rely on an automated feed, and do not assume the free plan will import transactions.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The free plan excludes VAT tracking and bank feeds, so a VAT registered business must pay for Standard anyway. Fewer South African accountants use Zoho than use Xero or Sage, so check your accountant is happy to work with it. The page also does not say which South African payment gateways connect.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Zoho Books undercuts Xero and Sage on price at every step, and it matches them on core VAT reporting. Xero has the bigger marketplace and Sage the stronger local brand. See the full comparison with Xero.",
+        ],
+      },
+    ],
+    verdict:
+      "The best value in the sector on paper. Start on the free plan if you are under R1 million and not VAT registered, move to Standard at R99 when you need VAT and bank feeds, and confirm that your bank and your accountant are both compatible.",
+    sources: [
+      { label: "Zoho Books pricing, South Africa", url: "https://www.zoho.com/za/books/pricing/" },
+      { label: "Zoho Books South Africa", url: "https://www.zoho.com/za/books/" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "wave-accounting",
+    headline: "Free accounting priced in North American dollars, with Zoho Books as the free plan priced in rand.",
+    summary:
+      "Wave offers free accounting, invoicing and bookkeeping for small businesses, with its money coming from payment processing fees and paid add ons. Its pricing is quoted in US and Canadian dollars, its support runs on Eastern time, and Wave announced in December 2020 that it was withdrawing from markets outside North America. A South African business that wants free accounting will usually start with Zoho Books, which prices in rand and has VAT reports.",
+    bestFor: [
+      "Freelancers and small businesses that bill clients in US or Canadian dollars",
+      "Anyone comparing free accounting tools who wants to see the trade offs against a rand priced plan",
+    ],
+    thinkTwice: [
+      "You need VAT returns, rand billing or South African bank feeds, which its pages do not describe",
+      "You want phone support in South African hours",
+      "You want a vendor that is actively serving your market, because Wave said in December 2020 that it was withdrawing from markets outside North America",
+    ],
+    facts: [
+      { label: "Vendor", value: "Wave, founded 2010" },
+      { label: "Starter plan", value: "$0, with unlimited invoices and bookkeeping" },
+      { label: "Pro plan", value: "$19 a month, or $190 a year" },
+      { label: "Payment fees", value: "2.9 percent plus $0.60 per card payment on Starter" },
+      { label: "Currencies shown", value: "US and Canadian dollars" },
+      { label: "Support hours", value: "Monday to Friday, Eastern time" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Wave built its reputation on giving small businesses free invoicing and bookkeeping. It earns money from payments, payroll, receipt scanning and a bookkeeping service called Wave Advisors.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "The Starter plan is $0 and includes unlimited estimates, invoices, bills and bookkeeping records, a mobile app and cash flow dashboards. Online card payments carry a fee of 2.9 percent plus $0.60, and 3.4 percent plus $0.60 for American Express. Pro is $19 a month, or $190 a year, and adds automatic bank imports, receipt capture, reminders, branding, multi user access and discounted payments. Wave Advisors, the bookkeeping service, starts at $149 to $199 a month. The register records Wave's starting price as USD 0.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "The pricing page quotes US and Canadian dollars and lists support hours in Eastern time. In December 2020 Wave announced it was pulling out of countries outside North America, as reported by TechCabal at the time. Its pages describe no SARS return, VAT report or South African bank connection, so check that it will serve you before you build on it. South African businesses that want a free plan usually start with Zoho Books, which prices in rand, offers a free plan for businesses under R1 million a year and adds VAT 201 reports from its R99 Standard plan.",
+        ],
+      },
+    ],
+    verdict:
+      "A well regarded free tool priced in dollars and supported on North American hours. For a South African business the closest rand priced alternative is Zoho Books, and the register keeps Wave listed so you can compare the two.",
+    sources: [
+      { label: "Wave pricing", url: "https://www.waveapps.com/pricing" },
+      { label: "TechCabal on Wave leaving African markets", url: "https://techcabal.com/2020/12/16/whats-next-for-waves-african-users-after-its-exit/" },
+    ],
+    researchedAt: DATE,
+  },
+];

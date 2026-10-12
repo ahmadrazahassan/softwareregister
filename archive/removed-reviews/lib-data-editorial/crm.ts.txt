@@ -1,0 +1,378 @@
+import type { EditorialReviewBase } from "../../types";
+
+const DATE = "2026-10-05";
+
+/**
+ * CRM reviews, written from each vendor's own pages on the date above. Where a vendor's page could
+ * not be read by our tools, the review says which figures come from price trackers instead.
+ */
+export const CRM_REVIEWS: EditorialReviewBase[] = [
+  {
+    slug: "hubspot",
+    headline: "The friendliest way to start a CRM for free, with costs that climb steeply as you grow.",
+    summary:
+      "HubSpot offers free CRM tools with no time limit, then paid tiers per seat. Its page showed Starter from $7 per seat per month for new customers who commit annually, and $20 per seat on a pay as you go basis. Professional and Enterprise sit far higher, and third party trackers report a one time onboarding fee on those tiers. It bills in US dollars, so every paid tier carries an exchange rate exposure for a South African buyer.",
+    bestFor: [
+      "Small sales teams that want to start on a free CRM and learn as they go",
+      "Businesses that want marketing, sales and service tools in one platform",
+      "Teams that value a large library of training and integrations",
+    ],
+    thinkTwice: [
+      "You plan to move up to Professional, where seat prices and onboarding fees are far above the starting figure",
+      "You need rand billing, because HubSpot prices in dollars",
+      "You want a flat predictable bill, because costs scale with seats and tiers",
+    ],
+    facts: [
+      { label: "Free tier", value: "Free tools, no time limit" },
+      { label: "Starter", value: "From $7 per seat per month for new customers on an annual commitment" },
+      { label: "Pay as you go", value: "$20 per seat per month on Starter" },
+      { label: "Billing", value: "US dollars" },
+      { label: "Tiers", value: "Free, Starter, Professional and Enterprise" },
+      { label: "Founded", value: "2006" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "HubSpot is a customer platform that started in marketing and grew into sales, service, content and data management. The CRM is the centre, and the free tools are a deliberate way in. The pricing page positions Starter as essential marketing, sales, service, content and data management software.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "The register records HubSpot's starting price as free, with a dollar billing currency. On the page read on 5 October 2026, the free tools carried no time limit, and Starter began at $7 per seat per month for new customers who committed annually, or $20 per seat per month on a pay as you go basis. At the 2 October 2026 reference rate, $7 is about R117 a seat and $20 is about R335, and those rand figures move daily.",
+          "The page did not display the Professional and Enterprise prices in the text we could read. Third party price trackers report Sales Hub Professional at around $100 per seat per month on annual billing, with a one time onboarding fee of $1,500, and Enterprise starting far higher, so treat the starting price as the door and not the destination.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: [
+          "The comparison charts on the page differ by email sending limits, automation workflows, reporting dashboards, user seat limits, removal of HubSpot branding and meeting scheduling. In plain terms, the free tier proves the concept, Starter removes the branding and raises limits, and Professional adds the automation and reporting that most sales teams eventually want.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "HubSpot is a global product, and its pricing page makes no South African specific claims. That is normal for a CRM, since there is no SARS filing involved, but it means you should check the dollar cost, local payment methods and support hours yourself.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The big risk is the gap between the free and Starter prices and the Professional price. A team that builds its whole sales process on free tools can face a large bill the moment it needs automation. Dollar billing adds a second risk.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against Pipedrive, HubSpot is broader and free to start, while Pipedrive is focused on the sales pipeline and publishes a lower per seat price. Against Zoho CRM, HubSpot is dearer and Zoho bills in rand. See the full comparisons.",
+        ],
+      },
+    ],
+    verdict:
+      "An easy, well supported way to start, and a platform where the bill can jump. Use the free tier to learn, price the tier you will actually need before you commit your team to it, and convert the dollar price at today's rate.",
+    sources: [{ label: "HubSpot CRM pricing", url: "https://www.hubspot.com/pricing/crm" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "pipedrive",
+    headline: "A focused sales pipeline tool, with the lowest paid entry price among the big names.",
+    summary:
+      "Pipedrive is a CRM built around the visual sales pipeline. Its entry plan, Lite, is $14 per user per month on annual billing, which matches what the register records. Its own pricing pages could not be read by our tools, so the higher plan prices come from price trackers and should be confirmed. Pipedrive bills in US dollars.",
+    bestFor: [
+      "Small sales teams that think in deals and pipeline stages",
+      "Businesses that want a simple CRM without the weight of a full platform",
+      "Teams that want a low per user price to start",
+    ],
+    thinkTwice: [
+      "You need marketing and service tools in the same platform",
+      "You need rand billing, because Pipedrive bills in dollars",
+      "You need the price confirmed first, because we could not read Pipedrive's own page",
+    ],
+    facts: [
+      { label: "Lite price", value: "$14 per user per month, billed annually, as recorded on the register" },
+      { label: "Other plans", value: "Reported at $39, $49 and $79 per user per month on annual billing" },
+      { label: "Monthly billing", value: "Reported at $24, $49, $79 and $99 for the four plans" },
+      { label: "Billing", value: "US dollars" },
+      { label: "Founded", value: "2010" },
+      { label: "Page access", value: "pipedrive.com blocked our readers, so plan details are from price trackers" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Pipedrive is a sales CRM for small and growing teams. The product is organised around pipelines and deals, which makes it quick to learn for a salesperson, and it deliberately leaves out much of the marketing and service breadth that HubSpot or Salesforce carry.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "The register records Pipedrive at $14 per user per month, billed annually. At the 2 October 2026 reference rate, that is about R234 per user per month, which is what the product pages on this site show. Price trackers report four plans on annual billing, at $14, $39, $49 and $79 per user per month, and higher figures of $24, $49, $79 and $99 on monthly billing. Pipedrive's own pricing page returned an access error to our readers on 5 October 2026, so confirm those figures with the vendor.",
+          "Because the price is per user and in dollars, a team of ten on the second plan would pay roughly $390 a month, about R6 500, before any add ons.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "As a CRM, Pipedrive has no SARS filing role. The checks that matter locally are dollar billing, support hours and whether your email and calendar integrations connect. We could not verify those details from the vendor's own pages.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The tool is narrower than a full platform, so marketing automation and service desks need other products. Dollar billing carries the usual exchange rate risk.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against HubSpot, Pipedrive is simpler and cheaper to start on a paid plan, and HubSpot has the free tier and the wider platform. See the full comparison.",
+        ],
+      },
+    ],
+    verdict:
+      "A good fit for a small team that lives in its pipeline. Confirm the plan prices on Pipedrive's own page, since our tools were blocked, and price the team in rand at today's rate.",
+    sources: [
+      { label: "Pipedrive pricing", url: "https://www.pipedrive.com/en/pricing" },
+      { label: "Price tracker summary, tech.co", url: "https://tech.co/crm-software/pipedrive-pricing" },
+    ],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "freshsales",
+    headline: "A capable mid priced CRM from Freshworks, with three clear tiers and a 21 day trial.",
+    summary:
+      "Freshsales is the CRM from Freshworks. Its pricing page lists three tiers billed annually: Growth at $9, Pro at $39 and Enterprise at $59 per user per month, and a 21 day trial of the fully loaded CRM. Freshworks says it is used by more than 74,000 businesses. The register records a free starting price, which the page does not show as a tier, so the plan the register treats as free should be checked.",
+    bestFor: [
+      "Small to mid sized sales teams that want phone, email and chat in the CRM",
+      "Teams that want AI assistance and are happy to pay per usage for it",
+      "Businesses already using other Freshworks products",
+    ],
+    thinkTwice: [
+      "You were counting on a free plan, because the page lists paid tiers and a trial",
+      "You need rand billing, because the prices are in dollars",
+      "You need forecasting, which starts on Enterprise",
+    ],
+    facts: [
+      { label: "Growth", value: "$9 per user per month, billed annually" },
+      { label: "Pro", value: "$39 per user per month, billed annually" },
+      { label: "Enterprise", value: "$59 per user per month, billed annually" },
+      { label: "Trial", value: "21 days with the fully loaded CRM" },
+      { label: "Add ons", value: "Branded documents at $19 per user, Freddy AI Agent at $49 per 100 sessions" },
+      { label: "Customers", value: "74,000 plus businesses, by Freshworks' own count" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Freshsales is a sales CRM for startups and small to mid sized businesses. Growth is described as built for teams that want a Kanban view, contact lifecycle stages, chat, email and phone, email templates, custom fields and basic workflows. Pro is for growing and mid sized businesses and adds contact scoring, deal insights, custom sales activities, territory management and sales sequences. Enterprise is for mid to large businesses and adds forecasting insights, field level permissions, custom modules, a sandbox and audit logs.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "The page shows a 20 percent saving when billed annually. At the 2 October 2026 reference rate, $9 is about R151 per user per month, $39 about R652 and $59 about R987, and those figures move daily. The register records a free starting price, but the page text we read shows no free tier, only a 21 day trial of the full CRM, so the register's figure may refer to the trial or an older plan.",
+          "Freshworks accepts Visa, Mastercard, Discover and American Express across currencies. The page does not state that it bills in rand.",
+        ],
+      },
+      {
+        heading: "What you get",
+        paragraphs: ["The AI side is sold by usage. Every paid plan comes with 500 free bot sessions, and additional sessions cost $49 per 100 through the Freddy AI Agent add on."],
+        bullets: [
+          "Kanban view, lifecycle stages, chat, email and phone on Growth",
+          "Contact scoring, deal insights and sales sequences on Pro",
+          "Forecasting insights, custom modules, audit logs and a sandbox on Enterprise",
+          "Branded documents as a $19 per user add on",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The price per user climbs quickly once you want forecasting, and add ons for AI sessions and documents can surprise a budget. There is no South African billing or support information on the pricing page.",
+        ],
+      },
+    ],
+    verdict:
+      "A well specified CRM at a fair mid market price. Confirm whether the free tier the register mentions still exists, take the 21 day trial, and convert the dollar price at today's rate.",
+    sources: [{ label: "Freshsales pricing", url: "https://www.freshworks.com/crm/pricing/" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "zoho-crm",
+    headline: "A free edition for three users and a suite behind it, with South African pricing available.",
+    summary:
+      "Zoho CRM is the CRM from Zoho, and its pricing page is headlined Free for 3 users. Paid editions are priced dynamically on the page, so our tools could not read the figures. The register records a free starting price in rand, and Zoho sells in South Africa through a regional site. Its strength is the wider Zoho suite and a low price per user, and its weakness is a learning curve and fewer local consultants than the big names.",
+    bestFor: [
+      "Small teams that want to start free and have up to three users",
+      "Businesses that already use Zoho Books or other Zoho products",
+      "Price sensitive firms that want a flexible platform",
+    ],
+    thinkTwice: [
+      "You need more than three users for free, because paid editions apply beyond that",
+      "You need the price in black and white, because it loads dynamically",
+      "You want a large local consulting network",
+    ],
+    facts: [
+      { label: "Free edition", value: "Free for 3 users, per the page title" },
+      { label: "Paid editions", value: "Prices load dynamically, so confirm on the page" },
+      { label: "User types", value: "Org users with full access and team users with limited access" },
+      { label: "Onboarding", value: "Free onboarding is advertised" },
+      { label: "Founded", value: "1996, as Zoho Corporation" },
+      { label: "Billing", value: "Rand on the regional site, as recorded on the register" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Zoho CRM is a customisable CRM sold as part of the Zoho family. The pricing page explains two kinds of licence: org users, who have full access to the sales modules, and team users, who have partial access suited to marketing, support, legal and finance colleagues. Team users can add notes and view records but cannot own records, build reports or create automation, which is a useful way to keep non sales colleagues connected at a lower cost.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "The page advertises Zoho CRM as free for three users and promises flexible contracts, a minimal learning curve, reliable support and free onboarding. The paid edition prices did not appear in the text of the page we read on 5 October 2026, because they load by script, and the South African regional pricing page returned not found, so no paid rand figure is stated here. The register records the free edition at R0, and treats paid prices as unchecked.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Zoho runs a South African regional site and a local support line for Zoho Books, and the register records the CRM free edition as rand billed. A CRM has no SARS filing role, so the local questions are billing currency, support hours and data hosting, which you should confirm with Zoho.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "Zoho's flexibility comes with complexity. The team user rules, modules and editions take time to understand, and a small team may find the setup heavier than Pipedrive.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against HubSpot, Zoho is cheaper to scale and can be billed in rand, and HubSpot has the gentler start and bigger community. See the full comparison.",
+        ],
+      },
+    ],
+    verdict:
+      "A strong value choice, especially for a team already in the Zoho family. Start on the free edition, read the paid prices on the live page before you scale, and check the billing currency on your invoice.",
+    sources: [{ label: "Zoho CRM pricing", url: "https://www.zoho.com/crm/zohocrm-pricing.html" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "salesforce-sales-cloud",
+    headline: "The enterprise standard, with a free suite to start and dollar prices that rise by the edition.",
+    summary:
+      "Salesforce Sales Cloud is the best known enterprise CRM. Its pricing page lists a Free Suite at $0, Starter Suite at $25, Pro Suite at $100, Core at $195, Advanced at $395 and Max at $550 per user per month, mostly billed annually, with free trials. It is powerful and expensive, billed in US dollars, and best suited to teams that can use what they are paying for.",
+    bestFor: [
+      "Larger sales organisations that need deep customisation and forecasting",
+      "Teams that want an enormous ecosystem of partners, apps and consultants",
+      "Businesses that will use the AI and Agentforce features at the higher editions",
+    ],
+    thinkTwice: [
+      "You are a small team on a rand budget, because the paid editions are priced in dollars from $25 per user",
+      "You need the free suite to remain enough, because limits push you up",
+      "You want a simple tool, because Salesforce is a platform that usually needs an administrator",
+    ],
+    facts: [
+      { label: "Free Suite", value: "$0 per user per month, with a free trial" },
+      { label: "Starter Suite", value: "$25 per user per month" },
+      { label: "Pro Suite", value: "$100 per user per month, billed annually" },
+      { label: "Core", value: "$195 per user per month, billed annually" },
+      { label: "Advanced", value: "$395 per user per month, billed annually" },
+      { label: "Max", value: "$550 per user per month, billed annually, with a contact sales step" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Sales Cloud is the sales product within Salesforce. The page describes the Free Suite as account, contact, lead and opportunity management with basic features, Starter Suite as adding built in sales flows, lead routing, AI email and event syncing and dynamic email marketing, and Pro Suite as adding greater customisation, sales quoting and forecasting. Core adds Premier Success, Slack Business plus and Tableau Next. Advanced adds enhanced security, more AI, expanded data capacity and backup and recovery. Max adds the full suite of AI, including Agentforce for Sales and Sales Planning.",
+        ],
+      },
+      {
+        heading: "Pricing in rand and in dollars",
+        paragraphs: [
+          "The register records the Free Suite at USD 0. The paid editions run from $25 to $550 per user per month. At the 2 October 2026 reference rate, $25 is about R418, $100 about R1 673, $195 about R3 262 and $395 about R6 608 per user per month, and those figures move daily. A team of ten on Core would pay about R32 600 a month at that rate, before implementation, which is why Salesforce usually involves a budget conversation.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Salesforce has a large partner ecosystem that includes South African consultancies, which is a real advantage for a business that needs customisation. The pricing page makes no rand pricing claim, so assume dollar billing and confirm any local invoicing arrangement through a partner.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "Cost and complexity are the main drawbacks. The free and Starter suites make the product accessible, and the step up to Pro Suite is a factor of four per user. Without an administrator, a smaller team may not use the power it is paying for.",
+        ],
+      },
+      {
+        heading: "How it compares",
+        paragraphs: [
+          "Against HubSpot, Salesforce is deeper and costlier, while HubSpot is easier to start and cheaper at the low end. See the full comparison.",
+        ],
+      },
+    ],
+    verdict:
+      "The right answer for a sales organisation with complexity and a budget, and overkill for a small team. Use the free suite to evaluate, price the edition you will really need in rand, and plan for an administrator or a partner.",
+    sources: [{ label: "Salesforce Sales Cloud pricing", url: "https://www.salesforce.com/sales/pricing/" }],
+    researchedAt: DATE,
+  },
+
+  {
+    slug: "sage-crm",
+    headline: "A CRM that is sold as an extension of your existing Sage system, with no published price.",
+    summary:
+      "Sage CRM is the customer relationship product from Sage, and its South African page is written for existing Sage customers. It describes a fully integrated CRM, or separate Sales, Marketing or Service modules, a MailChimp connection for campaigns and a Request a callback route. No price is published. Sage's newer Sage Sales Management product, described as an easy to use, AI powered CRM for teams on the move, appears beside it in the product range.",
+    bestFor: [
+      "Businesses already running Sage 200 Evolution, Sage X3 or Sage 300 that want CRM data joined to their ERP",
+      "Teams that want sales, marketing and service in one connected system",
+    ],
+    thinkTwice: [
+      "You do not use Sage elsewhere, because the value is the integration",
+      "You want a published price or a self service trial",
+      "You want a modern, fast to set up CRM, where Sage Sales Management or a rival may suit better",
+    ],
+    facts: [
+      { label: "In South Africa", value: "Sold and supported in South Africa by Sage South Africa" },
+      { label: "Pricing", value: "Not published, request a callback" },
+      { label: "Modules", value: "Integrated CRM, or Sales, Marketing and Service modules" },
+      { label: "Integrations", value: "MailChimp for campaigns, Sage business management products" },
+      { label: "Customers", value: "Used by hundreds of businesses worldwide, by Sage's own statement" },
+      { label: "Newer option", value: "Sage Sales Management, described as AI powered" },
+    ],
+    sections: [
+      {
+        heading: "What it is and who it is for",
+        paragraphs: [
+          "Sage CRM is aimed at Sage business management customers. The page says that as a Sage customer you can choose fully integrated CRM or the Sales, Marketing or Service modules to suit your needs. It talks about automating quotes and orders, forecasting sales, progressing leads and tracking orders in a Sage ERP such as Sage 300.",
+        ],
+      },
+      {
+        heading: "Pricing",
+        paragraphs: [
+          "No price is shown. The only call to action is Request a callback, so the register records Sage CRM as quote only. Ask for a quote that states the modules, the number of users, the VAT basis and the implementation cost.",
+        ],
+      },
+      {
+        heading: "South African fit",
+        paragraphs: [
+          "Sage CRM is sold and supported by Sage South Africa, which offers a South African callback service, and it is designed to sit alongside the Sage business management products that South African firms already run, such as Sage 300.",
+        ],
+      },
+      {
+        heading: "Where it falls short",
+        paragraphs: [
+          "The page is general in its claims and light on product specifics such as limits, mobile apps or integrations beyond Sage and MailChimp. For a business that is not a Sage customer, the strongest argument for the product disappears.",
+        ],
+      },
+    ],
+    verdict:
+      "Sensible if you run a Sage ERP and want the data to flow into CRM. If you are choosing a CRM from scratch, compare it with Sage Sales Management and with Zoho CRM or HubSpot, and insist on a written quote.",
+    sources: [{ label: "Sage CRM, Sage South Africa", url: "https://www.sage.com/en-za/products/sage-crm/" }],
+    researchedAt: DATE,
+  },
+];

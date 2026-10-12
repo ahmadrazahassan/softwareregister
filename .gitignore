@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+npm-debug.log*
+.next-verify
+
+# Local assistant settings
+.claude/settings.local.json
+
+# Old scraped reviews with ratings and counts. Kept on this machine only.
+REVIEWS.md

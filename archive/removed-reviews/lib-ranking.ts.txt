@@ -1,0 +1,54 @@
+import type { PriorValues, Software } from "./types";
+
+export type ScoredSoftware = Software & { rank: number; score: number };
+
+/**
+ * Bayesian weighted average, the same family of method the Internet Movie
+ * Database uses for its Top 250.
+ *
+ *   score = v / (v + m) * R  +  m / (v + m) * C
+ *
+ *   R  the product's own rating
+ *   v  the number of reviews behind that rating
+ *   C  the mean rating across the whole register, weighted by review count
+ *   m  the prior weight, set to the mean number of reviews per product
+ *
+ * A product with few reviews is pulled toward the register mean. A product with
+ * many keeps most of its own rating. That is why 412 reviews at 4.2 outranks
+ * 96 reviews at 4.3: the 4.3 rests on too little evidence to stand on its own.
+ *
+ * The ranking is computed from ratings and review counts only. No commercial
+ * relationship, affiliate link or sponsorship is an input.
+ */
+export function computePriors(items: Pick<Software, "rating" | "review_count">[]): PriorValues {
+  if (items.length === 0) return { meanRating: 0, weight: 0 };
+  let weighted = 0;
+  let total = 0;
+  for (const s of items) {
+    weighted += s.rating * s.review_count;
+    total += s.review_count;
+  }
+  return {
+    meanRating: total === 0 ? 0 : weighted / total,
+    weight: total / items.length,
+  };
+}
+
+export function weightedScore(rating: number, reviews: number, priors: PriorValues): number {
+  const denominator = reviews + priors.weight;
+  if (denominator === 0) return 0;
+  return (reviews / denominator) * rating + (priors.weight / denominator) * priors.meanRating;
+}
+
+export function rankSoftware(items: Software[]): { ranked: ScoredSoftware[]; priors: PriorValues } {
+  const priors = computePriors(items);
+  const scored = items.map((s) => ({ ...s, score: weightedScore(s.rating, s.review_count, priors) }));
+  scored.sort(
+    (a, b) =>
+      b.score - a.score || b.review_count - a.review_count || a.name.localeCompare(b.name, "en-ZA"),
+  );
+  return {
+    ranked: scored.map((s, i) => ({ ...s, rank: i + 1 })),
+    priors,
+  };
+}

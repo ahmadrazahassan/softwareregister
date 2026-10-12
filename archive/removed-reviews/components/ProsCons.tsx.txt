@@ -1,0 +1,54 @@
+import { Check, X } from "lucide-react";
+
+interface Props {
+  pros: string[];
+  cons: string[];
+  /** Show only the first few lines of each, for a card. */
+  limit?: number;
+  /** Smaller type and tighter padding, for a card. */
+  compact?: boolean;
+}
+
+/**
+ * Pros and cons, side by side. The pros sit on the lime wash and the cons on
+ * the plain surface, so the two read apart at a glance. A product with no
+ * pros says why, rather than leaving an empty box.
+ */
+export function ProsCons({ pros, cons, limit, compact = false }: Props) {
+  const shownPros = limit ? pros.slice(0, limit) : pros;
+  const shownCons = limit ? cons.slice(0, limit) : cons;
+  const text = compact ? "text-[14px] leading-5" : "text-[15px] leading-6";
+  const pad = compact ? "p-4" : "p-5";
+  const gap = compact ? "mt-2.5 space-y-2" : "mt-3 space-y-2.5";
+
+  return (
+    <div className={`grid gap-3 ${compact ? "" : "md:grid-cols-2 md:gap-5"}`}>
+      <div className={`rounded-[16px] border border-lime-deep/30 bg-lime-wash ${pad}`}>
+        <p className="stamp text-lime-text">Pros</p>
+        {shownPros.length > 0 ? (
+          <ul className={gap}>
+            {shownPros.map((t) => (
+              <li key={t} className={`flex gap-3 ${text}`}>
+                <Check size={compact ? 16 : 18} strokeWidth={1.75} aria-hidden="true" className="mt-0.5 flex-none text-lime-text" />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={`mt-2.5 text-muted ${text}`}>No strengths can be stated. We found no vendor page to read, and we will not guess.</p>
+        )}
+      </div>
+      <div className={`rounded-[16px] border border-line-firm bg-surface ${pad}`}>
+        <p className="stamp text-alert">Cons</p>
+        <ul className={gap}>
+          {shownCons.map((t) => (
+            <li key={t} className={`flex gap-3 ${text}`}>
+              <X size={compact ? 16 : 18} strokeWidth={1.75} aria-hidden="true" className="mt-0.5 flex-none text-alert" />
+              <span>{t}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}

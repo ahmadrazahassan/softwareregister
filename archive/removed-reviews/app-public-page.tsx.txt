@@ -1,0 +1,276 @@
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { ctaClass } from "@/components/CtaButton";
+import { DispatchForm } from "@/components/forms/DispatchForm";
+import { FxNote } from "@/components/FxNote";
+import { GuideCard } from "@/components/GuideCard";
+import { Note, Section } from "@/components/primitives";
+import { ProductLogo } from "@/components/ProductLogo";
+import { SoftwareCard } from "@/components/SoftwareCard";
+import { SponsoredBanner } from "@/components/SponsoredBanner";
+import { StatTiles } from "@/components/StatTiles";
+import { VersusCard } from "@/components/VersusCard";
+import { LOGOS } from "@/lib/data/assets.generated";
+import { formatInt } from "@/lib/format";
+import {
+  getFxRates,
+  getLatestBriefings,
+  getRegistry,
+  getResolvedComparisons,
+  getSiteStats,
+  getTokens,
+  getTopRatedSoftware,
+  loadSectors,
+} from "@/lib/queries";
+import { buildVerdict } from "@/lib/registry";
+import type { RankedSoftware } from "@/lib/types";
+
+export const revalidate = 3600;
+
+/** The rules the register tracks, each linking to the briefing that explains it. */
+const HERO_CHIPS = [
+  { label: "VAT201", href: "/briefings/vat-and-the-vat201-return" },
+  { label: "EMP501", href: "/briefings/payroll-returns-emp201-emp501-irp5" },
+  { label: "BCEA leave", href: "/briefings/bcea-leave-what-hr-software-must-accrue" },
+  { label: "SARS eFiling", href: "/method" },
+  { label: "bank feeds", href: "/briefings/bank-feeds-by-bank" },
+] as const;
+
+const SECTOR_SHORT: Record<string, string> = {
+  accounting: "Accounting",
+  erp: "ERP",
+  payroll: "Payroll",
+  hr: "HR",
+  crm: "CRM",
+  "project-management": "Projects",
+};
+const sectorShort = (slug: string) => SECTOR_SHORT[slug] ?? slug;
+
+export default async function FrontPage() {
+  const [stats, reg, sectors, top, comparisons, briefings, tokens, rates] = await Promise.all([
+    getSiteStats(),
+    getRegistry(),
+    loadSectors(),
+    getTopRatedSoftware(6),
+    getResolvedComparisons(),
+    getLatestBriefings(8),
+    getTokens(),
+    getFxRates(),
+  ]);
+
+  const versus = comparisons.slice(0, 3);
+  // The highest ranked product in each sector, in sector order.
+  const leaders = sectors.map((sec) => reg.ranked.find((s) => s.sector === sec.slug)).filter((s): s is RankedSoftware => Boolean(s));
+
+  return (
+    <>
+      {/* 1. Hero. Centred, no image: a huge headline, a sentence with its rules set as chips, one big action. */}
+      <section aria-labelledby="hero-title" className="mx-auto w-full max-w-[1120px] px-6 pt-14 text-center lg:pt-[88px]">
+        <p className="stamp mb-6 text-muted">South African business software</p>
+        <h1
+          id="hero-title"
+          className="mx-auto max-w-[980px] font-heading text-[42px] leading-[44px] font-bold tracking-[-0.03em] md:text-[68px] md:leading-[68px] lg:text-[88px] lg:leading-[86px]"
+        >
+          What this software actually costs in rand.
+        </h1>
+
+        <p className="mx-auto mt-10 max-w-[880px] text-[18px] leading-[3rem] md:text-[20px]">
+          We track {stats.products} products against{" "}
+          {HERO_CHIPS.map((chip, i) => (
+            <span key={chip.label}>
+              <Link href={chip.href} className="chip">
+                {chip.label}
+              </Link>
+              {i < HERO_CHIPS.length - 2 ? " " : i === HERO_CHIPS.length - 2 ? " and " : "."}
+            </span>
+          ))}
+        </p>
+        <p className="mx-auto mt-3 max-w-[560px] text-[15px] leading-6 text-muted">Every price carries the date it was read, or says so when it was not.</p>
+
+        <div className="mt-10 flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-3 sm:flex-row">
+            <span className="cta-halo">
+              <Link href="/register" className={ctaClass("primary", "min-h-14 px-8 text-[17px]")}>
+                Browse all software <span aria-hidden="true">→</span>
+              </Link>
+            </span>
+            <Link href="/method" className={ctaClass("quiet", "min-h-14 px-7 text-[16px]")}>
+              How we rank
+            </Link>
+          </div>
+          <p className="font-mono text-[12px] leading-4 text-muted">(No sign up. No paywall. Prices in rand.)</p>
+          <Link href="/versus" className="text-[14px] text-lime-text underline underline-offset-4">
+            or compare two products head to head
+          </Link>
+        </div>
+
+        {/* The top ranked product in each sector, set as a row of names where a logo strip would go. Real data, not endorsements. */}
+        <div className="mt-16 border-t border-line-firm py-6 text-left lg:mt-[88px]">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <p className="font-mono text-[13px] leading-5 whitespace-nowrap text-ink">Top ranked in each category</p>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 md:flex md:flex-1 md:flex-wrap md:justify-between md:gap-x-6">
+              {leaders.map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/register/${s.slug}`} className="flex flex-col items-start gap-2 hover:opacity-80">
+                    {/* The logo set large and bare, where a logo strip would go. */}
+                    <span className="flex h-12 items-center">
+                      <ProductLogo slug={s.slug} name={s.name} height={48} maxWidth={120} />
+                    </span>
+                    <span className="stamp text-[10px] font-medium tracking-[0.1em] text-muted">{sectorShort(s.sector)}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Four numbers, as tiles. Analysed, never verified. */}
+      <section className="mx-auto w-full max-w-[1080px] px-6 pb-12 lg:pb-[72px]">
+        <StatTiles
+          tiles={[
+            { value: String(stats.products), label: "Products", note: "across six categories", href: "/register" },
+            { value: formatInt(stats.reviews), label: "Reviews analysed", note: "never called verified", href: "/reviews" },
+            { value: String(stats.sectors), label: "Categories", note: "accounting to projects", href: "/sectors" },
+            { value: String(stats.comparisons), label: "Comparisons", note: "two products at a time", href: "/versus" },
+          ]}
+        />
+      </section>
+
+      {/* 3. Categories, as tiles with the products inside. */}
+      <Section title="Browse by category" aside={<Link href="/sectors" className="text-[13px] text-lime-text underline underline-offset-4">All categories</Link>}>
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {sectors.map((sec) => {
+            const items = reg.ranked.filter((s) => s.sector === sec.slug);
+            const withLogos = items.filter((s) => LOGOS[s.slug]).slice(0, 3);
+            return (
+              <li key={sec.slug}>
+                <Link
+                  href={`/sector/${sec.slug}`}
+                  className="group flex h-full flex-col rounded-[16px] border border-line-firm bg-surface p-5 transition-colors hover:border-ink"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-heading text-[22px] leading-7 font-bold tracking-[-0.01em]">{sec.label}</h3>
+                    <span className="inline-flex flex-none items-center rounded-full border border-line-firm px-2.5 py-1 text-[12px] leading-4 font-semibold">
+                      {items.length} products
+                    </span>
+                  </div>
+                  <p className="mt-3 line-clamp-3 text-[14px] leading-5 text-muted">{sec.description}</p>
+                  <div className="mt-5 flex min-h-10 flex-wrap items-center gap-x-5 gap-y-2">
+                    {withLogos.map((s) => (
+                      <ProductLogo key={s.slug} slug={s.slug} name={s.name} height={28} maxWidth={72} fallback="none" decorative />
+                    ))}
+                  </div>
+                  <p className="mt-3 truncate text-[13px] leading-5 text-muted">{items.slice(0, 4).map((s) => s.name).join(", ")}</p>
+                  <span className="mt-auto inline-flex items-center gap-1 border-t border-line pt-4 text-[14px] leading-5 font-semibold text-lime-text group-hover:underline group-hover:underline-offset-4">
+                    Browse {sec.name}
+                    <ChevronRight size={16} strokeWidth={1.5} aria-hidden="true" />
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </Section>
+
+      {/* 4. The highest ranked products, as cards. */}
+      <Section wide title="Highest rated, weighted" aside={<Link href="/register" className="text-[13px] text-lime-text underline underline-offset-4">All {stats.products} products</Link>}>
+        <Note className="-mt-3 mb-6 max-w-[720px]">A Bayesian weighted average of rating and review count. 412 reviews at 4.2 outranks 96 reviews at 4.3.</Note>
+        <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {top.map((s) => (
+            <li key={s.slug}>
+              <SoftwareCard s={s} placement="home-card" />
+            </li>
+          ))}
+        </ul>
+        <FxNote rates={rates} className="mt-8 max-w-[760px]" />
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link href="/register" className={ctaClass("primary", "min-h-12 px-7")}>
+            Browse all software <span aria-hidden="true">→</span>
+          </Link>
+          <Link href="/versus" className={ctaClass("quiet", "min-h-12 px-7")}>
+            Compare two products
+          </Link>
+        </div>
+      </Section>
+
+      {/* 5. How the register works. Three claims, each one true of how the data is handled. */}
+      <Section title="How the register works">
+        <ol className="grid gap-5 md:grid-cols-3">
+          {[
+            {
+              n: "01",
+              title: "Every price is read from the vendor",
+              body: "We record the price on the vendor's own pricing page, whether VAT is inside it, and the date we read it. A price we have not read shows as Unchecked.",
+            },
+            {
+              n: "02",
+              title: "Shown in rand, with the original beside it",
+              body: "Dollar, pound and euro prices are converted at the day's European Central Bank rate and marked with ≈. The vendor's own figure stays next to it, so the exchange rate risk is never hidden.",
+            },
+            {
+              n: "03",
+              title: "Ranked on ratings, never on commission",
+              body: "The order is a weighted score from rating and review count only. Affiliate links and sponsorships are not inputs. Reviews are analysed, not verified.",
+            },
+          ].map((step) => (
+            <li key={step.n} className="rounded-[16px] border border-line-firm bg-surface p-6">
+              <p className="stamp text-muted">{step.n}</p>
+              <h3 className="mt-3 font-heading text-[20px] leading-6 font-bold tracking-[-0.01em]">{step.title}</h3>
+              <p className="mt-3 text-[14px] leading-6 text-muted">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-6">
+          <Link href="/method" className={ctaClass("quiet", "min-h-12 px-7")}>
+            How we rank
+          </Link>
+        </div>
+      </Section>
+
+      {/* 6. Head to head, as three compact cards. */}
+      {versus.length > 0 && (
+        <Section title="Head to head" aside={<Link href="/versus" className="text-[13px] text-lime-text underline underline-offset-4">All {stats.comparisons} comparisons</Link>}>
+          <ul className="grid gap-5 md:grid-cols-3">
+            {versus.map((c) => (
+              <li key={c.slug}>
+                <VersusCard slug={c.slug} a={c.a_software} b={c.b_software} verdict={buildVerdict(c.a_software, c.b_software)} />
+              </li>
+            ))}
+          </ul>
+          <Note className="mt-4">The washed side ranks higher on the weighted score, not on the raw rating alone.</Note>
+        </Section>
+      )}
+
+      {/* 7. Sponsored. The label stays visible. */}
+      <Section tight>
+        <SponsoredBanner slot="leaderboard" />
+      </Section>
+
+      {/* 8. Guides, as cards. */}
+      <Section title="Guides" aside={<Link href="/briefings" className="text-[13px] text-lime-text underline underline-offset-4">All {stats.briefings} guides</Link>}>
+        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {briefings.slice(0, 6).map((b) => (
+            <li key={b.slug}>
+              <GuideCard b={b} tokens={tokens} />
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* 9. Price alerts. The one inverted block. */}
+      <section className="mx-auto w-full max-w-[1080px] px-6 pb-12 lg:pb-[72px]">
+        <div className="grid gap-8 rounded-[20px] bg-panel p-6 text-panel-ink md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center md:p-12">
+          <div>
+            <p className="stamp text-lime">Price alerts</p>
+            <h2 className="mt-3 font-heading text-[28px] leading-8 font-bold tracking-[-0.02em] text-panel-ink md:text-[34px] md:leading-10">Know when a price moves.</h2>
+            <p className="mt-3 max-w-[420px] text-[15px] leading-6 text-panel-ink/85">
+              We send a note when a price changes or a product is withdrawn. Nothing else.
+            </p>
+          </div>
+          <DispatchForm inverted />
+        </div>
+      </section>
+    </>
+  );
+}

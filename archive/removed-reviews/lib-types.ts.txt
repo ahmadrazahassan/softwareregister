@@ -1,0 +1,213 @@
+/**
+ * Shared shapes. Field names match the database columns one to one, so a row
+ * read from Supabase is already a `Software` and needs no mapping.
+ */
+
+export type Currency = "ZAR" | "USD" | "GBP" | "EUR";
+
+/** What a listed price is per, and whether VAT is inside it. */
+export type PriceBasis = "mo" | "mo_incl_vat" | "mo_excl_vat" | "employee_mo" | "user_mo";
+
+export type SectorSlug = "accounting" | "erp" | "payroll" | "hr" | "crm" | "project-management";
+
+export interface Sector {
+  slug: SectorSlug;
+  name: string;
+  /** Used in lists, for example "Accounting software". */
+  label: string;
+  description: string;
+  sort: number;
+}
+
+export interface PricingPlan {
+  name: string;
+  /** null means the plan is quoted. 0 means it is free. */
+  price: number | null;
+  currency: Currency | null;
+  basis: PriceBasis | null;
+  adds: string | null;
+}
+
+export interface SubRatings {
+  ease: number;
+  value: number;
+  support: number;
+  functionality: number;
+}
+
+export interface Software {
+  id: string;
+  slug: string;
+  name: string;
+  vendor: string;
+  sector: SectorSlug;
+  summary: string;
+  website_url: string | null;
+  /** The host and path the price was read from, for the pricing stamp. */
+  vendor_website: string | null;
+  affiliate_url: string | null;
+  founded: number | null;
+  rating: number;
+  review_count: number;
+  /** null is Quoted. 0 is Free. They are not the same thing. */
+  starting_price: number | null;
+  /** Currency of the listed price. null when the price is quoted and unpublished. */
+  price_currency: Currency | null;
+  price_basis: PriceBasis | null;
+  /** ISO date. null renders as Unchecked and is never treated as fresh. */
+  price_checked_at: string | null;
+  pricing_plans: PricingPlan[];
+  pricing_note: string | null;
+  free_trial: boolean | null;
+  free_plan: boolean | null;
+  demo: boolean | null;
+  /** null means not yet checked. An array, even empty, means it was checked. */
+  compliance: string[] | null;
+  bank_feeds: string[] | null;
+  features: string[];
+  integrations: string[];
+  subratings: SubRatings | null;
+  assessment: string | null;
+  logo: string | null;
+  screenshots: string[];
+  status: "active" | "withdrawn";
+}
+
+import type { FxInfo } from "./fx";
+
+export interface RankedSoftware extends Software {
+  /** The starting price in rand. Converted at the reference rate when the vendor bills in another currency. null when quoted. */
+  price_rand: number | null;
+  /** Set only when the price was converted. Carries the rate and its date. */
+  fx: FxInfo | null;
+  /** 1 based position on the Bayesian weighted score, across the whole register. */
+  rank: number;
+  score: number;
+}
+
+export interface Comparison {
+  slug: string;
+  a: string;
+  b: string;
+}
+
+export type BriefingBlock =
+  | { type: "h2"; text: string }
+  | { type: "h3"; text: string }
+  | { type: "p"; text: string }
+  | { type: "quote"; text: string }
+  | { type: "ul"; items: string[] }
+  | { type: "table"; head: string[]; rows: string[][] }
+  | { type: "live"; name: "priced" | "currency" | "quoted" | "free" | "priors" | "vat" | "banks" };
+
+export type BriefingTopic = "Pricing" | "Compliance" | "Method";
+
+export interface Briefing {
+  slug: string;
+  title: string;
+  standfirst: string;
+  topic: BriefingTopic;
+  author: string;
+  published_at: string;
+  read_minutes: number;
+  body: BriefingBlock[];
+  product_slugs: string[];
+  published: boolean;
+}
+
+export interface Review {
+  id: string;
+  software_slug: string;
+  rating: number;
+  title: string;
+  body: string;
+  author_name: string;
+  author_role: string | null;
+  company_size: string | null;
+  industry: string | null;
+  helpful: number;
+  created_at: string;
+  sub_ease: number | null;
+  sub_value: number | null;
+  sub_support: number | null;
+  sub_functionality: number | null;
+}
+
+export interface SiteStats {
+  products: number;
+  sectors: number;
+  comparisons: number;
+  briefings: number;
+  reviews: number;
+  priced: number;
+  free: number;
+  quoted: number;
+  zar: number;
+  foreign: number;
+  unrecordedCurrency: number;
+  lastChecked: string | null;
+  checkedCount: number;
+}
+
+export interface PriorValues {
+  /** C: the review weighted mean rating across the register. */
+  meanRating: number;
+  /** m: the prior weight, the mean number of reviews per product. */
+  weight: number;
+}
+
+/* ------------------------------------------------------------- editorial */
+
+export interface EditorialSource {
+  label: string;
+  url: string;
+}
+
+export interface EditorialSection {
+  heading: string;
+  paragraphs: string[];
+  bullets?: string[];
+}
+
+/**
+ * A long form review written from the vendor's own pages. It carries the
+ * sources it was read from and the date, and it never carries a score of its
+ * own: the rating on the register comes from the reviews analysed.
+ */
+export interface EditorialReviewBase {
+  slug: string;
+  headline: string;
+  summary: string;
+  bestFor: string[];
+  thinkTwice: string[];
+  /** Plain label and value pairs, for example "Support" and "Phone, email and chat". */
+  facts: { label: string; value: string }[];
+  sections: EditorialSection[];
+  verdict: string;
+  sources: EditorialSource[];
+  researchedAt: string;
+}
+
+/**
+ * A review with its pros and cons. Each line restates something the review
+ * already says. `pros` is empty when no vendor page could be found, because a
+ * strength we cannot read is not one we will invent.
+ */
+export interface EditorialReview extends EditorialReviewBase {
+  pros: string[];
+  cons: string[];
+}
+
+export interface EditorialComparison {
+  /** The pair slug, a-vs-b. */
+  slug: string;
+  headline: string;
+  summary: string;
+  chooseA: string[];
+  chooseB: string[];
+  /** Side by side facts, in the order a, b. */
+  glance: { label: string; a: string; b: string }[];
+  sections: EditorialSection[];
+  verdict: string;
+  researchedAt: string;
+}

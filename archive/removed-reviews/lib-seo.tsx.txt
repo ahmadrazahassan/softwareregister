@@ -1,0 +1,121 @@
+import { CONTACT_EMAIL, CONTACT_PHONE_HREF, SITE_ADDRESS, SITE_FOUNDER, SITE_NAME, SITE_URL } from "./site";
+import type { Briefing, RankedSoftware } from "./types";
+import { formatInt } from "./format";
+
+type Json = Record<string, unknown>;
+
+/** Renders a JSON-LD block. "<" is escaped so a stray "</script>" in data cannot break out. */
+export function JsonLd({ data }: { data: Json | Json[] }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
+  );
+}
+
+export function absoluteUrl(path: string): string {
+  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+/**
+ * Deliberately no sameAs. We do not name social profiles that are not
+ * confirmed to exist, because structured data that points at nothing is a
+ * trust signal facing the wrong way.
+ */
+export function organizationLd(): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_PHONE_HREF.replace("tel:", ""),
+    founder: { "@type": "Person", name: SITE_FOUNDER },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Knysna St",
+      addressLocality: "Baviaans Local Municipality",
+      addressRegion: "Eastern Cape",
+      postalCode: "6445",
+      addressCountry: "ZA",
+      description: SITE_ADDRESS,
+    },
+  };
+}
+
+export function websiteLd(): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: "en-ZA",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/lookup?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+export function breadcrumbLd(items: { name: string; path: string }[]): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+/**
+ * The aggregateRating block states what it is: a figure computed from reviews
+ * the register analysed. It does not claim the reviews were submitted by
+ * verified users, because they were not.
+ */
+export function softwareLd(s: RankedSoftware): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: s.name,
+    description: s.summary,
+    applicationCategory: "BusinessApplication",
+    url: absoluteUrl(`/register/${s.slug}`),
+    publisher: { "@type": "Organization", name: s.vendor },
+    ...(s.starting_price !== null && s.price_currency
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: s.starting_price,
+            priceCurrency: s.price_currency,
+            ...(s.price_checked_at ? { priceValidUntil: undefined } : {}),
+          },
+        }
+      : {}),
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: s.rating,
+      bestRating: 5,
+      worstRating: 1,
+      ratingCount: s.review_count,
+      description: `A rating computed across ${formatInt(s.review_count)} reviews analysed by ${SITE_NAME}. It is not a count of verified user submissions.`,
+    },
+  };
+}
+
+export function articleLd(b: Briefing): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: b.title,
+    datePublished: b.published_at,
+    author: { "@type": "Organization", name: SITE_NAME },
+    publisher: { "@type": "Organization", name: SITE_NAME },
+    mainEntityOfPage: absoluteUrl(`/briefings/${b.slug}`),
+    inLanguage: "en-ZA",
+  };
+}

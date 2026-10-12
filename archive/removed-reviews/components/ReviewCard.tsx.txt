@@ -1,0 +1,66 @@
+import Link from "next/link";
+import { formatInt, formatRating } from "@/lib/format";
+import type { EditorialReview, RankedSoftware } from "@/lib/types";
+import { StarGlyph } from "./primitives";
+import { ProductLogo } from "./ProductLogo";
+import { ProsCons } from "./ProsCons";
+
+/**
+ * One product's review, as a card: who it is, its rating and the reviews
+ * behind it, the headline and a short summary, the first pros and cons, and the
+ * way to the full review. The rating is the register's. The words are ours.
+ */
+export function ReviewCard({ s, r }: { s: RankedSoftware; r: EditorialReview | undefined }) {
+  return (
+    <article className="flex h-full flex-col rounded-[16px] border border-line-firm bg-surface p-5 transition-colors hover:border-ink">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex min-w-0 items-center gap-4">
+          <ProductLogo slug={s.slug} name={s.name} height={40} maxWidth={88} fallback="none" decorative className="flex-none" />
+          <div className="min-w-0">
+            <h3 className="font-heading text-[20px] leading-6 font-bold tracking-[-0.01em]">
+              <Link href={`/register/${s.slug}/reviews`} className="hover:underline hover:underline-offset-4">
+                {s.name}
+              </Link>
+            </h3>
+            <p className="truncate text-[13px] leading-5 text-muted">{s.vendor}</p>
+          </div>
+        </div>
+        <div className="flex-none text-right">
+          <p className="font-heading text-[26px] leading-7 font-bold tracking-[-0.02em]">
+            {formatRating(s.rating)} <StarGlyph className="text-lime-text" />
+          </p>
+          <p className="text-[12px] leading-4 text-muted">{formatInt(s.review_count)} reviews analysed</p>
+        </div>
+      </div>
+
+      {r ? (
+        <>
+          <p className="mt-5 font-heading text-[17px] leading-6 font-bold tracking-[-0.01em]">{r.headline}</p>
+          <p className="mt-2 line-clamp-3 text-[14px] leading-5 text-muted">{r.summary}</p>
+          <div className="mt-5">
+            <ProsCons pros={r.pros} cons={r.cons} limit={3} compact />
+          </div>
+        </>
+      ) : (
+        <p className="mt-5 text-[14px] leading-5 text-muted">A written review of {s.name} has not been published yet.</p>
+      )}
+
+      <div className="mt-auto flex flex-wrap gap-2 pt-5">
+        <Link
+          href={`/register/${s.slug}/reviews`}
+          className="inline-flex min-h-10 items-center rounded-[10px] border border-lime bg-lime px-4 text-[14px] font-semibold text-lime-ink hover:border-lime-deep hover:bg-lime-deep hover:text-panel-ink"
+        >
+          Read the review <span aria-hidden="true" className="ml-1.5">→</span>
+          <span className="sr-only"> of {s.name}</span>
+        </Link>
+        <Link
+          href={`/register/${s.slug}`}
+          className="inline-flex min-h-10 items-center rounded-[10px] border border-line-firm bg-surface px-4 text-[14px] font-semibold hover:bg-lime-wash"
+        >
+          Price and details
+          <span className="sr-only"> for {s.name}</span>
+        </Link>
+      </div>
+    </article>
+  );
+}

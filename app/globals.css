@@ -1,0 +1,542 @@
+@import "tailwindcss";
+
+/*
+ * Software Register design system.
+ *
+ * The idea in one line: a share price table in a newspaper, not a SaaS landing
+ * page. Dense, typographic, hairline ruled, with one accent colour that carries
+ * one meaning. Lime means this was checked on a date. Grey means it was not.
+ *
+ * Every contrast ratio below was computed with the WCAG relative luminance
+ * formula. None are estimates. Do not change a hex without recomputing it.
+ */
+:root {
+  --paper: #fbfbf9; /* global background, warm near white */
+  --surface: #ffffff; /* table bodies, raised panels */
+  --ink: #12130f; /* all primary text. 18.00:1 on paper */
+  --muted: #5f6157; /* secondary text. 6.08:1 on paper */
+  --line: #e3e3dc; /* every hairline */
+  --line-firm: #c9c9c0; /* table headers, section rules */
+
+  --lime: #c8f000; /* signature. Carries --ink at 14.14:1. NEVER carries white */
+  --lime-ink: #12130f; /* the ONLY text colour on --lime */
+  --lime-wash: #f2fbd4; /* state fill. Carries --ink at 17.34:1 */
+  --lime-text: #3f6212; /* lime as text on paper. 6.83:1 */
+  --lime-deep: #2f4a10; /* dark fill. Carries white at 9.96:1 */
+
+  --azure: #1d4ed8; /* the second action colour. Carries white at 6.70:1 */
+  --azure-deep: #1e3a8a; /* its hover. Carries white at 10.36:1 */
+
+  --panel: #12130f; /* inverted blocks, used twice site wide */
+  --panel-ink: #ffffff; /* 18.65:1 on panel. --lime on --panel is 14.14:1 */
+  --alert: #b42318; /* price rose, product withdrawn. 6.35:1 on paper */
+
+  --radius: 2px;
+  /* Buttons, chips and the header bar take a softer corner than tables and fields. */
+  --radius-btn: 10px;
+  --radius-bar: 16px;
+
+  /* shadcn aliases, pointed at the new values */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--lime-deep);
+  --primary: var(--lime);
+  --primary-foreground: var(--lime-ink);
+  --muted-foreground: var(--muted);
+  --destructive: var(--alert);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-firm: var(--line-firm);
+  --color-lime: var(--lime);
+  --color-lime-ink: var(--lime-ink);
+  --color-lime-wash: var(--lime-wash);
+  --color-lime-text: var(--lime-text);
+  --color-lime-deep: var(--lime-deep);
+  --color-azure: var(--azure);
+  --color-azure-deep: var(--azure-deep);
+  --color-panel: var(--panel);
+  --color-panel-ink: var(--panel-ink);
+  --color-alert: var(--alert);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-heading: var(--font-google-sans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Radius is 2px everywhere. Every rounded-* utility resolves to it. */
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-3xl: 2px;
+  --radius-4xl: 2px;
+
+  /* No box shadows on the public site. Separation is a 1px hairline. */
+  --shadow-2xs: none;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+  --inset-shadow-2xs: none;
+  --inset-shadow-xs: none;
+  --inset-shadow-sm: none;
+  --drop-shadow-xs: none;
+  --drop-shadow-sm: none;
+  --drop-shadow-md: none;
+  --drop-shadow-lg: none;
+  --drop-shadow-xl: none;
+  --drop-shadow-2xl: none;
+}
+
+@layer base {
+  html {
+    /* Mandatory. A price column that does not align is the clearest signal of an amateur table. */
+    font-variant-numeric: tabular-nums;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 24px;
+    /* clip, not hidden. hidden creates a scroll container and breaks every sticky element. */
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    color: var(--ink);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* --lime is too light to see on paper, so the focus ring uses --lime-deep. */
+  :focus-visible {
+    outline: 2px solid var(--lime-deep);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--lime);
+    color: var(--lime-ink);
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+    border-radius: var(--radius);
+  }
+
+  /* The only transitions on the site: background and border colour, 120ms, ease out. */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color;
+    transition-duration: 120ms;
+    transition-timing-function: ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Full width 1px section rule. */
+  .rule {
+    display: block;
+    width: 100%;
+    height: 0;
+    border: 0;
+    border-top: 1px solid var(--line-firm);
+  }
+
+  /* The 11px uppercase caption. */
+  .stamp {
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* The register table. */
+  .register {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    line-height: 20px;
+    background: var(--surface);
+  }
+  .register th,
+  .register td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--line);
+  }
+  .register th {
+    border-bottom: 1px solid var(--line-firm);
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .register th.num,
+  .register td.num {
+    text-align: right;
+  }
+  .register thead th {
+    background: var(--paper);
+  }
+  .register tbody tr:last-child td {
+    border-bottom-color: var(--line-firm);
+  }
+  /* The whole row is the link. Hover washes the row and nothing moves. */
+  .register tr.row {
+    position: relative;
+  }
+  .register tr.row:hover td {
+    background: var(--lime-wash);
+  }
+  .register a.row-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .register a.row-link:focus-visible {
+    outline: none;
+  }
+  .register a.row-link:focus-visible::after {
+    outline: 2px solid var(--lime-deep);
+    outline-offset: -2px;
+  }
+  /* Ten column tables need tighter cells than the 12px 16px default to fit beside a filter column. */
+  .register-dense th,
+  .register-dense td {
+    padding: 12px 8px;
+  }
+  .register-dense th:first-child,
+  .register-dense td:first-child {
+    padding-left: 12px;
+  }
+  .register-dense th:last-child,
+  .register-dense td:last-child {
+    padding-right: 12px;
+  }
+  .register th a {
+    color: inherit;
+  }
+  .register th a:hover {
+    color: var(--ink);
+  }
+  /*
+   * The comparison table: a dark header row, a quiet band for each group, and the winner washed lime.
+   * It sits inside a rounded frame, so the corners are the frame's, not the table's.
+   */
+  .register-compare {
+    background: var(--surface);
+  }
+  .register-compare thead th {
+    background: var(--panel);
+    color: var(--panel-ink);
+    border-bottom: 0;
+    padding: 18px 16px;
+    vertical-align: middle;
+  }
+  .register-compare thead th.win {
+    background: var(--lime);
+    color: var(--lime-ink);
+  }
+  .register-compare tbody th.group-row {
+    background: var(--paper);
+    color: var(--ink);
+    padding-top: 22px;
+    border-bottom: 1px solid var(--line-firm);
+  }
+  .register-compare td {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .register-compare tbody:last-of-type tr:last-child td {
+    border-bottom: 0;
+  }
+
+  /* Winning column on a comparison. */
+  .register td.win,
+  .register th.win {
+    background: var(--lime-wash);
+  }
+
+  /* Bare form controls: a 1px bottom border and nothing else. */
+  .field {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--line-firm);
+    border-radius: 0;
+    padding: 8px 0;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--ink);
+  }
+  .field::placeholder {
+    color: var(--muted);
+  }
+  .field:hover,
+  .field:focus {
+    border-bottom-color: var(--ink);
+  }
+  .field:focus-visible {
+    outline: 2px solid var(--lime-deep);
+    outline-offset: 2px;
+  }
+  textarea.field {
+    border: 1px solid var(--line-firm);
+    padding: 8px 12px;
+    min-height: 140px;
+    resize: vertical;
+  }
+  select.field {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 20px;
+    background-image: none;
+    cursor: pointer;
+  }
+
+  /* Plain checkbox and radio, square, ink. */
+  .check {
+    appearance: none;
+    -webkit-appearance: none;
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--surface);
+    display: inline-grid;
+    place-content: center;
+    cursor: pointer;
+  }
+  .check::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--ink);
+    transform: scale(0);
+  }
+  .check:checked::before {
+    transform: scale(1);
+  }
+  .check:disabled {
+    border-color: var(--line-firm);
+    cursor: not-allowed;
+  }
+
+  /*
+   * A flat lime halo around the one primary action. It is a solid ring, not a blurred
+   * shadow, so the no shadow and no gradient rules still hold. On hover the ring fills.
+   */
+  .cta-halo {
+    display: inline-flex;
+    padding: 5px;
+    border-radius: calc(var(--radius-btn) + 5px);
+    background: var(--lime-wash);
+  }
+  .cta-halo:hover {
+    background: var(--lime);
+  }
+
+  /* A word in the hero sentence, set as an outlined mono chip. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--ink);
+    border-radius: 8px;
+    background: var(--surface);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    line-height: 20px;
+    color: var(--ink);
+    vertical-align: middle;
+  }
+  a.chip:hover {
+    background: var(--lime-wash);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 8px;
+    z-index: 100;
+    background: var(--ink);
+    color: var(--panel-ink);
+    padding: 8px 16px;
+  }
+  .skip-link:focus {
+    left: 8px;
+  }
+
+  /* Long form text. The one place on the site where text runs larger than 15px. */
+  .prose-register {
+    font-size: 17px;
+    line-height: 28px;
+    max-width: 640px;
+  }
+  .prose-register p {
+    margin: 0 0 20px;
+  }
+  .prose-register h2 {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 48px 0 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .prose-register h3 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 600;
+    margin: 32px 0 12px;
+  }
+  .prose-register ul {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+  }
+  .prose-register ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .prose-register ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 1px;
+    background: var(--ink);
+  }
+  .prose-register ol {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  .prose-register ol li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 14px;
+    counter-increment: step;
+  }
+  .prose-register ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 9999px;
+    background: var(--lime);
+    color: var(--lime-ink);
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+  }
+  .prose-register blockquote {
+    margin: 0 0 20px;
+    padding-left: 20px;
+    border-left: 2px solid var(--lime);
+  }
+  .prose-register a,
+  .prose-link {
+    color: var(--lime-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .prose-register .register {
+    font-size: 14px;
+    margin: 0 0 28px;
+  }
+
+  /* Legal pages: 15px over 26px, h2 at 20px with a rule above. */
+  .legal {
+    font-size: 15px;
+    line-height: 26px;
+    max-width: 680px;
+  }
+  .legal h2 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    margin: 40px 0 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .legal p,
+  .legal ul {
+    margin: 0 0 16px;
+  }
+  .legal ul {
+    padding-left: 20px;
+    list-style: square;
+  }
+  .legal a {
+    color: var(--lime-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}

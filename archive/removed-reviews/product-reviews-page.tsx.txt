@@ -1,0 +1,205 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { CtaLink } from "@/components/CtaButton";
+import { EditorialReviewBlock } from "@/components/EditorialReviewBlock";
+import { Container, Note, PageHeader } from "@/components/primitives";
+import { ProductLogo } from "@/components/ProductLogo";
+import { RatingBar } from "@/components/RatingBar";
+import { ReviewRow } from "@/components/ReviewRow";
+import { StatTiles } from "@/components/StatTiles";
+import { formatInt, formatRating } from "@/lib/format";
+import { getEditorialReview } from "@/lib/data/editorial";
+import { getRegistry, getSiteStats, getSoftwareBySlug, loadSectors } from "@/lib/queries";
+import { COMPANY_SIZES, INDUSTRIES, getReviews, type ReviewSort } from "@/lib/queries/reviews";
+import { sectorOf } from "@/lib/registry";
+import { gapText, weightedMean } from "@/lib/review-summary";
+
+type SP = Record<string, string | string[] | undefined>;
+const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";
+const SORTS: { value: ReviewSort; label: string }[] = [
+  { value: "helpful", label: "Most helpful" },
+  { value: "recent", label: "Most recent" },
+  { value: "highest", label: "Highest rated" },
+  { value: "lowest", label: "Lowest rated" },
+];
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const s = await getSoftwareBySlug((await params).slug);
+  if (!s) return {};
+  return {
+    title: `${s.name} reviews`,
+    description: `${s.name} is rated ${formatRating(s.rating)} across ${formatInt(s.review_count)} reviews analysed. See where that sits in its category, and read reviews submitted through this site.`,
+    alternates: { canonical: `/register/${s.slug}/reviews` },
+  };
+}
+
+export default async function ReviewsPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<SP> }) {
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
+  const [s, reg, sectors, stats] = await Promise.all([getSoftwareBySlug(slug), getRegistry(), loadSectors(), getSiteStats()]);
+  if (!s) notFound();
+
+  const rating = Number(first(sp.rating));
+  const size = first(sp.size);
+  const industry = first(sp.industry);
+  const sort = (SORTS.find((x) => x.value === first(sp.sort))?.value ?? "helpful") as ReviewSort;
+  const page = Math.max(1, Math.floor(Number(first(sp.page))) || 1);
+
+  const result = await getReviews(s.slug, {
+    rating: rating >= 1 && rating <= 5 ? rating : undefined,
+    size: (COMPANY_SIZES as readonly string[]).includes(size) ? size : undefined,
+    industry: (INDUSTRIES as readonly string[]).includes(industry) ? industry : undefined,
+    sort,
+    page,
+  });
+
+  const review = getEditorialReview(s.slug);
+  const filtered = Boolean(rating || size || industry);
+  const sector = sectorOf(s.sector, sectors);
+  const peers = reg.ranked.filter((x) => x.sector === s.sector);
+  const sectorMean = weightedMean(peers);
+  const registerMean = reg.priors.meanRating;
+  const share = stats.reviews ? (s.review_count / stats.reviews) * 100 : 0;
+  const inSector = [...peers].sort((a, b) => b.review_count - a.review_count || b.rating - a.rating).findIndex((x) => x.slug === s.slug) + 1;
+
+  const href = (p: number) => {
+    const params = new URLSearchParams();
+    if (rating) params.set("rating", String(rating));
+    if (size) params.set("size", size);
+    if (industry) params.set("industry", industry);
+    if (sort !== "helpful") params.set("sort", sort);
+    if (p > 1) params.set("page", String(p));
+    const qs = params.toString();
+    return `/register/${s.slug}/reviews${qs ? `?${qs}` : ""}`;
+  };
+
+  return (
+    <>
+      <PageHeader title={`${s.name} reviews`} stamp={`${formatInt(s.review_count)} reviews analysed`} />
+      <Container className="pb-12 lg:pb-[72px]">
+        <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
+          <ProductLogo slug={s.slug} name={s.name} height={64} maxWidth={160} fallback="none" decorative className="flex-none" />
+          <p className="max-w-[68ch] text-[15px] leading-6">
+            {s.name} is rated {formatRating(s.rating)} out of 5 across {formatInt(s.review_count)} reviews analysed. It ranks {s.rank} of {reg.ranked.length} on the weighted score. Within {sector?.label ?? "its category"} it is number {inSector} of {peers.length} by review count.
+          </p>
+        </div>
+
+        <StatTiles
+          tiles={[
+            { value: formatRating(s.rating), label: "Rating", note: "out of 5" },
+            { value: formatInt(s.review_count), label: "Reviews analysed", note: `${share < 1 ? "under 1" : Math.round(share)} percent of all ${formatInt(stats.reviews)}` },
+            { value: String(s.rank), label: "Rank", note: `of ${reg.ranked.length} on the weighted score` },
+            { value: String(inSector), label: `In ${sector?.name ?? "category"}`, note: `by review count, of ${peers.length}` },
+          ]}
+        />
+
+        {review && (
+          <section id="review" aria-labelledby="our-review" className="mt-12">
+            <h2 id="our-review" className="mb-6 font-heading text-[24px] leading-7 font-bold tracking-[-0.01em]">Our review of {s.name}</h2>
+            <EditorialReviewBlock r={review} name={s.name} />
+          </section>
+        )}
+
+        <section aria-labelledby="where-it-sits" className="mt-12 rounded-[16px] border border-line-firm bg-surface p-6">
+          <h2 id="where-it-sits" className="font-heading text-[20px] leading-6 font-bold tracking-[-0.01em]">Where the rating sits</h2>
+          <div className="mt-4 max-w-[640px]">
+            <RatingBar label={s.name} value={s.rating} />
+            <RatingBar label={`${sector?.name ?? "Category"} mean`} value={sectorMean} />
+            <RatingBar label="Register mean" value={registerMean} />
+          </div>
+          <p className="mt-3 text-[14px] leading-5 text-muted">
+            {gapText(s.rating - sectorMean, `the ${sector?.name ?? "category"} mean of ${formatRating(sectorMean)}`)}, and {gapText(s.rating - registerMean, `the register mean of ${formatRating(registerMean)}`).toLowerCase()}. Means are weighted by review count.
+          </p>
+          <p className="mt-3 text-[14px] leading-5 text-muted">
+            Ease of use, value, support and functionality have not been recorded for {s.name}, so no breakdown is shown.
+          </p>
+        </section>
+
+        <div className="mt-10 mb-8 bg-lime-wash p-4 text-[14px] leading-5 text-ink">
+          The rating and the count are aggregate figures from a corpus produced by a seeded script. It is not a set of reviews written by verified buyers. Read why in the{" "}
+          <Link href="/method" className="underline underline-offset-2">method</Link>. Reviews submitted through this site are published as written, once an editor has read them.
+        </div>
+
+        {(result.total > 0 || filtered) && (
+          <form method="get" className="flex flex-wrap items-end gap-x-6 gap-y-4 border-y border-line py-4" aria-label="Filter reviews">
+            {[
+              { name: "rating", label: "Rating", value: rating ? String(rating) : "", options: [5, 4, 3, 2, 1].map((n) => ({ v: String(n), l: `${n} stars` })) },
+              { name: "size", label: "Company size", value: size, options: COMPANY_SIZES.map((v) => ({ v, l: `${v} employees` })) },
+              { name: "industry", label: "Industry", value: industry, options: INDUSTRIES.map((v) => ({ v, l: v })) },
+            ].map((f) => (
+              <div key={f.name} className="min-w-[140px]">
+                <label htmlFor={`f-${f.name}`} className="stamp mb-1 block text-muted">{f.label}</label>
+                <select id={`f-${f.name}`} name={f.name} defaultValue={f.value} className="field">
+                  <option value="">Any</option>
+                  {f.options.map((o) => (
+                    <option key={o.v} value={o.v}>{o.l}</option>
+                  ))}
+                </select>
+              </div>
+            ))}
+            <div className="min-w-[140px]">
+              <label htmlFor="f-sort" className="stamp mb-1 block text-muted">Sort</label>
+              <select id="f-sort" name="sort" defaultValue={sort} className="field">
+                {SORTS.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </div>
+            <button type="submit" className="h-11 cursor-pointer border border-line-firm px-4 text-[15px] font-semibold hover:bg-lime-wash">
+              Apply
+            </button>
+          </form>
+        )}
+
+        {result.rows.length > 0 ? (
+          <>
+            <h2 className="mt-8 mb-2 font-heading text-[20px] leading-6 font-bold tracking-[-0.01em]">
+              Reviews submitted through this site <span className="font-normal text-muted">({formatInt(result.total)})</span>
+            </h2>
+            <ul>
+              {result.rows.map((r) => (
+                <ReviewRow key={r.id} review={r} />
+              ))}
+            </ul>
+          </>
+        ) : (
+          <div className="rounded-[16px] border border-line-firm bg-surface p-6">
+            <h2 className="font-heading text-[20px] leading-6 font-bold tracking-[-0.01em]">
+              {filtered ? "No reviews match those filters" : `No reviews of ${s.name} have been submitted here yet`}
+            </h2>
+            <p className="mt-2 max-w-[60ch] text-[14px] leading-6 text-muted">
+              {filtered
+                ? "Clear a filter to see more."
+                : `The ${formatRating(s.rating)} above rests on the ${formatInt(s.review_count)} reviews analysed. A review you write is read by an editor and, if it is genuine, published as written.`}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {filtered && (
+                <CtaLink variant="quiet" href={`/register/${s.slug}/reviews`}>
+                  Clear filters
+                </CtaLink>
+              )}
+              <CtaLink variant="primary" href={`/register/${s.slug}/reviews/new`}>
+                Write a review of {s.name}
+              </CtaLink>
+            </div>
+          </div>
+        )}
+
+        {result.pages > 1 && (
+          <nav aria-label="Pagination" className="mt-8 flex flex-wrap gap-4 text-[15px]">
+            {Array.from({ length: result.pages }, (_, i) => i + 1).map((p) => (
+              <Link key={p} href={href(p)} aria-current={p === page ? "page" : undefined} className={p === page ? "font-bold underline underline-offset-4" : "text-lime-text underline underline-offset-4"}>
+                {p}
+              </Link>
+            ))}
+          </nav>
+        )}
+
+        <Note className="mt-10 flex flex-wrap gap-x-6 gap-y-2">
+          <Link href={`/register/${s.slug}`} className="prose-link">Back to the {s.name} record</Link>
+          <Link href="/reviews" className="prose-link">Review figures for every product</Link>
+        </Note>
+      </Container>
+    </>
+  );
+}
