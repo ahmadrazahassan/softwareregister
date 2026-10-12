@@ -2,7 +2,13 @@ import { NextResponse, type NextRequest } from "next/server";
 import { readSession } from "@/lib/supabase/proxy";
 
 /**
- * The admin guard, first line of defence. (Next 16 renamed middleware to proxy.)
+ * The admin guard, first line of defence.
+ *
+ * It is middleware.ts and not proxy.ts on purpose. Next 16 prefers proxy.ts,
+ * which always runs on the Node.js runtime, but the Cloudflare adapter supports
+ * Node.js middleware only experimentally and bundles the whole Next runtime a
+ * second time for it. Edge middleware is the supported path and a far smaller
+ * bundle. Next 16 still accepts it and prints a deprecation notice.
  *
  * Every /admin path requires a verified Supabase session whose app_metadata.role
  * is "admin". Anything else is redirected to /admin/login, except the login page
@@ -16,7 +22,7 @@ import { readSession } from "@/lib/supabase/proxy";
  *
  * With no Supabase keys configured this fails closed: nobody gets in.
  */
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const { response, isAdmin, signedIn, configured } = await readSession(request);
 

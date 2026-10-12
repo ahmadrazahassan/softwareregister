@@ -33,9 +33,27 @@ ADMIN_EMAIL=you@example.com ADMIN_PASSWORD='a long passphrase' npm run create-ad
 
 Once Supabase is configured and seeded, it is the source of truth. If it errors or is empty the site falls back to `lib/data`, so the public pages never go blank.
 
+## Deploy on Cloudflare Workers
+
+The site runs as one Cloudflare Worker named `softwareregister` through the OpenNext adapter (`@opennextjs/cloudflare`). Live address: `https://softwareregister.70148590.workers.dev`. The production domain is `softwareregister.co.za`.
+
+```bash
+npx opennextjs-cloudflare build    # builds Next, then the Worker in .open-next
+npx wrangler deploy                # uploads it (wrangler must be logged in: npx wrangler login)
+```
+
+- `wrangler.jsonc`: Worker name, static assets, the `WORKER_SELF_REFERENCE` service binding, the Images binding, `nodejs_compat`. `open-next.config.ts`: the incremental cache. `public/_headers`: long cache headers for static files.
+- The Worker bundle is about 2.0 MiB gzip. The Free plan allows 3 MiB, so keep an eye on it (`npx wrangler deploy --dry-run` prints it). The admin guard is `middleware.ts` (edge) and not `proxy.ts`: the Node.js middleware path bundles Next twice and is only experimental in the adapter.
+- Public build values (`NEXT_PUBLIC_*`) come from the committed `.env.production`. Secrets are Worker secrets and never go in a file in the repo: `npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY`, `IP_HASH_SALT`, and later `RESEND_API_KEY` plus the `DISPATCH_FROM` variable once the sending domain is verified. Without `RESEND_API_KEY`, Dispatch subscriptions are recorded as confirmed at consent.
+- **Workers plan: the Free plan is not enough.** Free allows 10 ms of CPU per request. Pages that are rendered on request (category pages, the register with filters, comparisons, reviews, the finder, search, forms) need roughly 15 to 30 ms, so under load about one request in six fails with Cloudflare error 1102 (HTTP 503). Pages that are prerendered at build time are served from assets and are fine. The Workers Paid plan ($5 a month) allows up to 5 minutes of CPU and removes the failures with no code change. Check with a burst: `for i in $(seq 1 24); do curl -s -o /dev/null -w "%{http_code}\n" "https://<worker>/sector/accounting?x=$i" & done`.
+- Never keep a Supabase client (or any object that holds pending promises) in a module variable: on Workers a request that reuses another request's promise can hang. `lib/supabase/public.ts` makes a new client per call for that reason.
+- Build from a clean env: OpenNext embeds every `.env*` file it finds into the bundle, so move `.env.local` away while building (the local service role key must not end up in the Worker code). OpenNext warns that Windows is not fully supported; a build on Windows worked here, and a Linux CI build is the safer long term route.
+- The incremental cache is read only (Workers static assets), so pages with `revalidate = 3600` update on the next deploy, not hourly. For an hourly refresh without a redeploy, create a KV namespace, bind it as `NEXT_INC_CACHE_KV` in `wrangler.jsonc`, and switch `open-next.config.ts` to `kv-incremental-cache` with `memory-queue` (see the comment in that file). That needs `wrangler login` to be refreshed with the KV scope.
+- Custom domain: add `softwareregister.co.za` to the same Cloudflare account, then Workers & Pages, `softwareregister`, Settings, Domains & Routes, Add, Custom domain.
+
 ## Security
 
-- `proxy.ts` (Next 16's name for middleware) checks a verified Supabase session with `getUser()` for every `/admin` path.
+- `middleware.ts` (edge middleware; it is not `proxy.ts` because the Cloudflare adapter supports Node.js middleware only experimentally) checks a verified Supabase session with `getUser()` for every `/admin` path.
 - It is **not the only check**. Every admin page, server action and route handler calls `requireAdmin()` itself.
 - The admin role lives in `app_metadata`, which only the service role key can write. A user cannot grant it to themselves.
 - Row level security is on for every table. Readers can read published content and approved reviews, and can only insert pending reviews, enquiries, subscriptions and clicks.

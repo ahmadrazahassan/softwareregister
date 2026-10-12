@@ -15,3 +15,8 @@ npm-debug.log*
 
 # Old scraped reviews with ratings and counts. Kept on this machine only.
 REVIEWS.md
+
+# Cloudflare build output and local worker state
+.open-next
+.wrangler
+.dev.vars
